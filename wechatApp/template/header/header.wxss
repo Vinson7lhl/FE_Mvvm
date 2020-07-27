@@ -1,0 +1,14 @@
+.publicHeader{
+  width:750rpx;
+  line-height: 36rpx;
+  color:#4e4e4e;
+  text-align: center;
+  font-size: 36rpx;
+}
+.publicHeader2{
+  width:100%;
+  line-height: 18rpx;
+  color:#4e4e4e;
+  text-align: center;
+  font-size: 18rpx;
+}

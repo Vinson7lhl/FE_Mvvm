@@ -1,0 +1,13 @@
+<!--logs.wxml-->
+<view class="container log-list">
+  全局num：{{global_num}}
+  <button bindtap='addGlobalNum'>增加全局Num值</button>
+  <button bindtap='fixData'>改变title</button>
+  <button bindtap='goToList'>进入产品列表</button>
+  <view class="">
+    {{log_data}}
+  </view>
+  <block wx:key="*this" wx:for="{{logs}}" wx:for-item="log">
+    <text class="log-item">{{index + 1}}. {{log}}</text>
+  </block>
+</view>

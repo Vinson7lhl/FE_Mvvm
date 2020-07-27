@@ -1,0 +1,15 @@
+<!--header.wxml-->
+<template name='publicHeader'>
+  <view class='publicHeader'>
+    <text>页面标题"{{header_name}}"</text>
+  </view>
+  <view class='publicHeader2'>
+    <text>另一个尺寸</text>
+  </view>
+</template>
+
+<template name='publicFooter'>
+  <view class='publicFooter'>
+    <text>我是脚</text>
+  </view>
+</template>

@@ -1,0 +1,38 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="userinfo">
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block>
+  </view>
+  <view class="usermotto">
+    <text class="user-motto">{{motto}}</text>
+    俺是李宏磊——为自己带盐
+  </view>
+  <!--客服按钮-->
+  <button class='contactService' id='contact_service' open-type="contact" show-message-card='true' bindcontact="handleContact" hover-class="none">联系客服</button>
+  <!--预览图片-->
+  <view class="previewPics" hover-class="none" hover-stop-propagation="false" bindtap="previewPics">
+	  预览图片
+  </view>
+  <view id='showHidden' hidden='{{show}}'>
+    单引号绑定
+  </view>
+    
+  <form bindsubmit="formSubmit" report-submit="{{true}}">
+      <button formType="submit" class='btn'>
+            <view class='aa'>
+				点我
+            </view>
+      </button>
+  </form>
+  <view id='animate' bindtap='triggerAnimate'>
+    动画走起
+  </view>
+  <view bindtap='changeData'>
+    修改数据
+  </view>
+    
+</view>
