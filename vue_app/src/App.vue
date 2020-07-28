@@ -5,7 +5,8 @@
       <router-link to="/">Home</router-link><br/>
       <router-link to="/about">About</router-link><br/>
       <router-link to="/list">List</router-link><br/>
-      <router-link to="/asyncComp">AsyncPage</router-link>
+      <router-link to="/ex">ExportExcel</router-link><br/>
+      <router-link to="/asyncComp">AsyncPage</router-link><br/>
     </div>
     <div v-if='isShowPopUp' class='popUp'>这里是弹窗</div>
     <!--一级路由动画切换配置-->

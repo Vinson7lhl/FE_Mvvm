@@ -1,11 +1,14 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+
 // 页面级别
 import Home from './views/Home.vue'
 import About from './views/About.vue'
 import List from './views/List.vue'
 import ListDetail from './views/ListDetail.vue'
 import NotFoundPage from './views/NotFound.vue'
+import ExportExcel from './views/ExportExl.vue'
+
 // 组件级别
 import AsyncComp from './views/asyncCompTest.vue'
 import AboutUs from './components/aboutUs/about_us.vue'
@@ -37,6 +40,11 @@ const router = new Router({
           component: AboutFirm
         }
       ]
+    },
+    {
+      path: '/ex',
+      name: 'export_excel',
+      component: ExportExcel
     },
     {
       path: '/list',
