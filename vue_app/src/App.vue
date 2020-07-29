@@ -1,45 +1,50 @@
 <template>
   <div id="app1">
-    root数据：{{rootData}}
+    root数据：{{ rootData }}
     <div id="nav">
-      <router-link to="/">Home</router-link><br/>
-      <router-link to="/about">About</router-link><br/>
-      <router-link to="/list">List</router-link><br/>
-      <router-link to="/ex">ExportExcel</router-link><br/>
-      <router-link to="/asyncComp">AsyncPage</router-link><br/>
+      <router-link to="/">Home</router-link>
+      <br />
+      <router-link to="/about">About</router-link>
+      <br />
+      <router-link to="/list">List</router-link>
+      <br />
+      <router-link to="/ex">ExportExcel</router-link>
+      <br />
+      <router-link to="/asyncComp">AsyncPage</router-link>
+      <br />
     </div>
-    <div v-if='isShowPopUp' class='popUp'>这里是弹窗</div>
+    <div v-if="isShowPopUp" class="popUp">这里是弹窗</div>
     <!--一级路由动画切换配置-->
-    <transition name="fade"
+    <transition
+      name="fade"
       v-on:before-enter="beforeEnter"
       v-on:enter="enter"
       v-on:after-enter="afterEnter"
       v-on:enter-cancelled="enterCancelled"
-
       v-on:before-leave="beforeLeave"
       v-on:leave="leave"
       v-on:after-leave="afterLeave"
       v-on:leave-cancelled="leaveCancelled"
-      >
+    >
       <!--路由的输出-->
-      <router-view/>
+      <router-view />
     </transition>
   </div>
 </template>
 <script lang="ts">
 export default {
   name: 'rootApp',
-  mounted () {
+  mounted() {
     console.log('/------------app-加载完毕-------------/')
-    this.$on('test', data => {
+    this.$on('test', (data) => {
       console.log('广播得到的数据')
       console.log(data)
     })
   },
-  data () {
+  data() {
     return {
       isShowPopUp: false,
-      rootData: 'root-data-洪七公'
+      rootData: 'root-data-洪七公',
     }
   },
   methods: {
@@ -52,36 +57,36 @@ export default {
         enter App.vue:38
         after-enter
      */
-    beforeEnter () {
+    beforeEnter() {
       console.log('before-enter')
     },
-    enter () {
+    enter() {
       console.log('enter')
     },
-    afterEnter () {
+    afterEnter() {
       console.log('after-enter')
     },
-    enterCancelled (el) {
+    enterCancelled(el) {
       console.log('after-cancel')
     },
-    beforeLeave (el) {
+    beforeLeave(el) {
       console.log('before-leave')
     },
     // 此回调函数是可选项的设置
     // 与 CSS 结合时使用
-    leave (el, done) {
+    leave(el, done) {
       // ...
       console.log('leave')
       done()
     },
-    afterLeave (el) {
+    afterLeave(el) {
       console.log('after-leave')
     },
     // leaveCancelled 只用于 v-show 中
-    leaveCancelled (el) {
+    leaveCancelled(el) {
       console.log('leave-cancel')
-    }
-  }
+    },
+  },
 }
 </script>
 <style lang="scss">
@@ -91,7 +96,7 @@ export default {
 //  公共样式文件
 $base_color: red;
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
