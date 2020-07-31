@@ -18,22 +18,21 @@
     </div>
   </div>
 </template>
-
 <script>
 export default {
-  name: "about-page",
+  name: 'about-page',
   data() {
     return {
-      content: ["你好", "啊——", "李银河"],
-    };
+      content: ['你好', '啊——', '李银河'],
+    }
   },
   methods: {
     changeConent() {
       // this.content[2] = '王小波'
-      this.$set(this.content, 2, "王小波");
+      this.$set(this.content, 2, '王小波')
     },
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>
