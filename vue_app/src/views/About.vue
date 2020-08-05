@@ -19,46 +19,46 @@
   </div>
 </template>
 <script>
-export default {
-  name: 'about-page',
-  data() {
-    return {
-      content: ['你好', '啊——', '李银河'],
-    }
-  },
-  methods: {
-    changeConent() {
-      // this.content[2] = '王小波'
-      this.$set(this.content, 2, '王小波')
-    },
-  },
-}
+	export default {
+		name: 'about-page',
+		data() {
+			return {
+				content: ['你好', '啊——', '李银河'],
+			}
+		},
+		methods: {
+			changeConent() {
+				// this.content[2] = '王小波'
+				this.$set(this.content, 2, '王小波')
+			},
+		},
+	}
 </script>
 
 <style lang="scss" scoped>
-.tabList {
-  overflow: hidden;
-  width: 200px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 100px;
-  .aboutTab {
-    float: left;
-    width: 100px;
-    text-align: center;
-    line-height: 50px;
-    background-color: #4e4e4e;
-    color: #ffffff;
-    transition: all 0.3s;
-    text-decoration: none;
-  }
-  .aboutTab:hover {
-    background-color: #000000;
-  }
-}
-.childrenRoute {
-  text-align: center;
-  font-weight: bold;
-  margin-top: 50px;
-}
+	.tabList {
+		overflow: hidden;
+		width: 200px;
+		margin-left: auto;
+		margin-right: auto;
+		margin-top: 100px;
+		.aboutTab {
+			float: left;
+			width: 100px;
+			text-align: center;
+			line-height: 50px;
+			background-color: #4e4e4e;
+			color: #ffffff;
+			transition: all 0.3s;
+			text-decoration: none;
+		}
+		.aboutTab:hover {
+			background-color: #000000;
+		}
+	}
+	.childrenRoute {
+		text-align: center;
+		font-weight: bold;
+		margin-top: 50px;
+	}
 </style>
