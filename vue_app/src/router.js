@@ -8,6 +8,7 @@ import List from './views/List.vue'
 import ListDetail from './views/ListDetail.vue'
 import NotFoundPage from './views/NotFound.vue'
 import ExportExcel from './views/ExportExl.vue'
+import ExportExcelCn from './views/ExportExlCn.vue'
 
 // 组件级别
 import AsyncComp from './views/asyncCompTest.vue'
@@ -45,6 +46,11 @@ const router = new Router({
       path: '/ex',
       name: 'export_excel',
       component: ExportExcel
+    },
+    {
+      path: '/exCn',
+      name: 'export_excel_cn',
+      component: ExportExcelCn
     },
     {
       path: '/list',

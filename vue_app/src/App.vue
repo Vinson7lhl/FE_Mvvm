@@ -10,6 +10,8 @@
       <br />
       <router-link to="/ex">ExportExcel</router-link>
       <br />
+	  <router-link to="/exCn">ExportExcelCn</router-link>
+      <br />
       <router-link to="/asyncComp">AsyncPage</router-link>
       <br />
     </div>

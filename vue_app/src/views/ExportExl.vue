@@ -205,6 +205,9 @@
 								{
 									tuple: ['Business Type.Warehouse'],
 								},
+								{
+									tuple: ['Business Type.Value Added Reseller'],
+								},
 							],
 						},
 					},
@@ -284,16 +287,15 @@
 			getData() {
 				return [
 					{
+						'Business Type': {
+							type: 'level',
+							hierarchy: 'Product Info',
+						},
 						Category: {
 							type: 'level',
 							hierarchy: 'Product Info',
 							parent: 'Business Type',
 						},
-						'Business Type': {
-							type: 'level',
-							hierarchy: 'Product Info',
-						},
-
 						Country: {
 							type: 'level',
 							parent: 'part',
