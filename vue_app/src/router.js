@@ -9,6 +9,7 @@ import ListDetail from './views/ListDetail.vue'
 import NotFoundPage from './views/NotFound.vue'
 import ExportExcel from './views/ExportExl.vue'
 import ExportExcelCn from './views/ExportExlCn.vue'
+import EchartsTable from './views/EchartsTable.vue'
 
 // 组件级别
 import AsyncComp from './views/asyncCompTest.vue'
@@ -46,6 +47,11 @@ const router = new Router({
       path: '/ex',
       name: 'export_excel',
       component: ExportExcel
+    },
+    {
+      path: '/dashboard',
+      name: 'page_dashboard',
+      component: EchartsTable
     },
     {
       path: '/exCn',
