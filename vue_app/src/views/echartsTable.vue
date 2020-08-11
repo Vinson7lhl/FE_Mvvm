@@ -18,15 +18,16 @@
 		},
 		methods: {
 			initCharts() {
-				// 基于准备好的dom，初始化echarts实例
+				// 基于准备好的容器1，折线图
 				var _this = this
 				let myChart1 = this.$Echarts.init(_this.$refs.echarts_container1)
-				// 绘制图表
+				// 绘制折线图
 				myChart1.setOption({
 					// 设置全局字体
 					textStyle: {
 						fontFamily: 'Arial',
 					},
+					// x轴的配置
 					xAxis: {
 						type: 'category',
 						boundaryGap: false,
@@ -61,6 +62,7 @@
 							color: '#ffffff',
 						},
 					},
+					// y轴的配置
 					yAxis: {
 						// y轴的标题名
 						name: '点数',
@@ -91,6 +93,7 @@
 							show: false,
 						},
 					},
+					// 核心数据轴的配置
 					series: [
 						{
 							data: [
@@ -157,6 +160,9 @@
 								show: false,
 							},
 						},
+						position: (point)=>{
+							return [point[0]-35, point[1]-60]
+						},
 						// 提示框内边距 [上 右 下 左]
 						padding: [0, 5, 0, 5],
 						// 背景色
@@ -174,52 +180,114 @@
 					},
 				})
 
-				// 基于准备好的dom，初始化echarts实例
+				// 基于准备好的容器2，雷达图
 				let myChart2 = this.$Echarts.init(_this.$refs.echarts_container2)
 				// 绘制图表
 				myChart2.setOption({
-					tooltip: {
-						trigger: 'item',
-						formatter: '{a} <br/>{b}: {c} ({d}%)',
+					tooltip:{
+						trigger:'item'
 					},
-					legend: {
-						orient: 'vertical',
-						left: 10,
-						data: [
-							'直接访问',
-							'邮件营销',
-							'联盟广告',
-							'视频广告',
-							'搜索引擎',
+					// 设置为雷达图
+					radar: {
+						// 设置雷达图指标，即有几个维度，以及最大值
+						indicator: [
+							{ text: '品牌', max: 100, color: '#ffffff' },
+							{ text: '内容', max: 100, color: '#ffffff' },
+							{ text: '可用性', max: 100, color: '#ffffff' },
+							{ text: '功能', max: 100, color: '#ffffff' },
 						],
+						// 指雷达图中心点在容器的位置，如果是 [距离左侧的百分比，距离顶部百分比] ['50%', '50%']则恰好是中心
+						center: ['50%', '50%'],
+						// 雷达图半径值，可以看做是雷达图在容器中的大小
+						radius: 80,
+						// 是否显示分割区域，此处不显示，从而让雷达图完全透明
+						splitArea: {
+							show: false,
+						},
+						axisLine: {
+							show: false,
+							lineStyle: {
+								color: 'aqua',
+								type: 'dotted',
+								opacity: 0.1,
+							},
+						},
+						// 雷达图内的分割区域线
+						splitLine: {
+							lineStyle: {
+								// 分割线颜色
+								color: '#979797',
+							},
+						},
+						// 雷达图内指示器名维度线
+						axisLine: {
+							show: true,
+							lineStyle: {
+								color: '#979797',
+								type: 'dashed',
+							},
+						},
+						// 指示器名是否显示（即那几个维度名字）
+						name: {
+							show: true,
+						},
+						// 指示器名字离雷达图距离
+						nameGap: 10,
 					},
 					series: [
 						{
-							name: '访问来源',
-							type: 'pie',
-							radius: ['50%', '70%'],
-							avoidLabelOverlap: false,
+							type: 'radar',
+							tooltip: {
+								trigger: 'item',
+							},
+							// 打点图形：空心圆
+							symbol: 'emptyCircle',
+							// 打点大小
+							symbolSize: 8,
 							label: {
 								show: false,
-								position: 'center',
 							},
-							emphasis: {
-								label: {
-									show: true,
-									fontSize: '30',
-									fontWeight: 'bold',
-								},
-							},
-							labelLine: {
-								show: false,
-							},
+							areaStyle: {},
 							data: [
-								{ value: 335, name: '直接访问' },
-								{ value: 310, name: '邮件营销' },
-								{ value: 234, name: '联盟广告' },
-								{ value: 135, name: '视频广告' },
-								{ value: 1548, name: '搜索引擎' },
+								{
+									value: [60, 73, 85, 40],
+									name: '某软件',
+									itemStyle: {
+										// 雷达图圆点颜色
+										color: '#964FFF',
+									},
+									// 雷达图面积颜色
+									areaStyle: {
+										color: '#964FFF',
+										opacity: 0.8,
+									},
+								},
+								{
+									value: [20, 53, 8, 90],
+									name: '某软件',
+									itemStyle: {
+										// 雷达图面积颜色
+										color: '#02C5D7',
+									},
+									areaStyle: {
+										color: '#02C5D7',
+										opacity: 0.8,
+									},
+								},
 							],
+							// 鼠标放上后的数据提示框
+							tooltip: {
+								// 提示框内边距 [上 右 下 左]
+								padding: [0, 5, 0, 5],
+								// 背景色
+								backgroundColor: '#A634EF',
+								// 文本样式
+								textStyle: {
+									color: '#ffffff',
+									fontWeight: 'bold',
+									fontSize: 18,
+								}
+							},
 						},
 					],
 				})
@@ -247,5 +315,6 @@
 	.dashboard2 {
 		width: 300px;
 		height: 300px;
+		background-color: #47059c;
 	}
 </style>
