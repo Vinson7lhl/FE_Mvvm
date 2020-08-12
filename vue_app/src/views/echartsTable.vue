@@ -315,6 +315,8 @@
 	.dashboard2 {
 		width: 300px;
 		height: 300px;
+		border-radius: 14px;
+		margin-top:20px;
 		background-color: #47059c;
 	}
 </style>
