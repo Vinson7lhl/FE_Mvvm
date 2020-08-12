@@ -328,7 +328,7 @@
 						// 禁用鼠标触发事件
 						// silent: true,
 						// 鼠标hover时激活大小
-						// hoverOffset: 5,
+						hoverOffset: 3,
 						// 类型标签样式
 						label: {
 							show: true,
@@ -345,7 +345,7 @@
 						emphasis: {
 							label: {
 								show: true,
-								fontSize: "15",
+								fontSize: "16",
 							},
 						},
 						tooltip: {
