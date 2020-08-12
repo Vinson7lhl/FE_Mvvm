@@ -200,16 +200,11 @@
 							},
 						],
 						drills: {
-							// drillAll: false,
-							rows: [
-								{
-									tuple: ['Business Type.Warehouse'],
-								},
-								{
-									tuple: ['Business Type.Value Added Reseller'],
-								},
-							],
+							"drillAll": true
 						},
+						expands:{
+							expandAll:true
+						}
 					},
 				},
 				global: {
