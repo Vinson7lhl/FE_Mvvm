@@ -3,27 +3,59 @@ import axios from 'axios'
 // 引入Element UI [loading]
 import { Loading } from 'element-ui';
 
+const BASE_URL = process.env.VUE_APP_BASE_URL
 
-// get 请求
+let axios_obj = axios.create({
+	baseURL: BASE_URL,
+	timeout: 15000
+})
+
+// axios拦截器：在返回数据时前置进行过滤，通用处理，然后最终发回给调用者有价值的数据，但需要和后端统一好！
+axios_obj.interceptors.response.use(res => {
+	// 如果http返回200状态
+	if (res.status === 200) {
+		// 处理后端自定义的数据，比如有自己的code定义，再次进行处理
+		return res.data
+	} else if (res.status === 404) {
+		return Promise.reject('/*-----无此接口，请确认！-----*/')
+	} else if (res.status === 500) {
+		return Promise.reject('/*-----服务端错误，请确认！-----*/')
+	}
+}, error => {
+	// 对响应错误做点什么
+	return Promise.reject(error)
+})
+
 /** 
- * post方法，对应post请求 
+ * get方法 
  * @param {String} url [请求的url地址] 
  * @param {Object} params [请求时携带的参数] 
  */
-export function post(url, params) {
-  return new Promise((resolve, reject) => {
-       axios.post(url, QS.stringify(params))
-      .then(res => {
-          resolve(res.data);
-      })
-      .catch(err =>{
-          reject(err.data)
-      })
-  });
+export function getRequest (url, params = {}) {
+	return axios_obj.get(url, params)
+		.then(res => {
+			return res
+		})
+		.catch(err => {
+			console.log('/*-----网络错误！-----*/', err)
+		})
 }
-
-// post 请求
-
+/** 
+ * post方法
+ * @param {String} url [请求的url地址] 
+ * @param {Object} params [请求时携带的参数] 
+ */
+export function postRequest (url, params) {
+	return new Promise((resolve, reject) => {
+		axios_obj.post(url, QS.stringify(params))
+			.then(res => {
+				resolve(res.data);
+			})
+			.catch(err => {
+				reject(err.data)
+			})
+	});
+}
 // put 请求
 
 // delete 请求
