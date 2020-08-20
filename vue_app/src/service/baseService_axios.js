@@ -10,7 +10,6 @@ let axios_obj = axios.create({
 	timeout: 15000
 })
 
-// http request 拦截器
 /**
  * @description axios-request拦截器：处理所有请求的token验证
  * @param {object} config 请求对象
@@ -61,6 +60,7 @@ export function getRequest (url, params = {}) {
 			console.log('/*-----网络错误！-----*/', err)
 		})
 }
+
 /** 
  * @description post方法
  * @param {String} url [请求的url地址] 
