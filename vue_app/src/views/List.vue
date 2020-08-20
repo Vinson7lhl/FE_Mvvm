@@ -7,7 +7,7 @@
 </template>
 
 <script>
-	import indexApi from "@/service/index";
+	import indexPageApi from "@/service/index_page_api";
 
 	export default {
 		name: "产品列表",
@@ -25,7 +25,7 @@
 		},
 		methods: {
 			async getList() {
-				let res = await indexApi.getList("/shows", { id: 82 })
+				let res = await indexPageApi.getList("/shows", { id: 82 })
 			},
 		},
 	};
