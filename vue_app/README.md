@@ -1,18 +1,20 @@
-### 问题1
 
-* 格式化为beautify插件，详情查看 .prettierrc 文件 
+# Vue-app-learning
+
+* 格式化为beautify插件，详情查看 .prettierrc 文件
 * 若要自定义配置则可查看 [官网] (https://github.com/HookyQR/VSCodeBeautify/blob/master/Settings.md)
 
 ***
 
-# 部署步骤
-** 安装依赖包：npm install **
-** 运行开发环境：npm run dev **
-** 运行打包代码：npm run build **
+## 部署步骤
+
+**安装依赖包：npm install**
+**运行开发环境：npm run dev**
+**运行打包代码：npm run build**
 
 ***
 
-# 项目说明
+## 项目说明
 
 ***
 
@@ -29,5 +31,3 @@
         ├──  main.js                  // 启动文件
         ├──  router.js                // 路由文件
         ├──  store.js                 // Vuex状态管理器
-
-
