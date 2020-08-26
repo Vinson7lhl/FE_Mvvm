@@ -26,11 +26,24 @@
 				content: ['你好', '啊——', '李银河'],
 			}
 		},
+		mounted(){
+			let obj_1 = this.factoryObj('张三',41)
+			let obj_2 = this.factoryObj('李四',27)
+			console.log(obj_1 === obj_2)
+		},
 		methods: {
 			changeConent() {
 				// this.content[2] = '王小波'
 				this.$set(this.content, 2, '王小波')
 			},
+			// 工厂函数
+			factoryObj(name,age){
+				let obj = {
+					name:name,
+					age:age
+				}
+				return obj
+			}
 		},
 	}
 </script>

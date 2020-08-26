@@ -130,6 +130,11 @@
 								width: 3,
 								color: "#A634EF",
 							},
+							itemStyle:{
+								color:'#400093',
+								borderColor: '#ffffff',
+								borderWidth: 2
+							},
 							// 数据显示区域填充颜色
 							areaStyle: {
 								// 颜色线性渐变
