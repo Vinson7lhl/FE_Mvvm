@@ -10,6 +10,7 @@ import NotFoundPage from './views/NotFound.vue'
 import ExportExcel from './views/ExportExl.vue'
 import ExportExcelCn from './views/ExportExlCn.vue'
 import EchartsTable from './views/echartsTable.vue'
+import MapTest from './views/MapTest.vue'
 
 // 组件级别
 import AsyncComp from './views/asyncCompTest.vue'
@@ -72,6 +73,11 @@ const router = new Router({
       path: '/asyncComp',
       name: 'async_comp',
       component: AsyncComp
+    },
+    {
+      path: '/map',
+      name: 'map_test',
+      component: MapTest
     },
     {
       path: '*',
