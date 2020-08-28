@@ -4,7 +4,7 @@
     <div>
       {{content}}
       <br />
-      <img src="../assets/async.jpg" alt />
+      <img src="../assets/img/async.jpg" alt />
       <div class="tabList">
         <router-link class="aboutTab" to="/about/us">关于我们</router-link>
         <router-link class="aboutTab" to="/about/firm">关于公司</router-link>

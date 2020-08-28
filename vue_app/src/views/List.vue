@@ -1,32 +1,51 @@
 <template>
-	<div>
-		<div v-for="item of products" :key="item.id">
-			<router-link :to="'/list_detail/' + item.id">{{item.name}}</router-link>
+	<div class='movieContainer' v-if='movie_list'>
+		<div class='perMovie' v-for="item in movie_list" :key="item.show.id">
+			<div class='baseInfo'>得分：<span class='scoreNum'>{{item.score}}</span> 片名：{{item.show.name}}</div>
+			<img v-if='item.show.image' :src="item.show.image.medium" alt="">
 		</div>
 	</div>
 </template>
 
 <script>
-	import indexPageApi from "@/service/index_page_api";
+	import indexPageApi from "@/api/index_api";
 
 	export default {
-		name: "产品列表",
+		name: "tv_list",
 		data() {
 			return {
-				products: [
-					{ id: 1, name: "苹果" },
-					{ id: 2, name: "鸭梨" },
-					{ id: 3, name: "橘子" },
-				],
+				movie_list: ''
 			};
 		},
 		mounted() {
 			this.getList()
 		},
 		methods: {
-			async getList() {
-				let res = await indexPageApi.getList("/shows", { id: 82 })
+			getList() {
+				console.log('请求')
+				indexPageApi.getTvList({ q: 'girls' }).then(res=>{
+					this.movie_list = res
+				})
 			},
 		},
 	};
 </script>
+
+<style lang="scss" scoped>
+.movieContainer{
+	padding:20px;
+	width:100%;
+	.perMovie{
+		width:150px;
+		text-align: center;
+		margin-left:20px;
+		float:left;
+		.scoreNum{
+			font-weight: bold;
+		}
+		img{
+			width:100%;
+		}
+	}
+}
+</style>

@@ -1,7 +1,7 @@
 <template>
   <div class="notFoundPage">
     <div class='notFoundText'>{{content}}</div>
-    <img src="../assets/404.jpg" alt />
+    <img src="../assets/img/404.jpg" alt />
   </div>
 </template>
 

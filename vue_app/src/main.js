@@ -9,6 +9,10 @@ import './registerServiceWorker'
 // Element UI
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+// 第三方iconfont一般用法：即用Unicode/类名,类名是推荐用法！
+// import './assets/icon_font/iconfont.css'
+// 特别地：第三方iconfont最推荐使用svg —— 未来趋势，可以使用非单一颜色，但需要引入此js，不用引入上面的css，然后在根组件app.vue中写入基本样式即可
+// import './assets/icon_font/iconfont.js'
 
 Vue.config.productionTip = false
 Vue.use(ElementUI)

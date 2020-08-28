@@ -31,8 +31,7 @@ HTTP.interceptors.request.use(function (config) {
 // 对所有请求增加响应拦截器
 HTTP.interceptors.response.use(res => {
     LOADING_OBJ.close()
-    // 如果存在响应数据，去除loading(后端会封装一层{code:x,data:x,extData:x,message:x})
-    if (res.data && res.data.code === 200 && res.data.data) {
+    if (res.data) {
         return res.data
     }
     // 如果没有返回有价值数据，则返回空字符串

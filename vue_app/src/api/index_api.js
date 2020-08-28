@@ -1,18 +1,12 @@
-import HTTP from './base_api'
+import http from './api'
 
-let indexApi = {
-	index_get:()=>{
-		
-	}
-}
-let index_get = () => {
-	return HTTP({
-		url: ' http://api.tvmaze.com/search/shows',
-		methods: 'get',
-		params: {
-			q: 'girls'
-		}
-	})
-}
 
-export { index_get }
+let index_page_api = {
+  /**
+   * @description 获取电视列表
+   */
+  getTvList: (params) => {
+    return http.get('search/shows', params)
+  }
+}
+export default index_page_api
