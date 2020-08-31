@@ -41,7 +41,7 @@
 	export default {
 		name: "rootApp",
 		mounted() {
-			console.log("/------------app-加载完毕-------------/");
+			console.log("---App:mounted---");
 			this.$on("test", (data) => {
 				console.log("广播得到的数据");
 				console.log(data);
@@ -64,19 +64,19 @@
 			        after-enter
 			     */
 			beforeEnter() {
-				console.log("before-enter");
+				console.log("---App:before-enter---");
 			},
 			enter() {
-				console.log("enter");
+				console.log("---App:enter---");
 			},
 			afterEnter() {
-				console.log("after-enter");
+				console.log("---App:after-enter---");
 			},
 			enterCancelled(el) {
-				console.log("after-cancel");
+				console.log("---App:after-cancel---");
 			},
 			beforeLeave(el) {
-				console.log("before-leave");
+				console.log("---App:before-leave---");
 			},
 			// 此回调函数是可选项的设置
 			// 与 CSS 结合时使用

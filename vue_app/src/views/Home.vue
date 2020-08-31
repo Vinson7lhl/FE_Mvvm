@@ -32,22 +32,22 @@
 			// 或者只写HelloWorld也可以相当于-HelloWorld:HelloWorld
 		},
 		beforeCreate() {
-			console.log("---beforeCreate---");
+			console.log("---Home:beforeCreate---");
 			console.log("$el", this.$el);
 			console.log("homeData", this.$data);
 		},
 		created() {
-			console.log("---created---");
+			console.log("---Home:created---");
 			console.log("$el", this.$el);
 			console.log("homeData", this.$data);
 		},
 		beforeMount() {
-			console.log("---beforeMount---");
+			console.log("---Home:beforeMount---");
 			console.log("$el", this.$el);
 			console.log("homeData", this.$data);
 		},
 		mounted() {
-			console.log("---mounted---");
+			console.log("---Home:mounted---");
 			console.log("$el", this.$el);
 			console.log("homeData", this.$data);
 			console.log("子组件访问Home页面数据：", this.$parent.homeData);

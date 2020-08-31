@@ -125,21 +125,21 @@ export default {
    * 生命周期钩子:created，注意不要用箭头函数！否则this无法绑定在vue实例上
    */
   beforeCreate () {
-    console.log('生命周期钩子：beforeCreated')
+    console.log('---HelloWord:beforeCreated---')
     console.log('周期函数中调用input_text:' + this.input_text) // undefined
   },
   created () {
-    console.log('生命周期钩子：created')
+    console.log('---HelloWord:created---')
     console.log('周期函数中调用input_text:' + this.input_text)
     console.log('子组件访问Home页面数据：', this.$parent.homeData)
   },
   beforeMount () {
-    console.log('---beforeMount---')
+    console.log('---HelloWord:beforeMount---')
     console.log('$el', this.$el)
     console.log('生命周期钩子：beforeMount')
   },
   mounted () {
-    console.log('/------------HelloWord-加载完毕-------------/')
+    console.log('---HelloWord:mounted---')
     console.log('子组件访问根组件数据：', this.$root.isShowPopUp)
   }
 }
