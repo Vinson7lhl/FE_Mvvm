@@ -20,7 +20,20 @@
 		mounted() {
 			let map = new AMap.Map("map_container");
 		},
-		methods: {},
+		methods: {
+			// 打点
+			mapDrawPoint(map_obj, lng_lat_arr) {
+				console.log('打点')
+			},
+			// 画线
+			mapDrawLine(map_obj, lng_lat_arr) {
+				console.log('画线')
+			},
+			// 画区域
+			mapDrawArea(map_obj, lng_lat_arr) {
+				console.log('画区域')
+			}
+		},
 	};
 </script>
 
