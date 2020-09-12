@@ -2,20 +2,20 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 // 页面级别
-import Home from './views/Home.vue'
-import About from './views/About.vue'
-import List from './views/List.vue'
-import ListDetail from './views/ListDetail.vue'
-import NotFoundPage from './views/NotFound.vue'
-import ExportExcel from './views/ExportExl.vue'
-import ExportExcelCn from './views/ExportExlCn.vue'
-import EchartsTable from './views/echartsTable.vue'
-import MapTest from './views/MapTest.vue'
+import Home from '@/views/Home.vue'
+import About from '@/views/About.vue'
+import List from '@/views/List.vue'
+import ListDetail from '@/views/ListDetail.vue'
+import NotFoundPage from '@/views/NotFound.vue'
+import ExportExcel from '@/views/ExportExl.vue'
+import ExportExcelCn from '@/views/ExportExlCn.vue'
+import EchartsTable from '@/views/echartsTable.vue'
+import MapTest from '@/views/MapTest.vue'
 
 // 组件级别
-import AsyncComp from './views/asyncCompTest.vue'
-import AboutUs from './components/aboutUs/about_us.vue'
-import AboutFirm from './components/aboutFirm/about_firm.vue'
+import AsyncComp from '@/views/asyncCompTest.vue'
+import AboutUs from '@/components/aboutUs/about_us.vue'
+import AboutFirm from '@/components/aboutFirm/about_firm.vue'
 
 Vue.use(Router)
 
