@@ -124,7 +124,7 @@
 			geo_map_polygens.on("click", function () {
 				console.log("被点击：", geo_map_polygens.getOverlays());
 				console.log("被点击：", overlayGroup.getOverlays());
-				map.setFitView(geo_map_polygens.getOverlays().getOverlays());
+				map.setFitView(geo_map_polygens.getOverlays().fx);
 			});
 		},
 		methods: {

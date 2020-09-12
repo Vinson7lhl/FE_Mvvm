@@ -23,17 +23,11 @@
 		<!--一级路由动画切换配置-->
 		<transition
 			name="fade"
-			v-on:before-enter="beforeEnter"
-			v-on:enter="enter"
-			v-on:after-enter="afterEnter"
-			v-on:enter-cancelled="enterCancelled"
-			v-on:before-leave="beforeLeave"
-			v-on:leave="leave"
-			v-on:after-leave="afterLeave"
-			v-on:leave-cancelled="leaveCancelled"
+			mode="out-in"
 		>
 			<!--路由的输出-->
-			<router-view />
+			<keep-alive><router-view /></keep-alive>
+			
 		</transition>
 	</div>
 </template>
