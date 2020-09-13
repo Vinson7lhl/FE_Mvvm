@@ -40,7 +40,10 @@ module.exports = {
     "quotes": [2, "single"],
     // 不强制驼峰命名规则 
     "camelcase": [2, 
-      {"properties": "never"}
+      {"properties": "never"}, 
+      {"ignoreImports": true}, 
+      {"ignoreDestructuring": true}, 
+      {"ignoreGlobals": true}
     ],
     // 不强制驼峰命名规则 "ignoreImports": false
     "camelcase": [2, {"ignoreImports": true}]
