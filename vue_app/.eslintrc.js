@@ -14,6 +14,7 @@ module.exports = {
     “error”或2：违反时报错。
    */
   rules: {
+    // 生产环境不允许有 console debugger
     'no-console': process.env.NODE_ENV === 'pro' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'pro' ? 'error' : 'off',
     // 函数定义的时候不允许出现重复的参数
@@ -39,14 +40,7 @@ module.exports = {
     // 使用单引号
     "quotes": [2, "single"],
     // 不强制驼峰命名规则 
-    "camelcase": [2, 
-      {"properties": "never"}, 
-      {"ignoreImports": true}, 
-      {"ignoreDestructuring": true}, 
-      {"ignoreGlobals": true}
-    ],
-    // 不强制驼峰命名规则 "ignoreImports": false
-    "camelcase": [2, {"ignoreImports": true}]
+    "camelcase": 0
   },
   parserOptions: {
     parser: 'babel-eslint'
