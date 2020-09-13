@@ -7,13 +7,13 @@
 
 <script>
 export default {
-  name: 'about-page',
-  data () {
-    return {
-      content: '404未找到'
-    }
-  },
-  methods: {}
+	name: 'about-page',
+	data () {
+		return {
+			content: '404未找到'
+		}
+	},
+	methods: {}
 }
 </script>
 

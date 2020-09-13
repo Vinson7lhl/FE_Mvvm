@@ -8,27 +8,27 @@
 </template>
 
 <script>
-	import indexPageApi from "@/api/index_api";
+import indexPageApi from '@/api/index_api'
 
-	export default {
-		name: "tv_list",
-		data() {
-			return {
-				movie_list: ''
-			};
-		},
-		mounted() {
-			this.getList()
-		},
-		methods: {
-			getList() {
-				console.log('请求')
-				indexPageApi.getTvList({ q: 'girls' }).then(res=>{
-					this.movie_list = res
-				})
-			},
-		},
-	};
+export default {
+	name: 'tv_list',
+	data () {
+		return {
+			movie_list: ''
+		}
+	},
+	mounted () {
+		this.getList()
+	},
+	methods: {
+		getList () {
+			console.log('请求')
+			indexPageApi.getTvList({ q: 'girls' }).then(res => {
+				this.movie_list = res
+			})
+		}
+	}
+}
 </script>
 
 <style lang="scss" scoped>

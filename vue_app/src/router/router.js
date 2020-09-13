@@ -20,77 +20,77 @@ import AboutFirm from '@/components/aboutFirm/about_firm.vue'
 Vue.use(Router)
 
 const router = new Router({
-  routes: [
-    {
-      path: '/',
-      name: 'home',
-      component: Home
-    },
-    {
-      path: '/about',
-      name: 'about',
-      component: About,
-      redirect: '/about/us',
-      children: [
-        {
-          path: 'us',
-          name: 'about_us',
-          component: AboutUs
-        },
-        {
-          path: 'firm',
-          name: 'about_firm',
-          component: AboutFirm
-        }
-      ]
-    },
-    {
-      path: '/ex',
-      name: 'export_excel',
-      component: ExportExcel
-    },
-    {
-      path: '/dashboard',
-      name: 'page_dashboard',
-      component: EchartsTable
-    },
-    {
-      path: '/exCn',
-      name: 'export_excel_cn',
-      component: ExportExcelCn
-    },
-    {
-      path: '/list',
-      name: 'list',
-      component: List
-    },
-    {
-      path: '/list_detail/:id',
-      name: 'list_detail',
-      component: ListDetail
-    },
-    {
-      path: '/asyncComp',
-      name: 'async_comp',
-      component: AsyncComp
-    },
-    {
-      path: '/map',
-      name: 'map_test',
-      component: MapTest
-    },
-    {
-      path: '*',
-      name: 'not_found_page',
-      component: NotFoundPage
-    }
-  ]
+	routes: [
+		{
+			path: '/',
+			name: 'home',
+			component: Home
+		},
+		{
+			path: '/about',
+			name: 'about',
+			component: About,
+			redirect: '/about/us',
+			children: [
+				{
+					path: 'us',
+					name: 'about_us',
+					component: AboutUs
+				},
+				{
+					path: 'firm',
+					name: 'about_firm',
+					component: AboutFirm
+				}
+			]
+		},
+		{
+			path: '/ex',
+			name: 'export_excel',
+			component: ExportExcel
+		},
+		{
+			path: '/dashboard',
+			name: 'page_dashboard',
+			component: EchartsTable
+		},
+		{
+			path: '/exCn',
+			name: 'export_excel_cn',
+			component: ExportExcelCn
+		},
+		{
+			path: '/list',
+			name: 'list',
+			component: List
+		},
+		{
+			path: '/list_detail/:id',
+			name: 'list_detail',
+			component: ListDetail
+		},
+		{
+			path: '/asyncComp',
+			name: 'async_comp',
+			component: AsyncComp
+		},
+		{
+			path: '/map',
+			name: 'map_test',
+			component: MapTest
+		},
+		{
+			path: '*',
+			name: 'not_found_page',
+			component: NotFoundPage
+		}
+	]
 })
 
 router.beforeEach((to, from, next) => {
-  console.log('全局前置路由守卫')
-  console.log(to)
-  console.log(from)
-  next()
+	console.log('全局前置路由守卫')
+	console.log(to)
+	console.log(from)
+	next()
 })
 export default router
