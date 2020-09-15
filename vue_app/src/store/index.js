@@ -18,7 +18,8 @@ export default new Vuex.Store({
 		state2: 3,
 		state3: 4,
 		login_name: '小李子',
-		login_number: '13888877671'
+		login_number: '13888877671',
+		G_map: ''
 	},
 	/**
 	 * -------------------------- getter -----------------------------
@@ -37,7 +38,10 @@ export default new Vuex.Store({
 	 */
 	mutations: {
 		add: (state, data) => state.count++,
-		minus: (state, data) => state.count--
+		minus: (state, data) => state.count--,
+		setGmap: (state, data) => {
+			state.G_map = data.G_map
+		}
 	},
 	actions: {
 
