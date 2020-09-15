@@ -4,16 +4,17 @@
     <button @click='add'>增加+1</button>
     <button @click='minus'>减少-1</button>
     <div>来自Vuex的状态值</div>
-    <span>状态值state1:{{state_1}}<br/></span>
-    <span>状态值state2:{{state_2}}<br/></span>
-    <span>状态值state3:{{state_3}}<br/></span>
+    <span>状态值state1:{{state_1}}<br /></span>
+    <span>状态值state2:{{state_2}}<br /></span>
+    <span>状态值state3:{{state_3}}<br /></span>
     <span>来自状态的getters：{{log_msg}}</span>
 
     <div class='baseClass'>李宏磊</div>
     <input ref='focusInput' type="text" v-model='input_text'>双向绑定
     <p>input输出：{{input_text}}</p>
     <div>这里是HTML片段，但是输出字符串：{{html_text}}</div>
-    <div id='renderHTML'>这里是HTML片段，但是渲染为html：<div class='htmlTag' v-html='html_text'></div></div>
+    <div id='renderHTML'>这里是HTML片段，但是渲染为html：<div class='htmlTag' v-html='html_text'></div>
+    </div>
     <div>新数据computed后1：{{newMessageByComputed}}</div>
     <div v-bind:class='{class1:activeClass1,class2:activeClass2}'>新数据通过方法后2：{{newMessageByMethod('呵呵')}}</div>
     <div>demo数据：name:{{demo.name}},age:{{demo.age}} <button @click='changeDemo'>修改demo数据</button></div>
@@ -30,14 +31,14 @@
     </div>
     <!--复选框：checkbox Test-->
     <div class='checkboxForm'>
-        史蒂夫.乔布斯 <input type="checkbox" value='sj' v-model='tecSuperStar'/>
-        拉里.埃里森 <input type="checkbox" value='la' v-model='tecSuperStar'/>
+        史蒂夫.乔布斯 <input type="checkbox" value='sj' v-model='tecSuperStar' />
+        拉里.埃里森 <input type="checkbox" value='la' v-model='tecSuperStar' />
         选中的名字：{{tecSuperStar}}
     </div>
     <!--下拉框：single-select-option Test-->
     <div class='selectOptionForm'>
         <select name="selectForm" id="selectForm" v-model='phoneName'>
-            <option  disabled value=''>请选择</option>
+            <option disabled value=''>请选择</option>
             <option value='iPhone6s'>iPhone 6s</option>
             <option value='iPhone7'>iPhone 7</option>
             <option value='iPhone8'>iPhone 8</option>
@@ -48,16 +49,16 @@
     </div>
     <!--下拉框：multiple-select-option Test-->
     <div class='selectOptionForm'>
-            <select multiple name="selectForm" id="selectForm" v-model='somePhoneName'>
-                <option  disabled value=''>请选择</option>
-                <option value='iPhone6s'>iPhone 6s</option>
-                <option value='iPhone7'>iPhone 7</option>
-                <option value='iPhone8'>iPhone 8</option>
-                <option value='iPhoneX'>iPhone X</option>
-                <option value='iPhoneXs'>iPhone Xs</option>
-            </select>
-            选择多个的手机名：{{somePhoneName}}
-        </div>
+        <select multiple name="selectForm" id="selectForm" v-model='somePhoneName'>
+            <option disabled value=''>请选择</option>
+            <option value='iPhone6s'>iPhone 6s</option>
+            <option value='iPhone7'>iPhone 7</option>
+            <option value='iPhone8'>iPhone 8</option>
+            <option value='iPhoneX'>iPhone X</option>
+            <option value='iPhoneXs'>iPhone Xs</option>
+        </select>
+        选择多个的手机名：{{somePhoneName}}
+    </div>
     <div>
         <button @click='changeArray'>修改名字</button>
         <ul>

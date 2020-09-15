@@ -1,33 +1,33 @@
 <template>
-  <div id="app1">
-    root数据：{{ rootData }}
-    <div id="nav">
-      <router-link to="/">Home</router-link>
-      <br />
-      <router-link to="/about">About</router-link>
-      <br />
-      <router-link to="/list">List</router-link>
-      <br />
-      <router-link to="/ex">ExportExcel</router-link>
-      <br />
-      <router-link to="/exCn">ExportExcelCn</router-link>
-      <br />
-      <router-link to="/dashboard">Dashboard</router-link>
-      <br />
-      <router-link to="/asyncComp">AsyncPage</router-link>
-      <br />
-      <router-link to="/map">MapPage</router-link>
-      <br />
-    </div>
-    <div v-if="isShowPopUp" class="popUp">这里是弹窗</div>
-    <!--一级路由动画切换配置-->
-    <transition name="fade" mode="out-in">
-      <!--路由的输出-->
-      <keep-alive>
-        <router-view />
-      </keep-alive>
-    </transition>
-  </div>
+	<div id="app1">
+		root数据：{{ rootData }}
+		<div id="nav">
+			<router-link to="/">Home</router-link>
+			<br />
+			<router-link to="/about">About</router-link>
+			<br />
+			<router-link to="/list">List</router-link>
+			<br />
+			<router-link to="/ex">ExportExcel</router-link>
+			<br />
+			<router-link to="/exCn">ExportExcelCn</router-link>
+			<br />
+			<router-link to="/dashboard">Dashboard</router-link>
+			<br />
+			<router-link to="/asyncComp">AsyncPage</router-link>
+			<br />
+			<router-link to="/map">MapPage</router-link>
+			<br />
+		</div>
+		<div v-if="isShowPopUp" class="popUp">这里是弹窗</div>
+		<!--一级路由动画切换配置-->
+		<transition name="fade" mode="out-in">
+			<!--路由的输出-->
+			<keep-alive>
+				<router-view />
+			</keep-alive>
+		</transition>
+	</div>
 </template>
 <script lang="ts">
 export default {
@@ -47,14 +47,14 @@ export default {
 	},
 	methods: {
 		/**
-	 * 动画生命周期，打印结果
-	 *  before-enter App.vue:35
-		before-leave App.vue:47
-		leave App.vue:53
-		after-leave App.vue:57
-		enter App.vue:38
-		after-enter
-		*/
+		 * 动画生命周期，打印结果
+		 *  before-enter App.vue:35
+			before-leave App.vue:47
+			leave App.vue:53
+			after-leave App.vue:57
+			enter App.vue:38
+			after-enter
+			*/
 		beforeEnter () {
 			console.log('---App:before-enter---')
 		},
@@ -88,53 +88,53 @@ export default {
 }
 </script>
 <style lang="scss">
-// .popUp{
-//   display: none;
-// }
-//  公共样式文件
-$base_color: red;
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
-.baseClass {
-  font-weight: bold;
-  font-size: 20px;
-  color: $base_color;
-}
+	// .popUp{
+	//   display: none;
+	// }
+	//  公共样式文件
+	$base_color: red;
+	#app {
+		font-family: "Avenir", Helvetica, Arial, sans-serif;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		text-align: center;
+		color: #2c3e50;
+	}
+	#nav {
+		padding: 30px;
+		a {
+			font-weight: bold;
+			color: #2c3e50;
+			&.router-link-exact-active {
+				color: #42b983;
+			}
+		}
+	}
+	.baseClass {
+		font-weight: bold;
+		font-size: 20px;
+		color: $base_color;
+	}
 
-.fade-enter-active,
-.fade-leave-active {
-  transition: all 0.3s;
-}
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-  opacity: 0;
-  transform: translate(10px, 0px);
-}
-.fade-leave,
-.fade-enter-to {
-  opacity: 1;
-  transform: translate(0px, 0px);
-}
-// 第三方iconfont推荐的svg用法需要写入此样式才可用
-.icon {
-  width: 1em;
-  height: 1em;
-  vertical-align: -0.15em;
-  fill: currentColor;
-  overflow: hidden;
-}
+	.fade-enter-active,
+	.fade-leave-active {
+		transition: all 0.3s;
+	}
+	.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+		opacity: 0;
+		transform: translate(10px, 0px);
+	}
+	.fade-leave,
+	.fade-enter-to {
+		opacity: 1;
+		transform: translate(0px, 0px);
+	}
+	// 第三方iconfont推荐的svg用法需要写入此样式才可用
+	.icon {
+		width: 1em;
+		height: 1em;
+		vertical-align: -0.15em;
+		fill: currentColor;
+		overflow: hidden;
+	}
 </style>

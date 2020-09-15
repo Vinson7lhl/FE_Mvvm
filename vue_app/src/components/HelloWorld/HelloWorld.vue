@@ -5,7 +5,6 @@
 import { mapState } from 'vuex'
 import Tab1Comp from '../tab1/tab1.vue'
 import Tab2Comp from '../tab2/tab2.vue'
-// import { X } from '../../../public/lib/lhl.js'
 export default {
 	// 组件名，其实不写这个属性也可以
 	name: 'HelloWorld',
@@ -14,8 +13,8 @@ export default {
 		dataMsg: String
 	},
 	/**
-   * 状态，必须是函数，然后返回状态，而不可以直接映射json对象
-   */
+	 * 状态，必须是函数，然后返回状态，而不可以直接映射json对象
+	 */
 	data () {
 		return {
 			input_text: 'computed',
@@ -46,8 +45,8 @@ export default {
 		}
 	},
 	/**
-   * 函数
-   */
+	 * 函数
+	 */
 	methods: {
 		newMessageByMethod (str) {
 			return `${this.msg}-${str}`
@@ -87,15 +86,15 @@ export default {
 		}
 	},
 	/**
-   * 重新定义数据，computed的本质就是angular的管道
-   */
+	 * 重新定义数据，computed的本质就是angular的管道
+	 */
 	computed: {
 		newMessageByComputed () {
 			return this.input_text + '-新数据'
 		},
 		/**
-     * from the Vuex 'store',来自Vuex中的状态一般会放在computed中，因为state和上面的data（本质也是state）是响应式的
-     */
+			 * from the Vuex 'store',来自Vuex中的状态一般会放在computed中，因为state和上面的data（本质也是state）是响应式的
+			 */
 		// 第一种写法：只有一个状态
 		from_store_count () {
 			// 通过this.$store来获取Vuex的Store 对象
@@ -104,7 +103,7 @@ export default {
 		// 第二种通过Vuex的mapState函数处理多个state
 		...mapState({
 			// 箭头函数
-			state_1: state => state.state1,
+			state_1: (state) => state.state1,
 			// 直接传递状态字符串
 			state_2: 'state2',
 			// 如果要使用this就必须用一般函数，如第一种写法
@@ -122,8 +121,8 @@ export default {
 		'tab2-comp': Tab2Comp
 	},
 	/**
-   * 生命周期钩子:created，注意不要用箭头函数！否则this无法绑定在vue实例上
-   */
+	 * 生命周期钩子:created，注意不要用箭头函数！否则this无法绑定在vue实例上
+	 */
 	beforeCreate () {
 		console.log('---HelloWord:beforeCreated---')
 		console.log('周期函数中调用input_text:' + this.input_text) // undefined

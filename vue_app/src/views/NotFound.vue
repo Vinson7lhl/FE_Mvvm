@@ -1,8 +1,8 @@
 <template>
-  <div class="notFoundPage">
-    <div class='notFoundText'>{{content}}</div>
-    <img src="../assets/img/404.jpg" alt />
-  </div>
+	<div class="notFoundPage">
+		<div class="notFoundText">{{content}}</div>
+		<img src="../assets/img/404.jpg" alt />
+	</div>
 </template>
 
 <script>
@@ -18,12 +18,12 @@ export default {
 </script>
 
 <style lang="scss">
-.notFoundPage {
-  text-align: center;
-  font-size: 40px;
-  font-weight: bold;
-  .notFoundText{
-    margin-bottom:100px;
-  }
-}
+	.notFoundPage {
+		text-align: center;
+		font-size: 40px;
+		font-weight: bold;
+		.notFoundText {
+			margin-bottom: 100px;
+		}
+	}
 </style>

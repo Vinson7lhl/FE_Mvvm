@@ -317,16 +317,16 @@ export default {
 							},
 							formatter: (params) => {
 								return `<div>${params.name}</div>
-											<div style="font-size:14px">${indicator_array[0].name} ${_this.numFormat(
+												<div style="font-size:14px">${indicator_array[0].name} ${_this.numFormat(
 	params.value[0]
 )}</div>
-											<div style="font-size:14px">${indicator_array[1].name} ${_this.numFormat(
+												<div style="font-size:14px">${indicator_array[1].name} ${_this.numFormat(
 	params.value[1]
 )}</div>
-											<div style="font-size:14px">${indicator_array[2].name} ${_this.numFormat(
+												<div style="font-size:14px">${indicator_array[2].name} ${_this.numFormat(
 	params.value[2]
 )}</div>
-											<div style="font-size:14px">${indicator_array[3].name} ${_this.numFormat(
+												<div style="font-size:14px">${indicator_array[3].name} ${_this.numFormat(
 	params.value[3]
 )}</div>`
 							}
@@ -364,8 +364,8 @@ export default {
 						},
 						// 设置各个子饼图之间距离，
 						itemStyle: {
-							borderWidth: 5,	// 边框的宽度
-							borderColor: '#47059c'	// 边框的颜色
+							borderWidth: 5, // 边框的宽度
+							borderColor: '#47059c' // 边框的颜色
 						},
 						// 标签和饼图线样式,首先让其不显示，其次让其第一段第二段引导线变短即可调整label与饼图距离
 						labelLine: {

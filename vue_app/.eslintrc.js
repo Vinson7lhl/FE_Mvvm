@@ -32,7 +32,7 @@ module.exports = {
     // 不允许出现多余的空格
     "no-multi-spaces": 2,
     // 允许使用tab
-    "no-tabs": [0],
+    "no-tabs": 0,
     // 强制一致的缩进风格:tab
     "indent": [2, "tab"],
     // 不允许使用var

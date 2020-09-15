@@ -1,22 +1,22 @@
 <template>
-  <div class="exportExl">
-    <div class="treeFrame">
-      <el-tree
-        draggable
-        :data="data"
-        :props="defaultProps"
-        :allow-drop="allowDrop"
-        default-expand-all
-        @node-click="handleNodeClick"
-        @node-drop="handleDrop"
-        @check="getTreeData"
-        ref="thisTree"
-      ></el-tree>
-    </div>
-    <div id="tableFrame">
-      <div id="wdr-component"></div>
-    </div>
-  </div>
+	<div class="exportExl">
+		<div class="treeFrame">
+			<el-tree
+				draggable
+				:data="data"
+				:props="defaultProps"
+				:allow-drop="allowDrop"
+				default-expand-all
+				@node-click="handleNodeClick"
+				@node-drop="handleDrop"
+				@check="getTreeData"
+				ref="thisTree"
+			></el-tree>
+		</div>
+		<div id="tableFrame">
+			<div id="wdr-component"></div>
+		</div>
+	</div>
 </template>
 
 <script>
@@ -200,7 +200,7 @@ export default {
 						}
 					],
 					drills: {
-						'drillAll': true
+						drillAll: true
 					},
 					expands: {
 						expandAll: true
@@ -212,6 +212,7 @@ export default {
 				localization: zh_json
 			}
 		})
+		console.log(pivot)
 	},
 	methods: {
 		handleNodeClick (data) {
@@ -1119,21 +1120,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-	.exportExl {
-
-	}
 	.treeFrame {
 		box-sizing: border-box;
 		width: 10%;
 		box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.2);
-		float:left;
-		margin-left:40px;
-		margin-top:100px;
+		float: left;
+		margin-left: 40px;
+		margin-top: 100px;
 	}
 	#tableFrame {
-		width:70%;
-		margin-left:50px;
-		float:right;
-		margin-right:40px;
+		width: 70%;
+		margin-left: 50px;
+		float: right;
+		margin-right: 40px;
 	}
 </style>

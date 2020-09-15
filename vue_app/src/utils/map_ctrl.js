@@ -5,16 +5,16 @@
 let MapCtrl = {
 	/* --------------------------GEO数据结构地图操作------------------------ */
 	/**
-     * @description 增加多个面操作
-     * @param {object} map_obj 地图实例
-     * @param {Array<object>} marker_array 点标记对象数组
-     */
+	 * @description 增加多个面操作
+	 * @param {object} map_obj 地图实例
+	 * @param {Array<object>} marker_array 点标记对象数组
+	 */
 
 	/* --------------------------非GEO数据结构地图------------------------ */
 	/**
-     * @description 创建某个marker对象工厂函数(分为三种：1、纯粹一个图标,2、自定义)
-     * @param {number} pointType marker类型
-     */
+	 * @description 创建某个marker对象工厂函数(分为三种：1、纯粹一个图标,2、自定义)
+	 * @param {number} pointType marker类型
+	 */
 	markerFactory: (pointType, div_content) => {
 		if (pointType === 1) {
 			return {
@@ -33,19 +33,19 @@ let MapCtrl = {
 		}
 	},
 	/**
-     * @description 聚焦在某点
-     * @param {object} map_obj 地图实例
-     * @param {object} marker 某点对象
-     */
-	locateMarker: (map_obj, marker) => {
+	 * @description 聚焦在某点
+	 * @param {object} map_obj 地图实例
+	 * @param {object} marker 某点对象
+	 */
+	focusMarker: (map_obj, marker) => {
 
 	},
 
 	/**
-     * @description 增加点标记
-     * @param {object} map_obj 地图实例
-     * @param {Array<object>} marker_array 点标记对象数组
-     */
+	 * @description 增加点标记
+	 * @param {object} map_obj 地图实例
+	 * @param {Array<object>} marker_array 点标记对象数组
+	 */
 	addMarker: (map_obj, marker_array) => {
 		if (map_obj) {
 			map_obj.add(marker_array)
@@ -55,12 +55,12 @@ let MapCtrl = {
 	},
 
 	/**
-     * @description 增加海量点标记（成千上万+）
-     * @param {object} map_obj 地图实例
-     * @param {object} mass_marker_obj 海量点标记对象
-     * @param {Array<object> || object} style_array 海量点标记样式
-     * @param {Array<object>} marker_array 点标记对象
-     */
+	 * @description 增加海量点标记（成千上万+）
+	 * @param {object} map_obj 地图实例
+	 * @param {object} mass_marker_obj 海量点标记对象
+	 * @param {Array<object> || object} style_array 海量点标记样式
+	 * @param {Array<object>} marker_array 点标记对象
+	 */
 	addMassMarker: (map_obj, mass_marker_obj, style_array, marker_array) => {
 		// 设置样式
 		mass_marker_obj.setStyle(style_array)
@@ -71,10 +71,10 @@ let MapCtrl = {
 	},
 
 	/**
-     * @description 增加矢量线标记
-     * @param {object} map_obj 地图实例
-     * @param {Array<object>} path_array 线标记对象
-     */
+	 * @description 增加矢量线标记
+	 * @param {object} map_obj 地图实例
+	 * @param {Array<object>} path_array 线标记对象
+	 */
 	addLine: (map_obj, path_obj) => {
 		if (map_obj && path_obj.path) {
 			let polyline = new AMap.Polyline(Object.assign({
@@ -99,10 +99,10 @@ let MapCtrl = {
 	},
 
 	/**
-     * @description 增加多边形区域
-     * @param {object} map_obj 地图实例
-     * @param {object} area_obj 多边形区域对象
-     */
+	 * @description 增加多边形区域
+	 * @param {object} map_obj 地图实例
+	 * @param {object} area_obj 多边形区域对象
+	 */
 	addArea: (map_obj, area_obj) => {
 		if (map_obj && area_obj.path) {
 			let polygon = new AMap.Polygon(Object.assign({
@@ -130,10 +130,10 @@ let MapCtrl = {
 	},
 
 	/**
-     * @description 增加圆形区域
-     * @param {object} map_obj 地图实例
-     * @param {object} circle_obj 圆形区域对象
-     */
+	 * @description 增加圆形区域
+	 * @param {object} map_obj 地图实例
+	 * @param {object} circle_obj 圆形区域对象
+	 */
 	addCircle: (map_obj, circle_obj) => {
 		if (map_obj && area_obj.path) {
 			let circle = new AMap.Circle(Object.assign({
@@ -160,54 +160,54 @@ let MapCtrl = {
 	},
 
 	/**
-     * @description 增加群组区域
-     * @param {object} map_obj 地图实例
-     * @param {object} data 群组区域对象
-     */
+	 * @description 增加群组区域
+	 * @param {object} map_obj 地图实例
+	 * @param {object} data 群组区域对象
+	 */
 	addAreas: (map_obj, data) => {
 
 	},
 
 	/**
-     * @description 移除某个点标记
-     * @param {object} map_obj 地图实例
-     * @param {object} data 点标记对象
-     */
+	 * @description 移除某个点标记
+	 * @param {object} map_obj 地图实例
+	 * @param {object} data 点标记对象
+	 */
 	deleteMarker: (map_obj, data) => {
 
 	},
 
 	/**
-     * @description 移除某个区域
-     * @param {object} map_obj 地图实例
-     * @param {object} data 地域对象
-     */
+	 * @description 移除某个区域
+	 * @param {object} map_obj 地图实例
+	 * @param {object} data 地域对象
+	 */
 	deleteArea: (map_obj, data) => {
 
 	},
 
 	/**
-     * @description 移除群组区域
-     * @param {object} map_obj 地图实例
-     * @param {object} data 群组区域对象
-     */
+	 * @description 移除群组区域
+	 * @param {object} map_obj 地图实例
+	 * @param {object} data 群组区域对象
+	 */
 	deleteAreas: (map_obj, data) => {
 
 	},
 
 	/**
-     * @description 清除所有标记
-     * @param {object} map_obj 地图实例
-     * @param {object} data 所有标记对象
-     */
+	 * @description 清除所有标记
+	 * @param {object} map_obj 地图实例
+	 * @param {object} data 所有标记对象
+	 */
 	deleteAllMapMarkers: (map_obj, data) => {
 
 	},
 
 	/**
-     * @description 清除地图实例，释放内存
-     * @param {object} map_obj 地图实例
-     */
+	 * @description 清除地图实例，释放内存
+	 * @param {object} map_obj 地图实例
+	 */
 	deleteMapObj: (map_obj) => {
 
 	}
