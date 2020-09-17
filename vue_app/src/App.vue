@@ -17,6 +17,7 @@
 			<router-link to="/asyncComp">AsyncPage</router-link>
 			<br />
 			<router-link to="/map">MapPage</router-link>
+			<router-link to="/map2">MapPage2</router-link>
 			<br />
 		</div>
 		<div v-if="isShowPopUp" class="popUp">这里是弹窗</div>

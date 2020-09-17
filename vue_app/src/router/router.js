@@ -11,6 +11,7 @@ import ExportExcel from '@/views/ExportExl.vue'
 import ExportExcelCn from '@/views/ExportExlCn.vue'
 import EchartsTable from '@/views/echartsTable.vue'
 import MapTest from '@/views/MapTest.vue'
+import MapTest2 from '@/views/MapTest2.vue'
 
 // 组件级别
 import AsyncComp from '@/views/asyncCompTest.vue'
@@ -78,6 +79,11 @@ const router = new Router({
 			path: '/map',
 			name: 'map_test',
 			component: MapTest
+		},
+		{
+			path: '/map2',
+			name: 'map_test2',
+			component: MapTest2
 		},
 		{
 			path: '*',
