@@ -1,6 +1,6 @@
 <template>
 	<div class="movieContainer" v-if="movie_list">
-		<div class="perMovie" v-for="item in movie_list" :key="item.show.id">
+		<div class="perMovie" v-for="item in movie_list" :key="item.show.id" @click='getDetail(item)'>
 			<div class="baseInfo">
 				得分：
 				<span class="scoreNum">{{item.score}}</span>
@@ -30,6 +30,9 @@ export default {
 			indexPageApi.getTvList({ q: 'girls' }).then((res) => {
 				this.movie_list = res
 			})
+		},
+		getDetail (item) {
+			this.$router.push({ name: 'list_detail', params: { id: item.show.id, score: item.score } })
 		}
 	}
 }

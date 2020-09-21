@@ -66,7 +66,7 @@ const router = new Router({
 			component: List
 		},
 		{
-			path: '/list_detail/:id',
+			path: '/list_detail/:id/:score',
 			name: 'list_detail',
 			component: ListDetail
 		},
