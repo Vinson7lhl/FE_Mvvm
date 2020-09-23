@@ -17,6 +17,7 @@
 			<router-link to="/asyncComp">AsyncPage</router-link>
 			<br />
 			<router-link to="/map">MapPage</router-link>
+			<br />
 			<router-link to="/map2">MapPage2</router-link>
 			<br />
 		</div>

@@ -1,6 +1,9 @@
 <template>
 	<div class="mapCtrl">
 		<button @click='addMarker'>增加一个点</button>
+		<button @click='addMarker'>增加一个点</button>
+		<button @click='addMarker'>增加一个点</button>
+		<button @click='addMarker'>增加一个点</button>
 	</div>
 </template>
 <script>
@@ -16,7 +19,7 @@ export default {
 	},
 	watch: {
 		G_map (old_data, new_data) {
-			console.log('地图变化了')
+			console.log('地图变化了，此处可以初始化操作')
 		}
 	},
 	mounted () {
@@ -24,7 +27,7 @@ export default {
 	},
 	methods: {
 		addMarker () {
-			console.log(this.G_map)
+
 		}
 	}
 }
