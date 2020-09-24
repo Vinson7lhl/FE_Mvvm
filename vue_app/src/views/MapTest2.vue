@@ -1,7 +1,7 @@
 <template>
   <div>
-    <MapCtrl />
-    <Map />
+    <MapCtrl :map-obj='map_obj'/>
+    <Map @sendMapObj = 'getMapObj'/>
   </div>
 </template>
 <script>
@@ -9,10 +9,10 @@ import Map from '@/components/map/Map.vue'
 import MapCtrl from '@/components/mapCtrl/MapCtrl.vue'
 
 export default {
-	name: 'map-page',
+	name: 'map-page2',
 	data () {
 		return {
-			map: '',
+			map_obj: '',
 			marker_obj: ''
 		}
 	},
@@ -23,7 +23,12 @@ export default {
 		Map,
 		MapCtrl
 	},
-	methods: {}
+	methods: {
+		getMapObj (map_obj) {
+			console.log('拿到map2')
+			this.map_obj = map_obj
+		}
+	}
 }
 </script>
 

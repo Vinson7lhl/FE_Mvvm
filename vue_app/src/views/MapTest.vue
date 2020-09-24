@@ -1,7 +1,7 @@
 <template>
   <div>
-    <MapCtrl />
-    <Map />
+    <MapCtrl :map-obj='map_obj'/>
+    <Map @sendMapObj = 'getMapObj' />
   </div>
 </template>
 <script>
@@ -12,7 +12,7 @@ export default {
 	name: 'map-page',
 	data () {
 		return {
-			map: '',
+			map_obj: '',
 			marker_obj: ''
 		}
 	},
@@ -23,7 +23,12 @@ export default {
 		Map,
 		MapCtrl
 	},
-	methods: {}
+	methods: {
+		getMapObj (map_obj) {
+			console.log('拿到map1')
+			this.map_obj = map_obj
+		}
+	}
 }
 </script>
 
