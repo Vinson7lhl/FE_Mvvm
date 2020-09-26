@@ -22,7 +22,7 @@
 		</transition>
 	</div>
 </template>
-<script lang="ts">
+<script>
 export default {
 	name: 'rootApp',
 	mounted () {
@@ -40,14 +40,14 @@ export default {
 	},
 	methods: {
 		/**
-		 * 动画生命周期，打印结果
-		 *  before-enter App.vue:35
-			before-leave App.vue:47
-			leave App.vue:53
-			after-leave App.vue:57
-			enter App.vue:38
-			after-enter
-			*/
+			 * 动画生命周期，打印结果
+			 *  before-enter App.vue:35
+				before-leave App.vue:47
+				leave App.vue:53
+				after-leave App.vue:57
+				enter App.vue:38
+				after-enter
+				*/
 		beforeEnter () {
 			console.log('---App:before-enter---')
 		},
@@ -86,6 +86,7 @@ export default {
 	// }
 	//  公共样式文件
 	$base_color: red;
+
 	#app {
 		font-family: "Avenir", Helvetica, Arial, sans-serif;
 		-webkit-font-smoothing: antialiased;
@@ -93,16 +94,20 @@ export default {
 		text-align: center;
 		color: #2c3e50;
 	}
+
 	#nav {
 		padding: 30px;
+
 		a {
 			font-weight: bold;
 			color: #2c3e50;
+
 			&.router-link-exact-active {
 				color: #42b983;
 			}
 		}
 	}
+
 	.baseClass {
 		font-weight: bold;
 		font-size: 20px;
@@ -113,15 +118,22 @@ export default {
 	.fade-leave-active {
 		transition: all 0.3s;
 	}
-	.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+
+	.fade-enter,
+	.fade-leave-to
+
+	/* .fade-leave-active below version 2.1.8 */
+		{
 		opacity: 0;
 		transform: translate(10px, 0px);
 	}
+
 	.fade-leave,
 	.fade-enter-to {
 		opacity: 1;
 		transform: translate(0px, 0px);
 	}
+
 	// 第三方iconfont推荐的svg用法需要写入此样式才可用
 	.icon {
 		width: 1em;
