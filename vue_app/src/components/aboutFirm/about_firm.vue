@@ -1,5 +1,8 @@
 <template>
-	<div>这里是公司简介</div>
+	<div>这里是公司简介
+		<button @click='add'>增加+1</button>
+		<button @click='minus'>减少-1</button>
+	</div>
 </template>
 
 <script>
@@ -13,9 +16,16 @@ export default {
 		return {}
 	},
 	/**
-		 * 函数
-		 */
-	methods: {},
+	 * 函数
+	 */
+	methods: {
+		add () {
+			this.$store.commit('add', '这里是add的载入数据')
+		},
+		minus () {
+			this.$store.commit('minus', '这里是minus的载入数据')
+		}
+	},
 	components: {}
 }
 </script>
