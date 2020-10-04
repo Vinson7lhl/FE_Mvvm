@@ -3,13 +3,16 @@
 		<img src="../assets/logo.png" />
 		<button @click="triggerSonFocus">点击触发子组件input的Focus</button>
 		<hello-world ref="childComponent" @emitFather="fatherEmit" data-msg="Father-Tmplate" />
+		<about-us />
+		<button @click='changeRoute'>触发绑定</button>
 	</div>
 </template>
 
 <script>
 // @ is an alias to /src，@ 是'/src'的别名
 import HelloWorld from '@/components/HelloWorld/HelloWorld.vue'
-
+import AboutUs from '@/components/aboutUs/about_us.vue'
+import $Vue from './vueInstance'
 export default {
 	name: 'home',
 	methods: {
@@ -20,6 +23,9 @@ export default {
 		},
 		triggerSonFocus () {
 			this.$refs.childComponent.beFocused()
+		},
+		changeRoute () {
+			$Vue.$emit('test')
 		}
 	},
 	data () {
@@ -28,7 +34,8 @@ export default {
 		}
 	},
 	components: {
-		'hello-world': HelloWorld
+		'hello-world': HelloWorld,
+		'about-us': AboutUs
 		// 或者只写HelloWorld也可以相当于-HelloWorld:HelloWorld
 	},
 	beforeCreate () {

@@ -32,6 +32,9 @@ export default {
 		console.log(obj_1 === obj_2)
 	},
 	methods: {
+		routeChange () {
+			console.log('About路由变化')
+		},
 		changeConent () {
 			// this.content[2] = '王小波'
 			this.$set(this.content, 2, '王小波')

@@ -3,6 +3,7 @@
 </template>
 
 <script>
+import $Vue from '@/views/vueInstance.js'
 export default {
 	// 组件上的属性
 	props: {},
@@ -11,6 +12,27 @@ export default {
 	 */
 	data () {
 		return {}
+	},
+	// 0
+	beforeRouteLeave (to, from, next) {
+		console.log('beforeRouteLeave')
+		next()
+	},
+	// 1(第一次进入)
+	beforeRouteEnter (to, from, next) {
+		console.log('beforeRouteEnter')
+		next()
+	},
+	// 2 (如果有重复组件则会触发)
+	beforeRouteUpdate (to, from, next) {
+		console.log('beforeRouteUpdate')
+		next()
+	},
+	mounted () {
+		console.log('about-us')
+		$Vue.$on('test', () => {
+			console.log('publicOn')
+		})
 	},
 	/**
 	 * 函数
