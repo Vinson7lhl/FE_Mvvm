@@ -134,9 +134,9 @@ export default {
 			console.log('polygon触发', polygon_obj.getPosition())
 		},
 		/**
-			 * @description 鼠标经过时触发
-			 * @params {object} marker_info 回调形参，其属性target属性为Marker对象
-			 */
+		 * @description 鼠标经过时触发
+		 * @params {object} marker_info 回调形参，其属性target属性为Marker对象
+		 */
 		mouseoverCallback (marker_info) {
 			// 显示编辑按钮
 			this.is_show_edit_button = true
@@ -149,8 +149,8 @@ export default {
 			this.top_val = marker_pixel.getY() + 100 + 'px'
 		},
 		/**
-			 * @description 鼠标离开时触发
-			 */
+		 * @description 鼠标离开时触发
+		 */
 		mouseoutCallback () {
 			// 隐藏编辑按钮
 			this.is_show_edit_button = false
@@ -198,7 +198,6 @@ export default {
 			})
 		},
 		submitLocation () {
-
 		},
 		goBack () {
 
