@@ -77,7 +77,7 @@ export default {
 		addMarkers () {
 			// 一定是拿到数据后再清除、定位、添加覆盖物
 			// 设置地图层级和中心点
-			this.mapObj.setZoomAndCenter(7, [117.8613, 32.3985])
+			// this.mapObj.setZoomAndCenter(7, [117.8613, 32.3985])
 			let markers_geo_obj = new AMap.GeoJSON({
 				geoJSON: fake_markers_data,
 				// 这里面就是一个遍历，能够默认遍历里面的所有点
@@ -123,6 +123,7 @@ export default {
 			// })
 			// 将点添加到地图
 			markers_geo_obj.setMap(this.mapObj)
+			this.mapObj.setFitView();
 		},
 		clickMarkerCallback (marker_obj, ohterInfo) {
 			console.log('marker触发', marker_obj, '当下id：', ohterInfo.orgId)
