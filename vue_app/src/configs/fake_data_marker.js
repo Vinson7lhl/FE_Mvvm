@@ -172,6 +172,7 @@ let markers = {
 		// 		]
 		// 	}
 		// },
+		// 约为4000个marker点
 		{
 			'type': 'Feature',
 			'properties': {},
