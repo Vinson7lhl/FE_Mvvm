@@ -4,13 +4,15 @@
 		<input type="checkbox" v-model="is_removed" /> 是否可以拖拽marker
 		<div
 			class="editButton"
-			:style="{'top': top_val, 'left': left_val}"
+			:style="{ top: top_val, left: left_val }"
 			v-show="is_show_edit_button"
 			@click="changeLocation"
-		>修改位置</div>
+		>
+			修改位置
+		</div>
 		<div
 			class="finishEditButton"
-			:style="{'top': end_top_val, 'left': end_left_val}"
+			:style="{ top: end_top_val, left: end_left_val }"
 			v-show="is_show_end_edit_button"
 		>
 			<div class="submitButton" @click="submitLocation">确认</div>
@@ -38,7 +40,9 @@ export default {
 			end_top_val: '',
 			end_left_val: '',
 			marker_lnglat: '',
-			position_picker: ''
+			position_picker: '',
+			mass_marker: [],
+			mass_marker_style: []
 		}
 	},
 	computed: {
@@ -78,52 +82,84 @@ export default {
 			// 一定是拿到数据后再清除、定位、添加覆盖物
 			// 设置地图层级和中心点
 			// this.mapObj.setZoomAndCenter(7, [117.8613, 32.3985])
-			let markers_geo_obj = new AMap.GeoJSON({
-				geoJSON: fake_markers_data,
-				// 这里面就是一个遍历，能够默认遍历里面的所有点
-				getMarker: (geo_json, lng_lat) => {
-					let html_str = `<div class="numContent">${geo_json.properties.name}：${geo_json.properties.age}</div><div class='areaName'>${geo_json.properties.name}</div>`
-					let marker_obj = new AMap.Marker({
-						position: lng_lat,
-						content: html_str,
-						anchor: 'center',
-						zIndex: 3
-					})
-					// 绑定点击事件
-					// marker_obj.on('click',(info)=>{
-					// 	this.clickMarkerCallback(marker_obj, markers_geo_obj)
-					// })
+			// this.marker_arr = []
+			// let markers_geo_obj = new AMap.GeoJSON({
+			// 	geoJSON: fake_markers_data,
+			// 	// 这里面就是一个遍历，能够默认遍历里面的所有点
+			// 	getMarker: (geo_json, lng_lat) => {
+			// 		let html_str = ''
+			// 		let marker_obj = ''
+			// 		if (geo_json.properties.name) {
+			// 			html_str = `<div class="numContent">${geo_json.properties.name}：${geo_json.properties.age}</div><div class='areaName'>${geo_json.properties.name}</div>`
+			// 			marker_obj = new AMap.Marker({
+			// 				position: lng_lat,
+			// 				content: html_str,
+			// 				anchor: 'center',
+			// 				zIndex: 3
+			// 			})
+			// 		} else {
+			// 			marker_obj = new AMap.Marker({
+			// 				position: lng_lat,
+			// 				anchor: 'center',
+			// 				zIndex: 3
+			// 			})
+			// 		}
+			// 		// 绑定点击事件
+			// 		// marker_obj.on('click',(info)=>{
+			// 		// 	this.clickMarkerCallback(marker_obj, markers_geo_obj)
+			// 		// })
 
-					// 此处必须返回当下的marker对象
-					this.marker_arr.push(marker_obj)
-					return marker_obj
-				},
-				getPolygon: (geo_json, lng_lat) => {
-					console.log(geo_json, lng_lat)
-					let polygon_obj = new AMap.Polygon({
-						path: lng_lat,
-						zIndex: 1,
-						strokeColor: '#2E82CF',
-						strokeOpacity: 1,
-						strokeWeight: 2,
-						fillColor: '#318FE9',
-						fillOpacity: 0.7
-					})
-					// 绑定点击事件
-					polygon_obj.on('click', () => {
-						// this.clickPolygonCallback(polygon_obj,{orgId:'123333'}, markers_geo_obj)
-					})
-					// 此处必须返回当下的marker对象
-					return polygon_obj
-				}
-			})
+			// 		// 此处必须返回当下的marker对象
+			// 		this.marker_arr.push(marker_obj)
+			// 		return marker_obj
+			// 	},
+			// 	getPolygon: (geo_json, lng_lat) => {
+			// 		console.log(geo_json, lng_lat)
+			// 		let polygon_obj = new AMap.Polygon({
+			// 			path: lng_lat,
+			// 			zIndex: 1,
+			// 			strokeColor: '#2E82CF',
+			// 			strokeOpacity: 1,
+			// 			strokeWeight: 2,
+			// 			fillColor: '#318FE9',
+			// 			fillOpacity: 0.7
+			// 		})
+			// 		// 绑定点击事件
+			// 		polygon_obj.on('click', () => {
+			// 			// this.clickPolygonCallback(polygon_obj,{orgId:'123333'}, markers_geo_obj)
+			// 		})
+			// 		// 此处必须返回当下的marker对象
+			// 		return polygon_obj
+			// 	}
+			// })
 			// 这个info就是当下被触发的覆盖物对象marker/polygon/polyline
 			// markers_geo_obj.on('mouseover',(info)=>{
 			// 	console.log('geoJson的click：',info)
 			// })
+			console.log('1')
+			for (let i = 0; i < fake_markers_data.features.length; i++) {
+				console.log('------')
+				this.mass_marker.push(
+					{
+						lnglat: [fake_markers_data.features[i].geometry.coordinates[0], fake_markers_data.features[i].geometry.coordinates[1]],
+						name: 'beijing',
+    					id: i
+					}
+				)
+			}
+			let mass_marker_obj = new AMap.MassMarks(this.mass_marker, {
+				zIndex: 5, // 海量点图层叠加的顺序
+				zooms: [3, 19],
+				style: {
+					url: '//vdata.amap.com/icons/b18/1/2.png', // 图标地址
+					size: new AMap.Size(11, 11), // 图标大小
+					anchor: new AMap.Pixel(5, 5)
+				} // 图标显示位置偏移量，基准点为图标左上角}
+			})
+			mass_marker_obj.setMap(this.mapObj)
 			// 将点添加到地图
-			markers_geo_obj.setMap(this.mapObj)
-			this.mapObj.setFitView();
+			// markers_geo_obj.setMap(this.mapObj)
+			this.mapObj.setFitView()
 		},
 		clickMarkerCallback (marker_obj, ohterInfo) {
 			console.log('marker触发', marker_obj, '当下id：', ohterInfo.orgId)
