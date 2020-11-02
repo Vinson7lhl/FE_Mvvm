@@ -136,7 +136,8 @@ export default {
 			// markers_geo_obj.on('mouseover',(info)=>{
 			// 	console.log('geoJson的click：',info)
 			// })
-			console.log('1')
+			let begin_time = new Date()
+			console.log('开始时间：', begin_time)
 			for (let i = 0; i < fake_markers_data.features.length; i++) {
 				console.log('------')
 				this.mass_marker.push(
@@ -157,6 +158,15 @@ export default {
 				} // 图标显示位置偏移量，基准点为图标左上角}
 			})
 			mass_marker_obj.setMap(this.mapObj)
+			mass_marker_obj.on('complete', function() {
+				console.log('mass点加载完成……')
+				let end_time = new Date()
+				console.log('结束时间1：', end_time)
+				console.log("process time is111=", end_time - begin_time);
+			})
+			let end_time = new Date()
+			console.log('结束时间：', end_time)
+			console.log("process time is=", end_time - begin_time);
 			// 将点添加到地图
 			// markers_geo_obj.setMap(this.mapObj)
 			this.mapObj.setFitView()
