@@ -158,6 +158,7 @@ export default {
 				} // 图标显示位置偏移量，基准点为图标左上角}
 			})
 			mass_marker_obj.setMap(this.mapObj)
+			// 无效！！！
 			mass_marker_obj.on('complete', function() {
 				console.log('mass点加载完成……')
 				let end_time = new Date()
