@@ -144,7 +144,8 @@ export default {
 					{
 						lnglat: [fake_markers_data.features[i].geometry.coordinates[0], fake_markers_data.features[i].geometry.coordinates[1]],
 						name: 'beijing',
-    					id: i
+						id: i,
+						style: -1
 					}
 				)
 			}
@@ -157,17 +158,20 @@ export default {
 					anchor: new AMap.Pixel(5, 5)
 				} // 图标显示位置偏移量，基准点为图标左上角}
 			})
+			 mass_marker_obj.on('mouseover', function (e) {
+				console.log('哈哈', e)
+			})
 			mass_marker_obj.setMap(this.mapObj)
 			// 无效！！！
-			mass_marker_obj.on('complete', function() {
+			mass_marker_obj.on('complete', function () {
 				console.log('mass点加载完成……')
 				let end_time = new Date()
 				console.log('结束时间1：', end_time)
-				console.log("process time is111=", end_time - begin_time);
+				console.log('process time is111=', end_time - begin_time)
 			})
 			let end_time = new Date()
 			console.log('结束时间：', end_time)
-			console.log("process time is=", end_time - begin_time);
+			console.log('process time is=', end_time - begin_time)
 			// 将点添加到地图
 			// markers_geo_obj.setMap(this.mapObj)
 			this.mapObj.setFitView()
