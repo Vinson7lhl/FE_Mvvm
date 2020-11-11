@@ -3,6 +3,9 @@
 		<div class="dashboard1" ref="echarts_container1"></div>
 		<div class="dashboard2" ref="echarts_container2"></div>
 		<div class="dashboard3" ref="echarts_container3"></div>
+		<div class='dashContainer'>
+			<div class="dashboard4" ref="echarts_container4"></div>
+		</div>
 	</div>
 </template>
 
@@ -317,16 +320,16 @@ export default {
 							},
 							formatter: (params) => {
 								return `<div>${params.name}</div>
-												<div style="font-size:14px">${indicator_array[0].name} ${_this.numFormat(
+													<div style="font-size:14px">${indicator_array[0].name} ${_this.numFormat(
 	params.value[0]
 )}</div>
-												<div style="font-size:14px">${indicator_array[1].name} ${_this.numFormat(
+													<div style="font-size:14px">${indicator_array[1].name} ${_this.numFormat(
 	params.value[1]
 )}</div>
-												<div style="font-size:14px">${indicator_array[2].name} ${_this.numFormat(
+													<div style="font-size:14px">${indicator_array[2].name} ${_this.numFormat(
 	params.value[2]
 )}</div>
-												<div style="font-size:14px">${indicator_array[3].name} ${_this.numFormat(
+													<div style="font-size:14px">${indicator_array[3].name} ${_this.numFormat(
 	params.value[3]
 )}</div>`
 							}
@@ -435,6 +438,141 @@ export default {
 				})
 				i++
 			}, 2000)
+			// 主状图：没有Y轴，没有辅助线，虚线折线图，数据为二维，X轴有滚动条
+			let myChart4 = this.$Echarts.init(_this.$refs.echarts_container4)
+			myChart4.setOption({
+				tooltip: {
+					trigger: 'axis',
+					axisPointer: {
+						type: 'none'
+					}
+				},
+				// 决定折线图在容器内的大小，xy为偏移量
+				grid: {
+					left: '0%', // x 偏移量
+					top: '25%', // y 偏移量
+					width: '100%', // 宽度,
+					containLabel: false
+				},
+				legend: {
+					data: ['门店数', 'TGI指数'],
+					left: 20,
+					textStyle: {
+						color: '#ffffff',
+						fontSize: 10
+					}
+				},
+				xAxis: {
+					type: 'category',
+					data: [
+						'1月',
+						'2月',
+						'3月',
+						'4月',
+						'5月',
+						'6月',
+						'7月',
+						'8月',
+						'9月',
+						'10月',
+						'11月',
+						'12月'
+					],
+					axisPointer: {
+						type: 'shadow'
+					},
+					// x坐标轴线是否显示
+					axisLine: {
+						lineStyle: {
+							color: '#BBBEC4'
+						}
+					},
+					// x坐标轴刻度是否显示
+					axisTick: {
+						show: false
+					},
+					// x轴坐标label文本设置
+					axisLabel: {
+						// 字体大小10
+						fontSize: 10,
+						// 距离顶部20
+						padding: [0, 0, 0, 0],
+						// 强制所有x轴类别都显示
+						interval: 0,
+						color: '#ffffff'
+					}
+				},
+				yAxis: [
+					{
+						show: false
+					},
+					{
+						show: false
+					}
+				],
+				series: [
+					{
+						name: '门店数',
+						type: 'bar',
+						// bar 间距
+						barCategoryGap: '50%',
+						itemStyle: {
+							color: '#FF9900'
+						},
+						data: [
+							2.0,
+							4.9,
+							7.0,
+							23.2,
+							25.6,
+							76.7,
+							135.6,
+							162.2,
+							32.6,
+							20.0,
+							6.4,
+							3.3
+						]
+					},
+					{
+						name: 'TGI指数',
+						type: 'line',
+						// 是否平滑过渡
+						smooth: true,
+						// 打点图形：空心圆
+						symbol: 'circle',
+						// 打点大小
+						symbolSize: 4,
+						// 平滑曲线的样式
+						lineStyle: {
+							type: 'dashed',
+							// 线宽
+							width: 1,
+							color: '#ffffff'
+						},
+						itemStyle: {
+							color: '#ffffff',
+							borderColor: '#ffffff',
+							borderWidth: 2,
+							opacity: 0.7
+						},
+						data: [
+							2.0,
+							2.2,
+							3.3,
+							4.5,
+							6.3,
+							10.2,
+							20.3,
+							23.4,
+							23.0,
+							16.5,
+							12.0,
+							6.2
+						]
+					}
+				]
+			})
 		},
 		numFormat (num) {
 			let res = num.toString().replace(/\d+/, function (n) {
@@ -472,5 +610,15 @@ export default {
 		border-radius: 14px;
 		margin-top: 20px;
 		background-color: #47059c;
+	}
+	.dashContainer{
+		width: 310px;
+		overflow-x: auto;
+		.dashboard4 {
+			width: 800px;
+			height: 228px;
+			background-color: #47059c;
+			margin-top: 20px;
+		}
 	}
 </style>
