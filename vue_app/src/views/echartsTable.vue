@@ -6,6 +6,7 @@
 		<div class='dashContainer'>
 			<div class="dashboard4" ref="echarts_container4"></div>
 		</div>
+		<div class="dashboard5" ref="echarts_container5"></div>
 	</div>
 </template>
 
@@ -438,7 +439,7 @@ export default {
 				})
 				i++
 			}, 2000)
-			// 主状图：没有Y轴，没有辅助线，虚线折线图，数据为二维，X轴有滚动条
+			// 柱状图：没有Y轴，没有辅助线，虚线折线图，数据为二维，X轴有滚动条
 			let myChart4 = this.$Echarts.init(_this.$refs.echarts_container4)
 			myChart4.setOption({
 				tooltip: {
@@ -465,18 +466,18 @@ export default {
 				xAxis: {
 					type: 'category',
 					data: [
-						'1月',
-						'2月',
-						'3月',
-						'4月',
-						'5月',
-						'6月',
-						'7月',
-						'8月',
-						'9月',
-						'10月',
-						'11月',
-						'12月'
+						'黑龙江',
+						'辽宁',
+						'吉林',
+						'河北',
+						'内蒙古自治区',
+						'山西',
+						'陕西',
+						'上海',
+						'北京',
+						'山东',
+						'河南',
+						'江苏'
 					],
 					axisPointer: {
 						type: 'shadow'
@@ -516,8 +517,12 @@ export default {
 						type: 'bar',
 						// bar 间距
 						barCategoryGap: '50%',
+						// 设置柱子宽度
+						barWidth: 14,
 						itemStyle: {
-							color: '#FF9900'
+							color: '#FF9900', // or #2D8CF0
+							// 设置柱子为圆角
+							barBorderRadius: [7, 7, 0, 0]
 						},
 						data: [
 							2.0,
@@ -573,6 +578,90 @@ export default {
 					}
 				]
 			})
+			// 柱状图：没有Y轴，没有辅助线，虚线折线图，数据为二维，X轴有滚动条
+			let myChart5 = this.$Echarts.init(_this.$refs.echarts_container5)
+			myChart5.setOption({
+				tooltip: {
+					show: false
+				},
+				grid: {
+					left: '8%',
+					right: '8%',
+					bottom: '3%',
+					containLabel: true
+				},
+				xAxis: [
+					{
+						show: false,
+						type: 'value',
+						boundaryGap: true,
+						axisLabel: {
+							formatter: function (val) {
+								return val + 100
+							}
+						}
+					}
+				],
+				yAxis: {
+					type: 'category',
+					axisTick: {
+						show: true
+					},
+					// Y轴偏移
+					offset: 10,
+					// Y轴文本样式
+					axisLabel: {
+						color: '#ffffff',
+						fontSize: 10
+					},
+					data: ['人流量高', '人流量偏高', '人流量中', '人流量偏低', '人流量低']
+				},
+				series: [
+					{
+						name: '收入',
+						type: 'bar',
+						stack: '总量',
+						label: {
+							show: true,
+							position: 'right',
+							fontSize: 10,
+							color: '#fff'
+						},
+						itemStyle: {
+							color: '#5CADFF',
+							// borderColor: '#ffffff',
+							barBorderRadius: [0, 7, 7, 0]
+						},
+						// 设置柱子宽度
+						barWidth: 14,
+						// 调节柱状图之间的距离
+						// barCategoryGap: '30%',
+						data: [120, 111, 141, 174, 190]
+					},
+					{
+						name: '支出',
+						type: 'bar',
+						stack: '总量',
+						label: {
+							show: true,
+							position: 'left',
+							fontSize: 10,
+							color: '#fff',
+							formatter: (value) => {
+								// 值都是负数的 所以需要取反一下
+								return -value.data
+							}
+						},
+						itemStyle: {
+							color: '#ED3F14',
+							// borderColor: '#ffffff',
+							barBorderRadius: [7, 0, 0, 7]
+						},
+						data: [-20, -32, -91, -94, -90]
+
+					}
+				]
+			})
 		},
 		numFormat (num) {
 			let res = num.toString().replace(/\d+/, function (n) {
@@ -615,10 +704,16 @@ export default {
 		width: 310px;
 		overflow-x: auto;
 		.dashboard4 {
-			width: 800px;
+			width: 450px;
 			height: 228px;
 			background-color: #47059c;
 			margin-top: 20px;
 		}
+	}
+	.dashboard5{
+		width: 310px;
+		height: 228px;
+		background-color: #47059c;
+		margin-top: 20px;
 	}
 </style>
