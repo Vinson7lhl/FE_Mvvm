@@ -3,10 +3,16 @@
 		<div class="dashboard1" ref="echarts_container1"></div>
 		<div class="dashboard2" ref="echarts_container2"></div>
 		<div class="dashboard3" ref="echarts_container3"></div>
-		<div class='dashContainer'>
+		<div class="dashContainer">
 			<div class="dashboard4" ref="echarts_container4"></div>
 		</div>
 		<div class="dashboard5" ref="echarts_container5"></div>
+		<div class="dashContainer">
+			<div class="dashboard6" ref="echarts_container6"></div>
+		</div>
+		<div class="dashContainer2">
+			<div class="dashboard7" ref="echarts_container7"></div>
+		</div>
 	</div>
 </template>
 
@@ -233,14 +239,6 @@ export default {
 					splitArea: {
 						show: false
 					},
-					axisLine: {
-						show: false,
-						lineStyle: {
-							color: 'aqua',
-							type: 'dotted',
-							opacity: 0.1
-						}
-					},
 					// 雷达图内的分割区域线
 					splitLine: {
 						lineStyle: {
@@ -253,7 +251,8 @@ export default {
 						show: true,
 						lineStyle: {
 							color: '#979797',
-							type: 'dashed'
+							type: 'dashed',
+							opacity: 0.1
 						}
 					},
 					// 指示器名是否显示（即那几个维度名字）
@@ -269,9 +268,6 @@ export default {
 				series: [
 					{
 						type: 'radar',
-						tooltip: {
-							trigger: 'item'
-						},
 						// 打点图形：空心圆
 						symbol: 'emptyCircle',
 						// 打点大小
@@ -309,6 +305,7 @@ export default {
 						],
 						// 鼠标放上后的数据提示框
 						tooltip: {
+							trigger: 'item',
 							// 提示框内边距 [上 右 下 左]
 							padding: [5, 5, 5, 5],
 							// 背景色
@@ -320,19 +317,11 @@ export default {
 								fontSize: 18
 							},
 							formatter: (params) => {
-								return `<div>${params.name}</div>
-													<div style="font-size:14px">${indicator_array[0].name} ${_this.numFormat(
-	params.value[0]
-)}</div>
-													<div style="font-size:14px">${indicator_array[1].name} ${_this.numFormat(
-	params.value[1]
-)}</div>
-													<div style="font-size:14px">${indicator_array[2].name} ${_this.numFormat(
-	params.value[2]
-)}</div>
-													<div style="font-size:14px">${indicator_array[3].name} ${_this.numFormat(
-	params.value[3]
-)}</div>`
+								return `
+									<div>${params.name}</div><div style="font-size:14px">${indicator_array[0].name} ${_this.numFormat(params.value[0])}</div>
+									<div style="font-size:14px">${indicator_array[1].name} ${_this.numFormat(params.value[1])}</div>
+									<div style="font-size:14px">${indicator_array[2].name} ${_this.numFormat(params.value[2])}</div>
+									<div style="font-size:14px">${indicator_array[3].name} ${_this.numFormat(params.value[3])}</div>`
 							}
 						}
 					}
@@ -439,29 +428,17 @@ export default {
 				})
 				i++
 			}, 2000)
-			// 柱状图：没有Y轴，没有辅助线，虚线折线图，数据为二维，X轴有滚动条
+
+			// 柱状图：横向滚动，310px 8个类型，以此类推
 			let myChart4 = this.$Echarts.init(_this.$refs.echarts_container4)
 			myChart4.setOption({
-				tooltip: {
-					trigger: 'axis',
-					axisPointer: {
-						type: 'none'
-					}
-				},
 				// 决定折线图在容器内的大小，xy为偏移量
 				grid: {
-					left: '0%', // x 偏移量
-					top: '25%', // y 偏移量
-					width: '100%', // 宽度,
+					left: '2%', // x 偏移量
+					top: '2%', // y 偏移量
+					bottom: 30,
+					width: '95%', // 宽度,
 					containLabel: false
-				},
-				legend: {
-					data: ['门店数', 'TGI指数'],
-					left: 20,
-					textStyle: {
-						color: '#ffffff',
-						fontSize: 10
-					}
 				},
 				xAxis: {
 					type: 'category',
@@ -470,14 +447,10 @@ export default {
 						'辽宁',
 						'吉林',
 						'河北',
-						'内蒙古自治区',
+						'内蒙',
 						'山西',
 						'陕西',
-						'上海',
-						'北京',
-						'山东',
-						'河南',
-						'江苏'
+						'上海'
 					],
 					axisPointer: {
 						type: 'shadow'
@@ -515,28 +488,28 @@ export default {
 					{
 						name: '门店数',
 						type: 'bar',
-						// bar 间距
-						barCategoryGap: '50%',
 						// 设置柱子宽度
 						barWidth: 14,
 						itemStyle: {
-							color: '#FF9900', // or #2D8CF0
+							color: (e) => {
+								if (e.dataIndex <= 2) {
+									return '#FF9900'
+								} else {
+									return '#2D8CF0'
+								}
+							}, // or #2D8CF0(蓝)  （黄）
 							// 设置柱子为圆角
-							barBorderRadius: [7, 7, 0, 0]
+							barBorderRadius: [4, 4, 0, 0]
 						},
 						data: [
-							2.0,
-							4.9,
-							7.0,
-							23.2,
-							25.6,
-							76.7,
-							135.6,
-							162.2,
-							32.6,
-							20.0,
-							6.4,
-							3.3
+							122.0,
+							99.9,
+							76.0,
+							75.2,
+							74.6,
+							70.7,
+							66.6,
+							62.2
 						]
 					},
 					{
@@ -569,15 +542,35 @@ export default {
 							6.3,
 							10.2,
 							20.3,
-							23.4,
-							23.0,
-							16.5,
-							12.0,
-							6.2
+							23.4
 						]
 					}
-				]
+				],
+				// 鼠标经过提示
+				tooltip: {
+					trigger: 'axis',
+					// 十字线显示
+					axisPointer: {
+						type: 'none'
+					},
+					backgroundColor: 'transparent',
+					// 文本样式
+					textStyle: {
+						color: '#ffffff',
+						fontSize: 10
+					},
+					formatter: params => {
+						return (
+							'<div style="background-color:rgba(121,9,193,0.7);padding:6px; border-radius:4px;">' +
+								'<div style="font-size:14px;margin-bottom:8px;font-weight:bold">' + params[0].name + '</div>' +
+								'<div><span style="width:30px; display:inline-block">' + params[0].seriesName + '</span> ' + _this.numFormat(params[0].data) + '</div>' +
+								'<div><span style="width:30px; display:inline-block">' + params[1].seriesName + '</span> ' + _this.numFormat(params[1].data) + ' %</div>' +
+							'</div>'
+						)
+					}
+				}
 			})
+
 			// 柱状图：没有Y轴，没有辅助线，虚线折线图，数据为二维，X轴有滚动条
 			let myChart5 = this.$Echarts.init(_this.$refs.echarts_container5)
 			myChart5.setOption({
@@ -614,7 +607,13 @@ export default {
 						color: '#ffffff',
 						fontSize: 10
 					},
-					data: ['人流量高', '人流量偏高', '人流量中', '人流量偏低', '人流量低']
+					data: [
+						'人流量高',
+						'人流量偏高',
+						'人流量中',
+						'人流量偏低',
+						'人流量低'
+					]
 				},
 				series: [
 					{
@@ -658,7 +657,200 @@ export default {
 							barBorderRadius: [7, 0, 0, 7]
 						},
 						data: [-20, -32, -91, -94, -90]
+					}
+				]
+			})
 
+			// 散点图 宽度 310 8个类型正好
+			let myChart6 = this.$Echarts.init(_this.$refs.echarts_container6)
+			myChart6.setOption({
+				grid: {
+					left: '3%',
+					right: '3%',
+					top: '10%',
+					bottom: '3%',
+					containLabel: true
+				},
+				xAxis: {
+					type: 'category',
+					// 是否显示轴线上的刻度
+					axisTick: {
+						show: false
+					},
+					// 是否显示轴线
+					axisLine: {
+						lineStyle: {
+							color: '#979797'
+						}
+					},
+					// x轴坐标label文本设置
+					axisLabel: {
+						// 字体大小10
+						fontSize: 10,
+						color: '#DDDEE1',
+						// 显示所有类型
+						interval: 0,
+						rotate: 40
+					}
+				},
+				yAxis: {
+					// 轴线
+					axisLine: {
+						// 是否显示
+						show: false
+					},
+					// 是否显示轴线上的刻度
+					axisTick: {
+						show: false
+					},
+					// y轴坐标label文本设置
+					axisLabel: {
+						// 字体大小10
+						fontSize: 10,
+						color: '#ffffff'
+					},
+					// x轴在grid中的分割线
+					splitLine: {
+						show: true,
+						lineStyle: {
+							type: 'dotted',
+							color: '#979797'
+						}
+					}
+				},
+				series: [
+					{
+						data: [
+							['休闲娱乐', 27.8, 122],
+							['健身', 33, 112],
+							['餐饮', 181, 87],
+							['大型超市', 109, 19],
+							['Fri', 221, 76],
+							['Sat', 145, 113],
+							['Sun', 271, 63],
+							['超级沃尔玛', 71, 119]
+						],
+						type: 'scatter',
+						// 控制点大小，以元数据第三个值为标准
+						symbolSize: function (data) {
+							return Math.sqrt(data[2]) * 2
+						},
+						itemStyle: {
+							color: (e) => {
+								console.log(e.data)
+								if (e.data[2] < 100) {
+									return '#ED3F14'
+								} else {
+									return '#5CADFF'
+								}
+							}
+						},
+						tooltip: {
+							// 放格式化数据
+						}
+					}
+				],
+				// 鼠标经过提示
+				tooltip: {
+					trigger: 'item',
+					// 十字线显示
+					axisPointer: {
+						type: 'cross',
+						crossStyle: {
+							color: '#ffffff'
+						}
+					},
+					backgroundColor: 'transparent',
+					// 文本样式
+					textStyle: {
+						color: '#ffffff',
+						fontSize: 10
+					},
+					formatter: params => {
+						return (
+							'<div style="background-color:rgba(121,9,193,0.7);padding:6px; border-radius:4px;">' +
+								'<div style="font-size:14px;margin-bottom:8px;font-weight:bold">' + params.data[0] + '</div>' +
+								'<div><span style="width:30px; display:inline-block">门店数</span> ' + _this.numFormat(params.data[1]) + '</div>' +
+								'<div><span style="width:30px; display:inline-block">TGI</span> ' + _this.numFormat(params.data[2]) + ' %</div>' +
+							'</div>'
+						)
+					}
+				}
+			})
+
+			// 柱状图（垂直滚动）273px - 8个类型正好
+			let myChart7 = this.$Echarts.init(_this.$refs.echarts_container7)
+			myChart7.setOption({
+				grid: {
+					left: '3%',
+					right: '3%',
+					top: 0,
+					bottom: '3%',
+					containLabel: true
+				},
+				xAxis: {
+					type: 'value',
+					// x坐标轴线是否显示
+					axisLine: {
+						show: false
+					},
+					// x坐标轴刻度是否显示
+					axisTick: {
+						show: false
+					},
+					// x轴坐标label文本设置
+					axisLabel: {
+						show: false
+					},
+					// x轴在grid中的分割线
+					splitLine: {
+						show: false
+					}
+				},
+				yAxis: {
+					type: 'category',
+					data: ['道路交通', '房屋地产', '公司企业', '购物', '科教文化', '世界人口', '欧阳锋', '郭靖'],
+					// y坐标轴线是否显示
+					axisLine: {
+						show: false
+					},
+					// y轴坐标label文本设置
+					axisLabel: {
+						// 字体大小10
+						fontSize: 10,
+						color: '#ffffff'
+					},
+					// y坐标轴刻度是否显示
+					axisTick: {
+						show: false
+					},
+					inverse: true
+				},
+				series: [
+					{
+						name: '2011年',
+						type: 'bar',
+						data: [18203, 23489, 29034, 104970, 131744, 630230, 33622, 99999],
+						label: {
+							show: true,
+							position: 'insideLeft',
+							fontSize: 10,
+							color: '#fff'
+						},
+						// bar 间距
+						// 设置柱子宽度
+						barWidth: 18,
+						itemStyle: {
+							color: (e) => {
+								console.log(e.data)
+								if (e.dataIndex <= 2) {
+									return '#FF9900'
+								} else {
+									return '#2D8CF0'
+								}
+							},
+							barBorderRadius: [0, 4, 4, 0]
+						}
 					}
 				]
 			})
@@ -700,19 +892,36 @@ export default {
 		margin-top: 20px;
 		background-color: #47059c;
 	}
-	.dashContainer{
+	.dashContainer,.dashContainer2 {
 		width: 310px;
 		overflow-x: auto;
 		.dashboard4 {
-			width: 450px;
+			width: 310px;
 			height: 228px;
 			background-color: #47059c;
 			margin-top: 20px;
 		}
 	}
-	.dashboard5{
+	.dashContainer2{
+		width:310px;
+		height:310px;
+		overflow-y: auto;
+	}
+	.dashboard5 {
 		width: 310px;
 		height: 228px;
+		background-color: #47059c;
+		margin-top: 20px;
+	}
+	.dashboard6 {
+		width: 310px;
+		height: 228px;
+		background-color: #47059c;
+		margin-top: 20px;
+	}
+	.dashboard7 {
+		width: 100%;
+		height: 273px;
 		background-color: #47059c;
 		margin-top: 20px;
 	}
