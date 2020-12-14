@@ -15,6 +15,12 @@ export default {
 	data () {
 		return {}
 	},
+	mounted () {
+		console.log('mounted , about_firm')
+	},
+	beforeRouteUpdate () {
+		console.log('beforeRouteUpdate about_firm.vue')
+	},
 	/**
 	 * 函数
 	 */

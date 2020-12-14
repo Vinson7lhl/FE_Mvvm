@@ -29,10 +29,10 @@ const router = new Router({
 			component: Home
 		},
 		{
-			path: '/about',
+			path: '/about/:id',
 			name: 'about',
 			component: About,
-			redirect: '/about/us',
+			// redirect: '/about/us',
 			children: [
 				{
 					path: 'us',

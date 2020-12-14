@@ -9,6 +9,9 @@
 				<router-link class="aboutTab" to="/about/us">关于我们</router-link>
 				<router-link class="aboutTab" to="/about/firm">关于公司</router-link>
 			</div>
+			<button @click='updateRoute'>测试beforeRouteUpdate</button>
+			<button @click='updateRoute2'>测试beforeRouteUpdate2</button>
+			<Pure />
 			<transition name="fade">
 				<!--路由的输出-->
 				<div class="childrenRoute">
@@ -19,8 +22,12 @@
 	</div>
 </template>
 <script>
+import Pure from '@/components/pureComp/pure'
 export default {
 	name: 'about-page',
+	components: {
+		Pure
+	},
 	data () {
 		return {
 			content: ['你好', '啊——', '李银河']
@@ -30,6 +37,10 @@ export default {
 		let obj_1 = this.factoryObj('张三', 41)
 		let obj_2 = this.factoryObj('李四', 27)
 		console.log(obj_1 === obj_2)
+	},
+	beforeRouteUpdate (to, from, next) {
+		console.log('beforeRouteUpdate About.vue')
+		next()
 	},
 	methods: {
 		routeChange () {
@@ -46,6 +57,12 @@ export default {
 				age: age
 			}
 			return obj
+		},
+		updateRoute () {
+			this.$router.push('/about/1/us?name=update1')
+		},
+		updateRoute2 () {
+			this.$router.push('/about/2/us?name=update2')
 		}
 	}
 }

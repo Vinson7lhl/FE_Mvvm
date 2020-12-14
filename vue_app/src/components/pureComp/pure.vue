@@ -1,9 +1,8 @@
 <template>
-	<div>这里是我的简介</div>
+	<div>这里是pure组件</div>
 </template>
 
 <script>
-import $Vue from '@/views/vueInstance.js'
 export default {
 	// 组件上的属性
 	props: {},
@@ -14,24 +13,21 @@ export default {
 		return {}
 	},
 	beforeRouteUpdate (to, from, next) {
-		console.log('beforeRouteUpdate about_us.vue')
+		console.log('beforeRouteUpdate pure.vue')
 		next()
 	},
 	// 0
 	beforeRouteLeave (to, from, next) {
-		console.log('beforeRouteLeave')
+		console.log('pure-beforeRouteLeave')
 		next()
 	},
 	// 1(第一次进入)
 	beforeRouteEnter (to, from, next) {
-		console.log('beforeRouteEnter')
+		console.log('pure-beforeRouteEnter')
 		next()
 	},
 	mounted () {
-		console.log('mounted , about_us')
-		$Vue.$on('test', () => {
-			console.log('publicOn')
-		})
+		console.log('mounted , pure')
 	},
 	/**
 	 * 函数
