@@ -35,6 +35,11 @@ const router = new Router({
 			// redirect: '/about/us',
 			children: [
 				{
+					path: '',
+					name: 'about_us',
+					component: AboutUs
+				},
+				{
 					path: 'us',
 					name: 'about_us',
 					component: AboutUs
@@ -95,9 +100,20 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-	console.log('全局前置路由守卫')
+	console.log('---全局“前”置路由守卫---')
 	console.log(to)
 	console.log(from)
+	// 无论如何要调用一次 next()
 	next()
+	// next(new Error('路由组件错误'))
+})
+router.afterEach((to, from) => {
+	console.log('---全局“后”置路由守卫---')
+	console.log(to)
+	console.log(from)
+})
+
+router.onError((message) => {
+	console.error('嘿，兄弟！报错了路由！这是信息 ====>>>', message)
 })
 export default router

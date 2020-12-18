@@ -3,7 +3,7 @@
 		root数据：{{ rootData }}
 		<div id="nav">
 			<router-link to="/">Home</router-link> //
-			<router-link to="/about">About</router-link> //
+			<router-link to="/about/us">About</router-link> //
 			<router-link to="/list">List</router-link> //
 			<router-link to="/ex">ExportExcel</router-link> //
 			<router-link to="/exCn">ExportExcelCn</router-link> //

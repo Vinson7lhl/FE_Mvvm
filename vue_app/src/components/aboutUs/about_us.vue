@@ -14,17 +14,17 @@ export default {
 		return {}
 	},
 	beforeRouteUpdate (to, from, next) {
-		console.log('beforeRouteUpdate about_us.vue')
+		console.log('beforeRouteUpdate --- about_us.vue')
 		next()
 	},
 	// 0
 	beforeRouteLeave (to, from, next) {
-		console.log('beforeRouteLeave')
+		console.log('beforeRouteLeave --- about_us.vue')
 		next()
 	},
 	// 1(第一次进入)
 	beforeRouteEnter (to, from, next) {
-		console.log('beforeRouteEnter')
+		console.log('beforeRouteEnter --- about_us.vue')
 		next()
 	},
 	mounted () {
