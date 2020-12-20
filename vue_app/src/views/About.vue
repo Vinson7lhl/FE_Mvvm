@@ -42,6 +42,10 @@ export default {
 		console.log('beforeRouteUpdate About.vue')
 		next()
 	},
+	beforeRouteLeave (to, from, next) {
+		console.log('beforeRouteLeave About.vue')
+		next()
+	},
 	methods: {
 		routeChange () {
 			console.log('About路由变化')
@@ -62,7 +66,7 @@ export default {
 			this.$router.push('/about/1/us?name=update1')
 		},
 		updateRoute2 () {
-			this.$router.push('/about/2/us?name=update2')
+			this.$router.push('/about/1/us?name=update2')
 		}
 	}
 }

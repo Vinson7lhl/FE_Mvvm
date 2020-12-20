@@ -32,22 +32,26 @@ const router = new Router({
 			path: '/about/:id',
 			name: 'about',
 			component: About,
+			meta: { requiresAuth: true },
 			// redirect: '/about/us',
 			children: [
 				{
 					path: '',
 					name: 'about_us',
-					component: AboutUs
+					component: AboutUs,
+					meta: { requiresAuth: true }
 				},
 				{
 					path: 'us',
 					name: 'about_us',
-					component: AboutUs
+					component: AboutUs,
+					meta: { requiresAuth: true }
 				},
 				{
 					path: 'firm',
 					name: 'about_firm',
-					component: AboutFirm
+					component: AboutFirm,
+					meta: { requiresAuth: true }
 				}
 			]
 		},
