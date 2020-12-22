@@ -42,7 +42,8 @@ export default {
 			marker_lnglat: '',
 			position_picker: '',
 			mass_marker: [],
-			mass_marker_style: []
+			mass_marker_style: [],
+			polyline: [[75.757904, 47.118117], [97.375719, 33.598057]]
 		}
 	},
 	computed: {
@@ -52,86 +53,90 @@ export default {
 	watch: {
 		mapObj (old_data, new_data) {
 			console.log('地图初始化完毕，操作', this.mapObj)
-		},
-		is_removed (new_data) {
-			console.log('is_removed', new_data)
-			if (new_data) {
-				// 可以编辑
-				for (let i = 0; i < this.marker_arr.length; i++) {
-					console.log('可以编辑')
-					// 绑定hover事件
-					this.marker_arr[i].on('mouseover', this.mouseoverCallback)
-					this.marker_arr[i].on('mouseout', this.mouseoutCallback)
-				}
-				return
-			}
-			// 不可编辑
-			for (let i = 0; i < this.marker_arr.length; i++) {
-				console.log('不可编辑')
-				// 绑定hover事件
-				this.marker_arr[i].off('mouseover', this.mouseoverCallback)
-				this.marker_arr[i].off('mouseout', this.mouseoutCallback)
-			}
+			this.initLines()
 		}
+		// is_removed (new_data) {
+		// 	console.log('is_removed', new_data)
+		// 	if (new_data) {
+		// 		// 可以编辑
+		// 		for (let i = 0; i < this.marker_arr.length; i++) {
+		// 			console.log('可以编辑')
+		// 			// 绑定hover事件
+		// 			this.marker_arr[i].on('mouseover', this.mouseoverCallback)
+		// 			this.marker_arr[i].on('mouseout', this.mouseoutCallback)
+		// 		}
+		// 		return
+		// 	}
+		// 	// 不可编辑
+		// 	for (let i = 0; i < this.marker_arr.length; i++) {
+		// 		console.log('不可编辑')
+		// 		// 绑定hover事件
+		// 		this.marker_arr[i].off('mouseover', this.mouseoverCallback)
+		// 		this.marker_arr[i].off('mouseout', this.mouseoutCallback)
+		// 	}
+		// }
 	},
 	mounted () {
-		console.log('地图控制器初始化完毕')
 	},
 	methods: {
+		// 添加两个点
+		initLines () {
+
+		},
 		addMarkers () {
 			// 一定是拿到数据后再清除、定位、添加覆盖物
 			// 设置地图层级和中心点
-			// this.mapObj.setZoomAndCenter(7, [117.8613, 32.3985])
-			// this.marker_arr = []
-			// let markers_geo_obj = new AMap.GeoJSON({
-			// 	geoJSON: fake_markers_data,
-			// 	// 这里面就是一个遍历，能够默认遍历里面的所有点
-			// 	getMarker: (geo_json, lng_lat) => {
-			// 		let html_str = ''
-			// 		let marker_obj = ''
-			// 		if (geo_json.properties.name) {
-			// 			html_str = `<div class="numContent">${geo_json.properties.name}：${geo_json.properties.age}</div><div class='areaName'>${geo_json.properties.name}</div>`
-			// 			marker_obj = new AMap.Marker({
-			// 				position: lng_lat,
-			// 				content: html_str,
-			// 				anchor: 'center',
-			// 				zIndex: 3
-			// 			})
-			// 		} else {
-			// 			marker_obj = new AMap.Marker({
-			// 				position: lng_lat,
-			// 				anchor: 'center',
-			// 				zIndex: 3
-			// 			})
-			// 		}
-			// 		// 绑定点击事件
-			// 		// marker_obj.on('click',(info)=>{
-			// 		// 	this.clickMarkerCallback(marker_obj, markers_geo_obj)
-			// 		// })
+			this.mapObj.setZoomAndCenter(7, [117.8613, 32.3985])
+			this.marker_arr = []
+			let markers_geo_obj = new AMap.GeoJSON({
+				geoJSON: fake_markers_data,
+				// 这里面就是一个遍历，能够默认遍历里面的所有点
+				getMarker: (geo_json, lng_lat) => {
+					let html_str = ''
+					let marker_obj = ''
+					if (geo_json.properties.name) {
+						html_str = `<div class="numContent">${geo_json.properties.name}：${geo_json.properties.age}</div><div class='areaName'>${geo_json.properties.name}</div>`
+						marker_obj = new AMap.Marker({
+							position: lng_lat,
+							content: html_str,
+							anchor: 'center',
+							zIndex: 3
+						})
+					} else {
+						marker_obj = new AMap.Marker({
+							position: lng_lat,
+							anchor: 'center',
+							zIndex: 3
+						})
+					}
+					// 绑定点击事件
+					marker_obj.on('click', (info) => {
+						this.clickMarkerCallback(marker_obj, markers_geo_obj)
+					})
 
-			// 		// 此处必须返回当下的marker对象
-			// 		this.marker_arr.push(marker_obj)
-			// 		return marker_obj
-			// 	},
-			// 	getPolygon: (geo_json, lng_lat) => {
-			// 		console.log(geo_json, lng_lat)
-			// 		let polygon_obj = new AMap.Polygon({
-			// 			path: lng_lat,
-			// 			zIndex: 1,
-			// 			strokeColor: '#2E82CF',
-			// 			strokeOpacity: 1,
-			// 			strokeWeight: 2,
-			// 			fillColor: '#318FE9',
-			// 			fillOpacity: 0.7
-			// 		})
-			// 		// 绑定点击事件
-			// 		polygon_obj.on('click', () => {
-			// 			// this.clickPolygonCallback(polygon_obj,{orgId:'123333'}, markers_geo_obj)
-			// 		})
-			// 		// 此处必须返回当下的marker对象
-			// 		return polygon_obj
-			// 	}
-			// })
+					// 此处必须返回当下的marker对象
+					this.marker_arr.push(marker_obj)
+					return marker_obj
+				},
+				getPolygon: (geo_json, lng_lat) => {
+					console.log(geo_json, lng_lat)
+					let polygon_obj = new AMap.Polygon({
+						path: lng_lat,
+						zIndex: 1,
+						strokeColor: '#2E82CF',
+						strokeOpacity: 1,
+						strokeWeight: 2,
+						fillColor: '#318FE9',
+						fillOpacity: 0.7
+					})
+					// 绑定点击事件
+					polygon_obj.on('click', () => {
+						// this.clickPolygonCallback(polygon_obj,{orgId:'123333'}, markers_geo_obj)
+					})
+					// 此处必须返回当下的marker对象
+					return polygon_obj
+				}
+			})
 			// 这个info就是当下被触发的覆盖物对象marker/polygon/polyline
 			// markers_geo_obj.on('mouseover',(info)=>{
 			// 	console.log('geoJson的click：',info)

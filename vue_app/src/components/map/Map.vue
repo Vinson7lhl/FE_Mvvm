@@ -23,9 +23,20 @@ export default {
 	mounted () {
 		this.map = new AMap.Map('map_container', {
 			zoom: 5, // 级别
-			center: [116.397428, 39.90923], // 中心点坐标
-			viewMode: '3D' // 使用3D视图
+			center: [116.397428, 39.90923] // 中心点坐标
 		})
+		let polyline1 = new AMap.Polyline({
+			path: [
+				[75.757904, 47.118117],
+				[97.375719, 33.598057],
+				[117.375719, 47.118117]
+			],
+			showDir: true,
+			strokeColor: '#336688', // 线颜色
+			strokeOpacity: 1,
+			strokeWeight: 6 // 线宽
+		})
+		this.map.add([polyline1])
 		// this.$store.commit({
 		// 	type: 'setGmap',
 		// 	G_map: this.map
