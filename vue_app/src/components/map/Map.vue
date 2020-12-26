@@ -42,6 +42,15 @@ export default {
 		// 	G_map: this.map
 		// })
 		this.$emit('sendMapObj', this.map)
+
+		// 高亮打点
+		let light_point = new AMap.Marker({
+			position: [115.356445, 39.774769],
+			content: '<div style="width:20px;height:20px;border-radius:50%;box-shadow:0px 0px 7px 3px #f00"></div>'
+		})
+		console.log('高亮打点')
+		light_point.setPosition([116.718749, 43.675818])
+		light_point.setMap(this.map)
 		if (!this.G_map) {
 
 			// 覆盖物1
