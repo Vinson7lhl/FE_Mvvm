@@ -5,12 +5,18 @@
 import { mapState } from 'vuex'
 import Tab1Comp from '../tab1/tab1.vue'
 import Tab2Comp from '../tab2/tab2.vue'
+import GetDataTemplate from '../../template/get_data_template'
 export default {
 	// 组件名，其实不写这个属性也可以
 	name: 'HelloWorld',
 	// 组件上的属性
 	props: {
 		dataMsg: String
+	},
+	components: {
+		GetDataTemplate,
+		'tab1-comp': Tab1Comp,
+		'tab2-comp': Tab2Comp
 	},
 	/**
 	 * 状态，必须是函数，然后返回状态，而不可以直接映射json对象
@@ -43,6 +49,58 @@ export default {
 			rootDataName: '',
 			current_tab_name: 'tab1-comp'
 		}
+	},
+	/**
+	 * 重新定义数据，computed的本质就是angular的管道
+	 */
+	computed: {
+		newMessageByComputed () {
+			return this.input_text + '-新数据'
+		},
+		/**
+			 * from the Vuex 'store',来自Vuex中的状态一般会放在computed中，因为state和上面的data（本质也是state）是响应式的
+			 */
+		// 第一种写法：只有一个状态
+		from_store_count () {
+			// 通过this.$store来获取Vuex的Store 对象
+			return this.$store.state.count
+		},
+		// 第二种通过Vuex的mapState函数处理多个state
+		...mapState({
+			// 箭头函数
+			state_1: (state) => state.state1,
+			// 直接传递状态字符串
+			state_2: 'state2',
+			// 如果要使用this就必须用一般函数，如第一种写法
+			state_3 (state) {
+				return this.demo.name + '-连接另一个字符串-' + state.state3
+			}
+		}),
+		// 来自于getters
+		log_msg () {
+			return this.$store.getters.login_message
+		}
+	},
+	/**
+	 * 生命周期钩子:created，注意不要用箭头函数！否则this无法绑定在vue实例上
+	 */
+	beforeCreate () {
+		console.log('---HelloWord:beforeCreated---')
+		console.log('周期函数中调用input_text:' + this.input_text) // undefined
+	},
+	created () {
+		console.log('---HelloWord:created---')
+		console.log('周期函数中调用input_text:' + this.input_text)
+		console.log('子组件访问Home页面数据：', this.$parent.homeData)
+	},
+	beforeMount () {
+		console.log('---HelloWord:beforeMount---')
+		console.log('$el', this.$el)
+		console.log('生命周期钩子：beforeMount')
+	},
+	mounted () {
+		console.log('---HelloWord:mounted---')
+		console.log('子组件访问根组件数据：', this.$root.isShowPopUp)
 	},
 	/**
 	 * 函数
@@ -84,62 +142,6 @@ export default {
 		switchTab (str) {
 			this.current_tab_name = str
 		}
-	},
-	/**
-	 * 重新定义数据，computed的本质就是angular的管道
-	 */
-	computed: {
-		newMessageByComputed () {
-			return this.input_text + '-新数据'
-		},
-		/**
-			 * from the Vuex 'store',来自Vuex中的状态一般会放在computed中，因为state和上面的data（本质也是state）是响应式的
-			 */
-		// 第一种写法：只有一个状态
-		from_store_count () {
-			// 通过this.$store来获取Vuex的Store 对象
-			return this.$store.state.count
-		},
-		// 第二种通过Vuex的mapState函数处理多个state
-		...mapState({
-			// 箭头函数
-			state_1: (state) => state.state1,
-			// 直接传递状态字符串
-			state_2: 'state2',
-			// 如果要使用this就必须用一般函数，如第一种写法
-			state_3 (state) {
-				return this.demo.name + '-连接另一个字符串-' + state.state3
-			}
-		}),
-		// 来自于getters
-		log_msg () {
-			return this.$store.getters.login_message
-		}
-	},
-	components: {
-		'tab1-comp': Tab1Comp,
-		'tab2-comp': Tab2Comp
-	},
-	/**
-	 * 生命周期钩子:created，注意不要用箭头函数！否则this无法绑定在vue实例上
-	 */
-	beforeCreate () {
-		console.log('---HelloWord:beforeCreated---')
-		console.log('周期函数中调用input_text:' + this.input_text) // undefined
-	},
-	created () {
-		console.log('---HelloWord:created---')
-		console.log('周期函数中调用input_text:' + this.input_text)
-		console.log('子组件访问Home页面数据：', this.$parent.homeData)
-	},
-	beforeMount () {
-		console.log('---HelloWord:beforeMount---')
-		console.log('$el', this.$el)
-		console.log('生命周期钩子：beforeMount')
-	},
-	mounted () {
-		console.log('---HelloWord:mounted---')
-		console.log('子组件访问根组件数据：', this.$root.isShowPopUp)
 	}
 }
 </script>

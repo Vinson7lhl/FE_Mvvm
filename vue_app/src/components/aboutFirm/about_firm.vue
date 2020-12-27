@@ -13,10 +13,13 @@ export default {
 		 * 状态，必须是函数，然后返回状态，而不可以直接映射json对象
 		 */
 	data () {
-		return {}
+		return {
+			comp_name: 'about_firm'
+		}
 	},
 	mounted () {
 		console.log('mounted , about_firm')
+		console.log('about_firm_comp组件的$data.comp_name', this.$data.comp_name)
 	},
 	beforeRouteUpdate () {
 		console.log('beforeRouteUpdate about_firm.vue')

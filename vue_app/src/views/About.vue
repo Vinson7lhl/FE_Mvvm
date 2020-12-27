@@ -6,8 +6,8 @@
 			<br />
 			<img src="../assets/img/async.jpg" alt />
 			<div class="tabList">
-				<router-link class="aboutTab" to="/about/us">关于我们</router-link>
-				<router-link class="aboutTab" to="/about/firm">关于公司</router-link>
+				<router-link class="aboutTab" to="/about/2/us">关于我们</router-link>
+				<router-link class="aboutTab" to="/about/3/firm">关于公司</router-link>
 			</div>
 			<button @click='updateRoute'>测试beforeRouteUpdate</button>
 			<button @click='updateRoute2'>测试beforeRouteUpdate2</button>

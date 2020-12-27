@@ -2,7 +2,7 @@
 	<div class="home">
 		<img src="../assets/logo.png" />
 		<button @click="triggerSonFocus">点击触发子组件input的Focus</button>
-		<hello-world ref="childComponent" @emitFather="fatherEmit" data-msg="Father-Tmplate" />
+		<hello-world :passData= 'passData' ref="childComponent" @emitFather="fatherEmit" data-msg="Father-Tmplate" />
 		<about-us />
 		<button @click='changeRoute'>触发绑定</button>
 	</div>
@@ -30,7 +30,11 @@ export default {
 	},
 	data () {
 		return {
-			homeData: 'Home页面数据'
+			homeData: 'Home页面数据',
+			passData: {
+				from: 'Home',
+				to: 'HelloWorld'
+			}
 		}
 	},
 	components: {
