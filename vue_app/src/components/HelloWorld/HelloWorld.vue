@@ -81,6 +81,15 @@ export default {
 			return this.$store.getters.login_message
 		}
 	},
+	watch: {
+		input_text: {
+			handler: function (val, old_val) {
+				console.log('watch监听：val-旧值', val)
+				console.log('watch监听：val-新值', val)
+			},
+			immediate: true
+		}
+	},
 	/**
 	 * 生命周期钩子:created，注意不要用箭头函数！否则this无法绑定在vue实例上
 	 */
