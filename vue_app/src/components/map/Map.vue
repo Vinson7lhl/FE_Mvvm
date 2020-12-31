@@ -14,7 +14,8 @@ export default {
 	data () {
 		return {
 			map: '',
-			marker_obj: ''
+			marker_obj: '',
+			count: ''
 		}
 	},
 	computed: {
@@ -51,6 +52,24 @@ export default {
 		console.log('高亮打点')
 		light_point.setPosition([116.718749, 43.675818])
 		light_point.setMap(this.map)
+
+		// 聚合test
+		let markers = []
+		let points = window.points
+		for (let i = 0; i < points.length; i++) {
+			markers.push(new AMap.Marker({
+				position: points[i]['lnglat']
+			}))
+		}
+		this.count = markers.length
+		let cluster = new AMap.MarkerClusterer(this.map, markers, {
+			gridSize: 80,
+			renderClusterMarker: context => {
+				this.clusterSetting(context)
+			}
+		})
+		console.log(cluster)
+
 		if (!this.G_map) {
 
 			// 覆盖物1
@@ -155,6 +174,29 @@ export default {
 		}
 	},
 	methods: {
+		clusterSetting (context) {
+			let factor = Math.pow(context.count / this.count, 1 / 18)
+			let div = document.createElement('div')
+			let Hue = 180 - factor * 180
+			let bgColor = 'hsla(' + Hue + ',100%,50%,0.7)'
+			let fontColor = 'hsla(' + Hue + ',100%,20%,1)'
+			let borderColor = 'hsla(' + Hue + ',100%,40%,1)'
+			let shadowColor = 'hsla(' + Hue + ',100%,50%,1)'
+			div.style.backgroundColor = bgColor
+			let size = Math.round(30 + Math.pow(context.count / this.count, 1 / 5) * 20)
+			div.style.width = div.style.height = size + 'px'
+			div.style.border = 'solid 1px ' + borderColor
+			div.style.borderRadius = size / 2 + 'px'
+			div.style.boxShadow = '0 0 1px ' + shadowColor
+			div.innerHTML = context.count
+			div.style.lineHeight = size + 'px'
+			div.style.color = fontColor
+			div.style.fontSize = '14px'
+			div.style.textAlign = 'center'
+			context.marker.setOffset(new AMap.Pixel(-size / 2, -size / 2))
+			context.marker.setContent(div)
+			console.log('完成！')
+		}
 		// 打点
 		// addMarker () {
 		// 	let icon_obj = new AMap.Icon({
