@@ -17,8 +17,8 @@ export default {
 		'tab2-comp': Tab2Comp
 	},
 	/**
-	 * 状态，必须是函数，然后返回状态，而不可以直接映射json对象
-	 */
+		 * 状态，必须是函数，然后返回状态，而不可以直接映射json对象
+		 */
 	data () {
 		return {
 			input_text: 'computed',
@@ -49,8 +49,8 @@ export default {
 		}
 	},
 	/**
-	 * 重新定义数据，computed的本质就是angular的管道
-	 */
+		 * 重新定义数据，computed的本质就是angular的管道
+		 */
 	computed: {
 		newMessageByComputed () {
 			return this.input_text + '-新数据'
@@ -89,8 +89,8 @@ export default {
 		}
 	},
 	/**
-	 * 生命周期钩子:created，注意不要用箭头函数！否则this无法绑定在vue实例上
-	 */
+		 * 生命周期钩子:created，注意不要用箭头函数！否则this无法绑定在vue实例上
+		 */
 	beforeCreate () {
 		console.log('---HelloWord:beforeCreated---')
 		console.log('周期函数中调用input_text:' + this.input_text) // undefined
@@ -110,8 +110,8 @@ export default {
 		console.log('子组件访问根组件数据：', this.$root.isShowPopUp)
 	},
 	/**
-	 * 函数
-	 */
+		 * 函数
+		 */
 	methods: {
 		newMessageByMethod (str) {
 			return `${this.msg}-${str}`
@@ -148,6 +148,15 @@ export default {
 		},
 		switchTab (str) {
 			this.current_tab_name = str
+		},
+		circle1 () {
+			console.log('-圈圈1-')
+		},
+		circle2 () {
+			console.log('--圈圈2--')
+		},
+		circle3 () {
+			console.log('---圈圈3---')
 		}
 	}
 }
