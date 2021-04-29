@@ -78,8 +78,8 @@
     <div>切换选项卡:is指令</div>
     <button @click='switchTab("tab1-comp")'>tab1</button> -- <button @click='switchTab("tab2-comp")'>tab2</button>
     <div :is='current_tab_name'></div>
-    <div class='circle_1' @click.capture='circle1'>圈圈1
-        <div class='circle_2' @click.capture='circle2'>圈圈2
+    <div class='circle_1' @click='circle1'>圈圈1
+        <div class='circle_2' @click.stop='circle2'>圈圈2
             <div class='circle_3' @click='circle3'>圈圈3</div>
         </div>
     </div>
