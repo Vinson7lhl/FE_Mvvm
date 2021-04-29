@@ -150,13 +150,13 @@ export default {
 			this.current_tab_name = str
 		},
 		circle1 () {
-			console.log('-圈圈1-')
+			console.log('-牛油果皮-')
 		},
 		circle2 () {
-			console.log('--圈圈2--')
+			console.log('--牛油果肉--')
 		},
 		circle3 () {
-			console.log('---圈圈3---')
+			console.log('---牛油果核---')
 		}
 	}
 }
