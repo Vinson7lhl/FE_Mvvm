@@ -1,6 +1,7 @@
 <template>
 	<div class="mapCtrl">
 		<button @click="addMarkers">增加Geo_json点</button>
+		<button @click="addGridHeatMap">增加网格热力图</button>
 		<input type="checkbox" v-model="is_removed" /> 是否可以拖拽marker
 		<div
 			class="editButton"
@@ -27,6 +28,7 @@
 import fake_markers_data from '@/configs/fake_data_marker.js'
 // import fake_polyline_data from "@/config/fake_daa_polyline";
 // import fake_polygon_data from "@/config/fake_data_polygon";
+import GEO_DATA from './mock.json'
 
 export default {
 	data () {
@@ -43,7 +45,10 @@ export default {
 			position_picker: '',
 			mass_marker: [],
 			mass_marker_style: [],
-			polyline: [[75.757904, 47.118117], [97.375719, 33.598057]]
+			polyline: [
+				[75.757904, 47.118117],
+				[97.375719, 33.598057]
+			]
 		}
 	},
 	computed: {
@@ -76,12 +81,91 @@ export default {
 		// 	}
 		// }
 	},
-	mounted () {
-	},
+	mounted () {},
 	methods: {
 		// 添加两个点
-		initLines () {
+		initLines () {},
+		// 增加网格热力
+		addGridHeatMap () {
+			let loca = new Loca.Container({
+				map: this.mapObj
+			})
+			// loca.ambLight = {
+			// 	intensity: 0.1,
+			// 	color: '#000000'
+			// }
+			// loca.dirLight = {
+			// 	intensity: 1.2,
+			// 	color: '#fff',
+			// 	target: [0, 1, 0],
+			// 	position: [0, -1, 1]
+			// }
+			// loca.pointLight = {
+			// 	color: 'rgb(100,100,100)',
+			// 	position: [114.2517, 30.552128, 20000],
+			// 	intensity: 1.6,
+			// 	// 距离表示从光源到光照强度为 0 的位置，0 就是光不会消失。
+			// 	distance: 100000
+			// }
 
+			let geo = new Loca.GeoJSONSource({
+				data: GEO_DATA
+			})
+			console.log('geo:', geo)
+
+			let ll = new Loca.GridLayer({
+				// loca,
+				zIndex: 14,
+				opacity: 0.9,
+				visible: true,
+				zooms: [2, 22],
+				acceptLight: true
+				// shinniness: 0,
+				// cullface: 'none',
+				// depth: true,
+				// hasSide: true,
+			})
+
+			let colors = [
+				'#FAE200',
+				'#D27E37',
+				'#C53634',
+				'#C12B6E',
+				'#A92E9A',
+				'#67238A',
+				'#211A50',
+				'#18244E'
+			].reverse()
+			// let heights = [100, 200, 400, 600, 800, 1400, 1800, 4000]
+			ll.setSource(geo)
+			ll.setStyle({
+				unit: 'meter',
+				radius: 200,
+				gap: 1,
+				altitude: 100,
+				height: 0,
+				topColor: function (index, feature) {
+					let ranks =
+							(feature.coordinates && feature.coordinates.length) ||
+							0
+					return ranks < 5
+						? colors[0]
+						: ranks < 10
+							? colors[1]
+							: ranks < 20
+								? colors[2]
+								: ranks < 30
+									? colors[3]
+									: ranks < 50
+										? colors[4]
+										: ranks < 80
+											? colors[5]
+											: ranks < 100
+												? colors[6]
+												: colors[7]
+				}
+			})
+			loca.add(ll)
 		},
 		addMarkers () {
 			// 一定是拿到数据后再清除、定位、添加覆盖物
@@ -145,14 +229,15 @@ export default {
 			console.log('开始时间：', begin_time)
 			for (let i = 0; i < fake_markers_data.features.length; i++) {
 				console.log('------')
-				this.mass_marker.push(
-					{
-						lnglat: [fake_markers_data.features[i].geometry.coordinates[0], fake_markers_data.features[i].geometry.coordinates[1]],
-						name: 'beijing',
-						id: i,
-						style: -1
-					}
-				)
+				this.mass_marker.push({
+					lnglat: [
+						fake_markers_data.features[i].geometry.coordinates[0],
+						fake_markers_data.features[i].geometry.coordinates[1]
+					],
+					name: 'beijing',
+					id: i,
+					style: -1
+				})
 			}
 			let mass_marker_obj = new AMap.MassMarks(this.mass_marker, {
 				zIndex: 5, // 海量点图层叠加的顺序
@@ -163,7 +248,7 @@ export default {
 					anchor: new AMap.Pixel(5, 5)
 				} // 图标显示位置偏移量，基准点为图标左上角}
 			})
-			 mass_marker_obj.on('mouseover', function (e) {
+			mass_marker_obj.on('mouseover', function (e) {
 				console.log('哈哈', e)
 			})
 			mass_marker_obj.setMap(this.mapObj)
@@ -191,9 +276,9 @@ export default {
 			console.log('polygon触发', polygon_obj.getPosition())
 		},
 		/**
-		 * @description 鼠标经过时触发
-		 * @params {object} marker_info 回调形参，其属性target属性为Marker对象
-		 */
+			 * @description 鼠标经过时触发
+			 * @params {object} marker_info 回调形参，其属性target属性为Marker对象
+			 */
 		mouseoverCallback (marker_info) {
 			// 显示编辑按钮
 			this.is_show_edit_button = true
@@ -206,18 +291,20 @@ export default {
 			this.top_val = marker_pixel.getY() + 100 + 'px'
 		},
 		/**
-		 * @description 鼠标离开时触发
-		 */
+			 * @description 鼠标离开时触发
+			 */
 		mouseoutCallback () {
 			// 隐藏编辑按钮
 			this.is_show_edit_button = false
 		},
 		/**
-		 * @description 拖拽成功后触发
-		 */
+			 * @description 拖拽成功后触发
+			 */
 		finishedEdit (position_obj) {
 			console.log('拖拽结束：', position_obj)
-			let end_position = this.mapObj.lngLatToContainer(position_obj.position)
+			let end_position = this.mapObj.lngLatToContainer(
+				position_obj.position
+			)
 			this.end_top_val = end_position.getY() + 'px'
 			this.end_left_val = end_position.getX() + 'px'
 			this.is_show_end_edit_button = true
@@ -228,7 +315,7 @@ export default {
 				this.position_picker.stop()
 			}
 			this.is_show_edit_button = false
-			AMapUI.loadUI(['misc/PositionPicker'], PositionPicker => {
+			AMapUI.loadUI(['misc/PositionPicker'], (PositionPicker) => {
 				// 初始化拖拽对象
 				this.position_picker = new PositionPicker({
 					mode: 'dragMarker',
@@ -242,9 +329,9 @@ export default {
 				// 选择起始位置
 				console.log(this.marker_lnglat)
 				this.mapObj.setCenter(this.marker_lnglat)
-				this.position_picker.start(this.marker_lnglat)// 115.6201171875, 33.137551192346145
+				this.position_picker.start(this.marker_lnglat) // 115.6201171875, 33.137551192346145
 				// 拖拽完毕后回调
-				this.position_picker.on('success', positionResult => {
+				this.position_picker.on('success', (positionResult) => {
 					console.log('成功')
 					// this.finishedEdit(positionResult)
 				})
@@ -254,11 +341,8 @@ export default {
 				})
 			})
 		},
-		submitLocation () {
-		},
-		goBack () {
-
-		}
+		submitLocation () {},
+		goBack () {}
 	}
 }
 </script>

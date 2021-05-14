@@ -23,8 +23,11 @@ export default {
 	},
 	mounted () {
 		this.map = new AMap.Map('map_container', {
-			zoom: 5, // 级别
-			center: [116.397428, 39.90923] // 中心点坐标
+			zoom: 11.57,
+			center: [114.341232, 30.567523],
+			viewMode: '3D',
+			// showLabel: false,
+			mapStyle: 'amap://styles/45311ae996a8bea0da10ad5151f72979'
 		})
 		let polyline1 = new AMap.Polyline({
 			path: [
