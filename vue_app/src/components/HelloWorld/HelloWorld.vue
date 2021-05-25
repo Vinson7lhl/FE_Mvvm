@@ -10,7 +10,7 @@ export default {
 	// 组件名，其实不写这个属性也可以
 	name: 'HelloWorld',
 	// 组件上的属性
-	props: ['dataMsg', 'passData'],
+	props: ['dataMsg'],
 	components: {
 		GetDataTemplate,
 		'tab1-comp': Tab1Comp,
