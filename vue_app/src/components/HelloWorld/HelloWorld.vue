@@ -109,6 +109,12 @@ export default {
 		console.log('---HelloWord:mounted---')
 		console.log('子组件访问根组件数据：', this.$root.isShowPopUp)
 	},
+	beforeDestroy () {
+		console.log('---HelloWord:beforeDestroy---')
+	},
+	destroyed () {
+		console.log('---HelloWord:destroyed---')
+	},
 	/**
 		 * 函数
 		 */

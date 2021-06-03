@@ -2,9 +2,10 @@
 	<div class="home">
 		<img src="../assets/logo.png" />
 		<button @click="triggerSonFocus">点击触发子组件input的Focus</button>
-		<hello-world :passData= 'passData' ref="childComponent" @emitFather="fatherEmit" data-msg="Father-Tmplate" />
+		<hello-world v-if='is_show' :passData= 'passData' ref="childComponent" @emitFather="fatherEmit" data-msg="Father-Tmplate" />
 		<about-us />
 		<button @click='changeRoute'>触发绑定</button>
+		<button @click='showHome'>切换首页</button>
 	</div>
 </template>
 
@@ -26,10 +27,14 @@ export default {
 		},
 		changeRoute () {
 			$Vue.$emit('test')
+		},
+		showHome () {
+			this.is_show = !this.is_show
 		}
 	},
 	data () {
 		return {
+			is_show: false,
 			homeData: 'Home页面数据',
 			passData: {
 				from: 'Home',
@@ -62,6 +67,12 @@ export default {
 		console.log('$el', this.$el)
 		console.log('homeData', this.$data)
 		console.log('子组件访问Home页面数据：', this.$parent.homeData)
+	},
+	beforeDestroy () {
+		console.log('---Home:beforeDestroy---')
+	},
+	destroyed () {
+		console.log('---Home:destroyed---')
 	}
 }
 </script>
