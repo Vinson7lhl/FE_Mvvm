@@ -2,21 +2,21 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 // 页面级别
-import Home from '@/views/Home.vue'
-import About from '@/views/About.vue'
-import List from '@/views/List.vue'
-import ListDetail from '@/views/ListDetail.vue'
-import NotFoundPage from '@/views/NotFound.vue'
-import ExportExcel from '@/views/ExportExl.vue'
-import ExportExcelCn from '@/views/ExportExlCn.vue'
-import EchartsTable from '@/views/echartsTable.vue'
-import MapTest from '@/views/MapTest.vue'
-import MapTest2 from '@/views/MapTest2.vue'
+// import Home from '@/views/Home.vue'
+// import About from '@/views/About.vue'
+// import List from '@/views/List.vue'
+// import ListDetail from '@/views/ListDetail.vue'
+// import NotFoundPage from '@/views/NotFound.vue'
+// import ExportExcel from '@/views/ExportExl.vue'
+// import ExportExcelCn from '@/views/ExportExlCn.vue'
+// import EchartsTable from '@/views/echartsTable.vue'
+// import MapTest from '@/views/MapTest.vue'
+// import MapTest2 from '@/views/MapTest2.vue'
 
-// 组件级别
-import AsyncComp from '@/views/asyncCompTest.vue'
-import AboutUs from '@/components/aboutUs/about_us.vue'
-import AboutFirm from '@/components/aboutFirm/about_firm.vue'
+// // 组件级别
+// import AsyncComp from '@/views/asyncCompTest.vue'
+// import AboutUs from '@/components/aboutUs/about_us.vue'
+// import AboutFirm from '@/components/aboutFirm/about_firm.vue'
 
 Vue.use(Router)
 
@@ -26,31 +26,30 @@ const router = new Router({
 		{
 			path: '/',
 			name: 'home',
-			component: Home
+			component: () => import(/* webpackChunkName: "home" */ '../views/Home.vue')
 		},
 		{
 			path: '/about/:id',
 			name: 'about',
-			component: About,
+			component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
 			meta: { requiresAuth: true },
 			// redirect: '/about/us',
 			children: [
 				{
 					path: '',
-					name: 'about_us',
-					component: AboutUs,
+					component: () => import(/* webpackChunkName: "about" */ '../components/aboutUs/about_us.vue'),
 					meta: { requiresAuth: true }
 				},
 				{
 					path: 'us',
 					name: 'about_us',
-					component: AboutUs,
+					component: () => import(/* webpackChunkName: "about" */ '../components/aboutUs/about_us.vue'),
 					meta: { requiresAuth: true }
 				},
 				{
 					path: 'firm',
 					name: 'about_firm',
-					component: AboutFirm,
+					component: () => import(/* webpackChunkName: "about" */ '../components/aboutFirm/about_firm.vue'),
 					meta: { requiresAuth: true }
 				}
 			]
@@ -58,47 +57,47 @@ const router = new Router({
 		{
 			path: '/ex',
 			name: 'export_excel',
-			component: ExportExcel
+			component: () => import(/* webpackChunkName: "export-excel" */ '../views/ExportExl.vue'),
 		},
 		{
 			path: '/dashboard',
 			name: 'page_dashboard',
-			component: EchartsTable
+			component: () => import(/* webpackChunkName: "dashboard" */ '../views/echartsTable.vue'),
 		},
 		{
 			path: '/exCn',
 			name: 'export_excel_cn',
-			component: ExportExcelCn
+			component: () => import(/* webpackChunkName: "export-excel-cn" */ '../views/ExportExlCn.vue'),
 		},
 		{
 			path: '/list',
 			name: 'list',
-			component: List
+			component: () => import(/* webpackChunkName: "list" */ '../views/List.vue'),
 		},
 		{
 			path: '/list_detail/:id/:score',
 			name: 'list_detail',
-			component: ListDetail
+			component: () => import(/* webpackChunkName: "list-detail" */ '../views/ListDetail.vue'),
 		},
 		{
 			path: '/asyncComp',
 			name: 'async_comp',
-			component: AsyncComp
+			component: () => import(/* webpackChunkName: "async-comp" */ '../views/asyncCompTest.vue'),
 		},
 		{
 			path: '/map',
 			name: 'map_test',
-			component: MapTest
+			component: () => import(/* webpackChunkName: "map-test" */ '../views/MapTest.vue'),
 		},
 		{
 			path: '/map2',
 			name: 'map_test2',
-			component: MapTest2
+			component: () => import(/* webpackChunkName: "map-test2" */ '../views/MapTest2.vue'),
 		},
 		{
 			path: '*',
 			name: 'not_found_page',
-			component: NotFoundPage
+			component: () => import(/* webpackChunkName: "404" */ '../views/NotFound.vue')
 		}
 	]
 })
