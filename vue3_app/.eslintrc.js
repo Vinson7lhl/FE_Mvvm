@@ -10,6 +10,11 @@ module.exports = {
   parserOptions: {
     parser: 'babel-eslint'
   },
+  /**
+   *“off”或0：不启用该规则。
+    “warn”或1：违反时警告。
+    “error”或2：违反时报错。
+   */
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
@@ -36,6 +41,8 @@ module.exports = {
     // 使用单引号
     "quotes": [2, "single"],
     // 不强制驼峰命名规则 
-    "camelcase": 0
+    "camelcase": 0,
+    // 最后一行是否留出空行- 不必
+    "eol-last": 0
   }
 }
