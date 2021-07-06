@@ -28,7 +28,7 @@ module.exports = {
     "no-extra-semi": 2,
     // 禁止语句分号结尾
     "semi": [2, "never"],
-     // 分后前不空格，后空格
+     // 分号前不空格，后空格
     "semi-spacing": [2, {"before": false, "after": true}],
     // 不允许出现多余的空格
     "no-multi-spaces": 2,
