@@ -35,3 +35,14 @@ AXIOS_OBJ.interceptors.response.use(res => {
 	// 对响应错误做点什么
 	return Promise.reject(error)
 })
+
+const BASE_API = {
+	GET: (url, params = {}) => {
+		return AXIOS_OBJ.get(url, { params })
+	},
+	POST: (url, data = {}) => {
+		return AXIOS_OBJ.post(url, { data })
+	}
+}
+
+export default BASE_API
