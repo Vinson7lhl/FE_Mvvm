@@ -31,7 +31,7 @@ module.exports = {
     "semi-spacing": [2, {"before": false, "after": true}],
     // 不允许出现多余的空格
     "no-multi-spaces": 2,
-    // 不允许使用tab
+    // 允许使用tab
     "no-tabs": 0,
     // 强制一致的缩进风格:tab
     "indent": [2, "tab"],
@@ -40,7 +40,9 @@ module.exports = {
     // 使用单引号
     "quotes": [2, "single"],
     // 不强制驼峰命名规则 
-    "camelcase": 0
+    "camelcase": 0,
+    // 强制尾随逗号
+    "comma-dangle":  [2, "never"]
   },
   parserOptions: {
     parser: 'babel-eslint'

@@ -57,42 +57,42 @@ const router = new Router({
 		{
 			path: '/ex',
 			name: 'export_excel',
-			component: () => import(/* webpackChunkName: "export-excel" */ '../views/ExportExl.vue'),
+			component: () => import(/* webpackChunkName: "export-excel" */ '../views/ExportExl.vue')
 		},
 		{
 			path: '/dashboard',
 			name: 'page_dashboard',
-			component: () => import(/* webpackChunkName: "dashboard" */ '../views/echartsTable.vue'),
+			component: () => import(/* webpackChunkName: "dashboard" */ '../views/echartsTable.vue')
 		},
 		{
 			path: '/exCn',
 			name: 'export_excel_cn',
-			component: () => import(/* webpackChunkName: "export-excel-cn" */ '../views/ExportExlCn.vue'),
+			component: () => import(/* webpackChunkName: "export-excel-cn" */ '../views/ExportExlCn.vue')
 		},
 		{
 			path: '/list',
 			name: 'list',
-			component: () => import(/* webpackChunkName: "list" */ '../views/List.vue'),
+			component: () => import(/* webpackChunkName: "list" */ '../views/List.vue')
 		},
 		{
 			path: '/list_detail/:id/:score',
 			name: 'list_detail',
-			component: () => import(/* webpackChunkName: "list-detail" */ '../views/ListDetail.vue'),
+			component: () => import(/* webpackChunkName: "list-detail" */ '../views/ListDetail.vue')
 		},
 		{
 			path: '/asyncComp',
 			name: 'async_comp',
-			component: () => import(/* webpackChunkName: "async-comp" */ '../views/asyncCompTest.vue'),
+			component: () => import(/* webpackChunkName: "async-comp" */ '../views/asyncCompTest.vue')
 		},
 		{
 			path: '/map',
 			name: 'map_test',
-			component: () => import(/* webpackChunkName: "map-test" */ '../views/MapTest.vue'),
+			component: () => import(/* webpackChunkName: "map-test" */ '../views/MapTest.vue')
 		},
 		{
 			path: '/map2',
 			name: 'map_test2',
-			component: () => import(/* webpackChunkName: "map-test2" */ '../views/MapTest2.vue'),
+			component: () => import(/* webpackChunkName: "map-test2" */ '../views/MapTest2.vue')
 		},
 		{
 			path: '*',
