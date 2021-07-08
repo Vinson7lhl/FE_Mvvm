@@ -28,21 +28,23 @@ module.exports = {
     "no-extra-semi": 2,
     // 禁止语句分号结尾
     "semi": [2, "never"],
-     // 分号后前不空格，后空格
-    "semi-spacing": [2, {"before": false, "after": true}],
-    // 不允许出现多余的空格
+    // 禁止出现多余的空格
     "no-multi-spaces": 2,
-    // 允许使用tab
-    "no-tabs": 0,
-    // 强制一致的缩进风格:tab
-    "indent": [2, "tab"],
     // 禁止许使用var
     "no-var": 2, 
+    // 禁止尾随逗号
+    "comma-dangle":  [2, "never"],
+     // 强制分号后前不空格，后空格
+    "semi-spacing": [2, {"before": false, "after": true}],
+    // 强制一致的缩进风格:tab
+    "indent": [2, "tab"],
     // 强制使用单引号
     "quotes": [2, "single"],
+    // 强制用绝对等于 === 和 !== 来判断
+    "eqeqeq": [2, 'always'],
     // 不强制驼峰命名规则 
     "camelcase": 0,
-    // 禁止尾随逗号
-    "comma-dangle":  [2, "never"]
+    // 允许使用tab
+    "no-tabs": 0,
   }
 }
