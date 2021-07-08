@@ -17,13 +17,13 @@ module.exports = {
     // 生产环境不允许有 console debugger
     'no-console': process.env.NODE_ENV === 'pro' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'pro' ? 'error' : 'off',
-    // 函数定义的时候不允许出现重复的参数
+    // 禁止函数定义的时候出现重复的参数
     "no-dupe-args": 2, 
-    // 对象中不允许出现重复的键
+    // 禁止对象中出现重复的键
     "no-dupe-keys": 2,
-    // 不允许出现空的代码块
+    // 禁止出现空的代码块
     "no-empty": 2,
-    // 不允许出现不必要的分号
+    // 禁止出现不必要的分号
     "no-extra-semi": 2,
     // 禁止语句分号结尾
     "semi": [2, "never"],
@@ -35,13 +35,13 @@ module.exports = {
     "no-tabs": 0,
     // 强制一致的缩进风格:tab
     "indent": [2, "tab"],
-    // 不允许使用var
+    // 禁止许使用var
     "no-var": 2, 
-    // 使用单引号
+    // 强制使用单引号
     "quotes": [2, "single"],
     // 不强制驼峰命名规则 
     "camelcase": 0,
-    // 强制尾随逗号
+    // 禁止尾随逗号
     "comma-dangle":  [2, "never"]
   },
   parserOptions: {
