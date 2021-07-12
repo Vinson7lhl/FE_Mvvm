@@ -41,10 +41,12 @@ module.exports = {
     // 强制使用单引号
     "quotes": [2, "single"],
     // 强制用绝对等于 === 和 !== 来判断
-    "eqeqeq": [2, 'always'],
+    "eqeqeq": [2],
     // 不强制驼峰命名规则 
     "camelcase": 0,
     // 允许使用tab
     "no-tabs": 0,
+    // 是否在非空文件中必须有个空行，不必
+    "eol-last": [0]
   }
 }
