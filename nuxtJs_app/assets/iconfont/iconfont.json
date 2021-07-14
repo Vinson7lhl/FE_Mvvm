@@ -1,0 +1,51 @@
+{
+  "id": "2058182",
+  "name": "GAIA-Drinking",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon",
+  "description": "盖亚康饮",
+  "glyphs": [
+    {
+      "icon_id": "11749411",
+      "name": "五角星",
+      "font_class": "wujiaoxing",
+      "unicode": "e66f",
+      "unicode_decimal": 58991
+    },
+    {
+      "icon_id": "4770726",
+      "name": "导出",
+      "font_class": "daochu",
+      "unicode": "e634",
+      "unicode_decimal": 58932
+    },
+    {
+      "icon_id": "7096954",
+      "name": "距离icon-55",
+      "font_class": "juliicon-",
+      "unicode": "e626",
+      "unicode_decimal": 58918
+    },
+    {
+      "icon_id": "8017632",
+      "name": "charts_histo",
+      "font_class": "charts_histo",
+      "unicode": "e6d0",
+      "unicode_decimal": 59088
+    },
+    {
+      "icon_id": "15085034",
+      "name": "地点线路",
+      "font_class": "didianxianlu",
+      "unicode": "e7d2",
+      "unicode_decimal": 59346
+    },
+    {
+      "icon_id": "15885751",
+      "name": "转换",
+      "font_class": "zhuanhuan",
+      "unicode": "e60b",
+      "unicode_decimal": 58891
+    }
+  ]
+}
