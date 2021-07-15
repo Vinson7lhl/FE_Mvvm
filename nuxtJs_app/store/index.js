@@ -44,4 +44,9 @@ export const getters = {
 	}
 }
 
-export const actions = {}
+export const actions = {
+	asyncAction: ({ state, commit }) => {
+		console.log(state)
+		console.log(commit)
+	}
+}

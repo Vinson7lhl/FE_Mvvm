@@ -3,7 +3,7 @@
  */
 
 export const state = () => ({
-	list: []
+	ju_bu_1: '模块变量'
 })
 
 export const mutations = {

@@ -24,7 +24,8 @@ export default {
 
 	// Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
 	plugins: [
-		'@/plugins/element-ui'
+		'@/plugins/element-ui',
+		'@/plugins/axios.js'
 	],
 
 	// Auto import components: https://go.nuxtjs.dev/config-components
@@ -39,11 +40,22 @@ export default {
 	// Modules: https://go.nuxtjs.dev/config-modules
 	modules: [
 		// https://go.nuxtjs.dev/axios
-		'@nuxtjs/axios'
+		'@nuxtjs/axios',
+		'@nuxtjs/proxy'
 	],
 
 	// Axios module configuration: https://go.nuxtjs.dev/config-axios
-	axios: {},
+	axios: {
+		// process.env.NODE_ENV production : development
+		baseURL: '',
+		proxy: true,
+		https: false,
+		retry: { retries: 3 },
+		timeout: 10000
+	},
+	proxy: {
+		'/api': { target: 'http://61.153.224.202:15109', pathRewrite: { '/api': '' } }
+	},
 
 	// Build Configuration: https://go.nuxtjs.dev/config-build
 	build: {
