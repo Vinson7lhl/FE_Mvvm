@@ -48,6 +48,8 @@ module.exports = {
 		indent: [2, 'tab'],
 		// 强制使用单引号
 		quotes: [2, 'single'],
+		// vue-html模板中字符串用单引号
+		'vue/html-quotes': [2, 'single'],
 		// 强制用绝对等于 === 和 !== 来判断
 		eqeqeq: [2],
 		// 不强制驼峰命名规则

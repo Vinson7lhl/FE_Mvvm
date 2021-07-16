@@ -1,6 +1,6 @@
 # nuxtJs
 
-## Build Setup
+## 启动步骤
 
 ```bash
 # 安装依赖
@@ -17,36 +17,30 @@ $ npm run start
 $ npm run generate
 ```
 
-For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
 
-## Special Directories
 
-You can create the following extra directories, some of which have special behaviors. Only `pages` is required; you can delete them if you don't want to use their functionality.
+## 文件夹说明
 
 ### `assets`
 
-The assets directory contains your uncompiled assets such as Stylus or Sass files, images, or fonts.
+存放要编译/压缩的文件：sass、图片、字体。 [详细](https://nuxtjs.org/docs/2.x/directory-structure/assets).
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/assets).
+引入方式：模板中/sass文件中：'@/assets/imgs/demo_big.jpg'
 
 ### `components`
 
-The components directory contains your Vue.js components. Components make up the different parts of your page and can be reused and imported into your pages, layouts and even other components.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/components).
+组件文件夹，所有组件存放在此处，建议公共放在根目录，单独属于某些页面的放在对应文件夹内 [详细](https://nuxtjs.org/docs/2.x/directory-structure/components).
 
 ### `layouts`
 
-Layouts are a great help when you want to change the look and feel of your Nuxt app, whether you want to include a sidebar or have distinct layouts for mobile and desktop.
+此文件夹放最顶级容器，即基本布局容器，一般情况一个就够用了，也可以多个。比如此文件可以包含header-content-footer三个模块，content为路由注入（通过<nuxt />）的某个page，page中的文件默认使用layouts/default.vue文件，page中也可以用其它，但需要在page中特别指定某容器
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/layouts).
+ [详细](https://nuxtjs.org/docs/2.x/directory-structure/layouts).
 
 
 ### `pages`
 
-This directory contains your application views and routes. Nuxt will read all the `*.vue` files inside this directory and setup Vue Router automatically.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/get-started/routing).
+此文夹内的.vue文件结构会对应映射为router路由文件。每个文件可以用一个layout中的布局容器（默认为 layouts/default.vue）也可指定为其它容器， [详细](https://nuxtjs.org/docs/2.x/get-started/routing).
 
 ### `plugins`
 
@@ -58,14 +52,8 @@ More information about the usage of this directory in [the documentation](https:
 
 不需要编译的静态文件放在这里
 
-This directory contains your static files. Each file inside this directory is mapped to `/`.
-
-Example: `/static/robots.txt` is mapped as `/robots.txt`.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/static).
+引入方式 '/某文件' [详细](https://nuxtjs.org/docs/2.x/directory-structure/static).
 
 ### `store`
 
-This directory contains your Vuex store files. Creating a file in this directory automatically activates Vuex.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/store).
+装载Vuex状态器，起始文件为index.js，其它文件为子module，不需要导入导出模块，只需要在每个文件中单独写state、mutations、actions等 [详细](https://nuxtjs.org/docs/2.x/directory-structure/store).

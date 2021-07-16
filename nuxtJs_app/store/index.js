@@ -39,7 +39,7 @@ export const mutations = {
  * 用法：this.$store.getter.login_message
  */
 export const getters = {
-	login_message: (state) => {
+	login_message: state => {
 		return `登陆者名字为：${state.login_name}，手机号码为：${state.login_number}`
 	}
 }

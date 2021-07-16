@@ -1,9 +1,9 @@
 <template>
-  <div class="test">
+  <div class='indexPage'>
     {{ page_name }}
-    需要编译的assets/路径下的图片：<img src="@/assets/imgs/demo_big.jpg">
-    不需要编译的图片static/路径下的图片：<img src="/imgs/Vue.jpg">
-    <div class="imgTest" />
+    需要编译的assets/路径下的图片：<img src='@/assets/imgs/demo_big.jpg'>
+    不需要编译的图片static/路径下的图片：<img src='/imgs/Vue.jpg'>
+    <div class='imgTest' />
     <span>来自全局store，count：{{ count }}</span>
     <span>来自全局store，state1：{{ state1 }}</span>
     <span>{{ project }}</span>
@@ -64,8 +64,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.test {
+<style lang='scss' scoped>
+.indexPage {
     font-size:28px;
     .imgTest{
         width:100px;

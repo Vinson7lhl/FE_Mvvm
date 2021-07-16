@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class='defaultLayout'>
     <!--这里是首页等页面的base-layout-->
     <Header />
     <nuxt />
@@ -21,3 +21,5 @@ export default {
 	}
 }
 </script>
+<style lang='scss' scoped>
+</style>
