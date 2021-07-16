@@ -55,6 +55,8 @@ module.exports = {
 		// 允许使用tab
 		'no-tabs': 0,
 		// 是否在非空文件中必须有个空行，不必
-		'eol-last': [0]
+		'eol-last': [0],
+		// 箭头函数只有一个参数时必须有括号，不必
+		'arrow-parens': ['error', 'as-needed']
 	}
 }
