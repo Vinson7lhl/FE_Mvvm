@@ -1,9 +1,14 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-    <OtherComp />
-  </div>
+	<div class="home">
+		<img alt="Vue logo" src="../assets/logo.png" />
+		<HelloWorld msg="Welcome to Your Vue.js App" />
+		<OtherComp />
+		<input type='text' v-focus>
+	</div>
+	<div>另一个根节点
+		<input type='text' v-focus>
+		<span>{{new_name}}</span>
+	</div>
 </template>
 
 <script>
@@ -19,6 +24,24 @@ export default {
 		HelloWorld,
 		OtherComp: defineAsyncComponent(() =>
 			import('@/components/other-page/OtherPage.vue'))
+	},
+	directives: {
+		focus: {
+			// 指令的定义
+			mounted (el) {
+				el.focus()
+			}
+		}
+	},
+	data () {
+		return {
+			name: '欧阳锋'
+		}
+	},
+	computed: {
+		new_name () {
+			return this.$fun_1(this.name)
+		}
 	}
 }
 </script>
