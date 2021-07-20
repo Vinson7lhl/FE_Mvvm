@@ -1,30 +1,30 @@
 <template>
-  <div class="FooterModel">
+  <div class='FooterModel'>
     这里是脚部
   </div>
 </template>
 
 <script>
 export default {
-  name: 'FooterModel',
-  props: [],
-  data () {
-    return {}
-  },
-  beforeCreate () {
-    console.log('footer:beforeCreate')
-  },
-  created () {
-    console.log('footer:created')
-  },
-  beforeMount () {
-    console.log('footer:beforeMount')
-  },
-  mounted () {
-    console.log('footer:mounted')
-  },
-  methods: {
-  }
+	name: 'FooterModel',
+	props: [],
+	data () {
+		return {}
+	},
+	beforeCreate () {
+		console.log('footer:beforeCreate')
+	},
+	created () {
+		console.log('footer:created')
+	},
+	beforeMount () {
+		console.log('footer:beforeMount')
+	},
+	mounted () {
+		console.log('footer:mounted')
+	},
+	methods: {
+	}
 }
 </script>
 

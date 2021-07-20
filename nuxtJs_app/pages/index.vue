@@ -6,7 +6,7 @@
     <div class='imgTest' />
     <span>来自全局store，count：{{ count }}</span>
     <span>来自全局store，state1：{{ state1 }}</span>
-    <span>{{ project }}</span>
+    <span @click='getUserName'>来自asyncData：{{ project }}</span>
   </div>
 </template>
 
@@ -17,13 +17,20 @@ export default {
 	name: 'IndexPage',
 	components: {},
 	props: [],
-	async asyncData () {
+	asyncData (context) {
+		console.log('----', context.app.API_INDEX)
+		context.app.$API_INDEX().get_index_list({ data: {}, is_token: true }).then(data => {
+			console.log('server返回data：', data.data)
+		})
+		// console.log('服务端测试：', app.API_INDEX.get_index_list())
+		// console.log('----', context.app.$_get)
 		// const data = await context.app.$axios.get('/api/assets/api/product/getAllModuleProducts')
+		// console.log(context)
 		// console.log(data)
 		// if (data) {
 		// 	return { project: data || '哈哈哈' }
 		// }
-		// return { project: '哈哈哈' }
+		return { project: '哈哈哈' }
 	},
 	data () {
 		return {
@@ -50,7 +57,10 @@ export default {
 	},
 	mounted () {
 		console.log('index:mounted')
-		console.log('axios:', this.$axios)
+		this.$API_INDEX().get_index_list({ data: {}, is_token: true }).then(data => {
+			console.log('异步返回data：', data.data)
+		})
+		// console.log('客户端测试：', Vue, INDEX_API.GET_LIST())
 		// this.$axios.get('/api/assets/api/product/getAllModuleProducts')
 	},
 	methods: {

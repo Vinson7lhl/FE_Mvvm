@@ -1,4 +1,13 @@
+import ENV from './env'
+
 export default {
+	server: {
+		// 此处设置为80而不是3000是因为ssr中预渲染asyncData函数中调用接口只会启动端口为80的node服务——实际上启动的是3000，所以就会报错
+		// port: 80
+	},
+	env: {
+		BASE_URL: ENV[process.env.MODE].BASE_URL
+	},
 	// Global page headers: https://go.nuxtjs.dev/config-head
 	head: {
 		title: 'nuxtJs',
@@ -22,10 +31,12 @@ export default {
 		'@/assets/css/base.scss'
 	],
 
-	// Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
+	// 插件配置：https://go.nuxtjs.dev/config-plugins
 	plugins: [
 		'@/plugins/element-ui',
-		'@/plugins/axios.js'
+		{ src: '@/plugins/axios.js', mode: 'client' },
+		{ src: '@/plugins/index_api.js', mode: 'client' }
+		// '@/plugins/demo.js'
 	],
 
 	// Auto import components: https://go.nuxtjs.dev/config-components
@@ -47,15 +58,15 @@ export default {
 	// Axios module configuration: https://go.nuxtjs.dev/config-axios
 	axios: {
 		// process.env.NODE_ENV production : development
-		baseURL: '',
-		proxy: true,
+		baseURL: ENV[process.env.MODE].BASE_URL,
+		proxy: false,
 		https: false,
 		retry: { retries: 3 },
 		timeout: 10000
 	},
-	proxy: {
-		'/api': { target: 'http://61.153.224.202:15109', pathRewrite: { '/api': '' } }
-	},
+	// proxy: {
+	// 	'/api': { target: ENV[process.env.MODE].BASE_URL, pathRewrite: { '/api': '' } }
+	// },
 
 	// Build Configuration: https://go.nuxtjs.dev/config-build
 	build: {
