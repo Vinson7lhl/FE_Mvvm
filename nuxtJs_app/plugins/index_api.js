@@ -9,7 +9,7 @@ export default ({ app, env }, inject) => {
 			 * @param {boolean} is_loading 是否需要显示loading
 			 */
 			get_index_list: (data = {}) => {
-				return app.$_get(`${env}/assets/api/product/getAllModuleProducts`, data)
+				return app.$_get(`${env.BASE_URL}/assets/api/product/getAllModuleProducts`, data)
 			}
 		}
 	})

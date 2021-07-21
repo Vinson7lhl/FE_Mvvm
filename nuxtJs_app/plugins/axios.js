@@ -24,7 +24,7 @@ export default ({ app, redirect }) => {
 			redirect('/404')
 		} else {
 			// 请求接口数据正常，返回数据
-			return response
+			return response.data
 		}
 		return response
 	}, error => {
@@ -39,9 +39,14 @@ export default ({ app, redirect }) => {
 			console.log(data.is_loading)
 		}
 		if (data.is_token) {
-			console.log('获取token:', sessionStorage.getItem('lhl'))
+			// console.log('获取token:', sessionStorage.getItem('lhl'))
 		}
-		return app.$axios.get(url, { params: data.data, headers: { Authorization: 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJtb2JpbGUiOiIxOTEzNzUwNjk3MjEiLCJzdWIiOiJ5YW5odWkiLCJ1SWQiOiJjMzVlZmExMmYyNmJhM2VjNzQ2MThjMDA5NDNiYTc1MCIsIm5pa2VOYW1lIjoi6Lev5bu26L6JIiwiZXhwIjoxNzcwNzY1NjI5LCJjcmVhdGVkIjoxNjI2NzY1NjI5NDQ3fQ.mg-ry7Ckc1nF5U4XXyyCmX2Qu1zhd4kpdNFCMcRpO3qmbLHMnpSIX6EysDbHDUjbcNQ7abgoALYMrsOXWIm__A' } })
+		return app.$axios.get(url, {
+			params: data.data,
+			headers: {
+				Authorization: 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJtb2JpbGUiOiIxOTEzNzUwNjk3MjEiLCJzdWIiOiJ5YW5odWkiLCJ1SWQiOiJjMzVlZmExMmYyNmJhM2VjNzQ2MThjMDA5NDNiYTc1MCIsIm5pa2VOYW1lIjoi6Lev5bu26L6JIiwiZXhwIjoxNzcwNzY1NjI5LCJjcmVhdGVkIjoxNjI2NzY1NjI5NDQ3fQ.mg-ry7Ckc1nF5U4XXyyCmX2Qu1zhd4kpdNFCMcRpO3qmbLHMnpSIX6EysDbHDUjbcNQ7abgoALYMrsOXWIm__A'
+			}
+		})
 	}
 	app.$_post = (url, data, is_token = false, is_loading = false) => {
 		// 做点啥

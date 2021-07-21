@@ -18,9 +18,11 @@ export default {
 	components: {},
 	props: [],
 	asyncData (context) {
-		console.log('----', context.app.API_INDEX)
-		context.app.$API_INDEX().get_index_list({ data: {}, is_token: true }).then(data => {
-			console.log('server返回data：', data.data)
+		console.log('server设置cookie-token')
+		context.app.$cookies.set('lhl', '阿西吧xxx')
+		console.log('server取出cookie-token', context.app.$cookies.get('lhl'))
+		context.app.$API_INDEX().get_index_list({ data: { q: 'girls' }, is_token: true }).then(data => {
+			console.log('server返回data啦！', data.data[0].id)
 		})
 		// console.log('服务端测试：', app.API_INDEX.get_index_list())
 		// console.log('----', context.app.$_get)
@@ -60,6 +62,10 @@ export default {
 		this.$API_INDEX().get_index_list({ data: {}, is_token: true }).then(data => {
 			console.log('异步返回data：', data.data)
 		})
+		console.log('设置cookie-token')
+		this.$cookies.set('lhl2', '阿西吧xxx2')
+		console.log('server取出cookie-token', this.$cookies.get('lhl'))
+		console.log('取出cookie-token', this.$cookies.get('lhl2'))
 		// console.log('客户端测试：', Vue, INDEX_API.GET_LIST())
 		// this.$axios.get('/api/assets/api/product/getAllModuleProducts')
 	},

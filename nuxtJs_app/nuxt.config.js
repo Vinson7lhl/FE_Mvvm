@@ -34,8 +34,8 @@ export default {
 	// 插件配置：https://go.nuxtjs.dev/config-plugins
 	plugins: [
 		'@/plugins/element-ui',
-		{ src: '@/plugins/axios.js', mode: 'client' },
-		{ src: '@/plugins/index_api.js', mode: 'client' }
+		{ src: '@/plugins/axios.js' },
+		{ src: '@/plugins/index_api.js' }
 		// '@/plugins/demo.js'
 	],
 
@@ -51,6 +51,7 @@ export default {
 	// Modules: https://go.nuxtjs.dev/config-modules
 	modules: [
 		// https://go.nuxtjs.dev/axios
+		'cookie-universal-nuxt',
 		'@nuxtjs/axios',
 		'@nuxtjs/proxy'
 	],
