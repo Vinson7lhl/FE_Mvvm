@@ -7,6 +7,7 @@
 </template>
 
 <style lang="scss">
+// 全局基本样式：颜色，字号，字体，reset样式等
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

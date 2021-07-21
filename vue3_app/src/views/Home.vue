@@ -4,10 +4,13 @@
 		<HelloWorld msg="Welcome to Your Vue.js App" />
 		<OtherComp />
 		<input type='text' v-focus>
-	</div>
-	<div>另一个根节点
-		<input type='text' v-focus>
-		<span>{{new_name}}</span>
+        <div>另一个根节点
+            <input type='text' v-focus>
+            <span>{{new_name}}</span>
+        </div>
+        <div class='iconDemo'>
+            饿了么icondemo：<i class="el-icon-edit"></i>
+        </div>
 	</div>
 </template>
 
@@ -45,3 +48,12 @@ export default {
 	}
 }
 </script>
+
+<style lang="scss" scoped>
+.home {
+    .iconDemo{
+        background-color: azure;
+        text-align: center;
+    }
+}
+</style>

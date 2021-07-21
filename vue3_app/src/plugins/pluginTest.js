@@ -6,6 +6,7 @@ const plugins = {
 	install: (app, opt) => {
 		// 全局可以通过 this.$fun_1(str)调用
 		app.config.globalProperties.$fun_1 = baseFuns.fun_1
+		// 其它全局函数 / 属性
 	}
 }
 

@@ -5,8 +5,11 @@ import axios from 'axios'
  */
 const AXIOS_OBJ = axios.create({
 	// 根据环境不同从而匹配不同的api
-	baseURL: 'http://api.tvmaze.com',
-	timeout: 3000
+	baseURL: process.env.BASE_URL,
+	timeout: 3000,
+	headers: {
+		'Content-Type': 'application/json;charset=UTF-8;'
+	}
 })
 
 /**
