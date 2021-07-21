@@ -24,6 +24,7 @@ export default {
 	},
 	mounted () {
 		console.log('header:mounted')
+		this.login_name = '白七爷'
 	},
 	methods: {
 		/**

@@ -6,7 +6,7 @@
 # 安装依赖
 $ npm i || cnpm i
 
-# 以localhost:3000为热启动
+# 默认以localhost:3000为热启动
 $ npm run dev
 
 # 构建生产环境
@@ -44,16 +44,25 @@ $ npm run generate
 
 ### `plugins`
 
-The plugins directory contains JavaScript plugins that you want to run before instantiating the root Vue.js Application. This is the place to add Vue plugins and to inject functions or constants. Every time you need to use `Vue.use()`, you should create a file in `plugins/` and add its path to plugins in `nuxt.config.js`.
+此文件夹的作用是写入全局功能，供server端和client端调用，方法见详情，里面有三种方式绑定：
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/plugins).
+（1）只绑定client端，即Vue使用，通过Vue.prototype.$XXX，注意默认加上$前缀以表示这是Vue实例所用
 
-### `static`
+（2）只绑定server端，即通过context.app
 
-不需要编译的静态文件放在这里
+（3）两端都要使用的，默认会自动将名字加上$，所以不必单独加$
 
-引入方式 '/某文件' [详细](https://nuxtjs.org/docs/2.x/directory-structure/static).
+```
+export default ({ app }, inject) => {
+	// 只在server端
+	app.fun_1 = str => {
+		// 做点啥
+	}
+	// server 端和 client都可以用，通过this.$fun_2 || context.app.$fun_2
+	inject('fun_2', str => {
+		// 做点啥
+	})
+}
+```
 
-### `store`
-
-装载Vuex状态器，起始文件为index.js，其它文件为子module，不需要导入导出模块，只需要在每个文件中单独写state、mutations、actions等 [详细](https://nuxtjs.org/docs/2.x/directory-structure/store).
+ [详细](https://nuxtjs.org/docs/2.x/directory-structure/plugins).

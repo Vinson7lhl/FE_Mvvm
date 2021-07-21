@@ -7,6 +7,7 @@
     <span>来自全局store，count：{{ count }}</span>
     <span>来自全局store，state1：{{ state1 }}</span>
     <span @click='getUserName'>来自asyncData：{{ project }}</span>
+    icon<i class='el-icon-delete' />
   </div>
 </template>
 

@@ -1,16 +1,17 @@
+// 导入基本环境变量api
 import ENV from './env'
 
 export default {
+	// 此处用来配置本地server端的ip/port。默认localhost,3000
 	server: {
-		// 此处设置为80而不是3000是因为ssr中预渲染asyncData函数中调用接口只会启动端口为80的node服务——实际上启动的是3000，所以就会报错
-		// port: 80
 	},
+	// 设置环境变量供server端和client共享的变量
 	env: {
 		BASE_URL: ENV[process.env.MODE].BASE_URL
 	},
-	// Global page headers: https://go.nuxtjs.dev/config-head
+	// 配置每个页面的通用元数据脚本和配置（即 每个html中的<head>信息），以及单独引入某些js
 	head: {
-		title: 'nuxtJs',
+		title: '箱箱',
 		htmlAttrs: {
 			lang: 'en'
 		},
@@ -25,21 +26,20 @@ export default {
 		]
 	},
 
-	// Global CSS: https://go.nuxtjs.dev/config-css
+	// 全局引入基本css，包括库和自定义reset等样式
 	css: [
 		'element-ui/lib/theme-chalk/index.css',
 		'@/assets/css/base.scss'
 	],
 
-	// 插件配置：https://go.nuxtjs.dev/config-plugins
+	// 插件配置：即在server端和client端配置的公用方法，也可指定此某文件在某端运行
 	plugins: [
 		'@/plugins/element-ui',
-		{ src: '@/plugins/axios.js' },
-		{ src: '@/plugins/index_api.js' }
-		// '@/plugins/demo.js'
+		'@/plugins/axios.js',
+		'@/plugins/index_api.js'
 	],
 
-	// Auto import components: https://go.nuxtjs.dev/config-components
+	// 自动导入组件
 	components: true,
 
 	// Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
@@ -48,22 +48,20 @@ export default {
 		'@nuxtjs/eslint-module'
 	],
 
-	// Modules: https://go.nuxtjs.dev/config-modules
 	modules: [
-		// https://go.nuxtjs.dev/axios
+		// 用来同时处理server端和client端的cookie从而注入请求头（因为server端没办法使用sessionStorage等客户端机制），
 		'cookie-universal-nuxt',
 		'@nuxtjs/axios',
 		'@nuxtjs/proxy'
 	],
 
-	// Axios module configuration: https://go.nuxtjs.dev/config-axios
 	axios: {
-		// process.env.NODE_ENV production : development
+		// 根据package.json文件中的webpack mode
 		baseURL: ENV[process.env.MODE].BASE_URL,
 		proxy: false,
 		https: false,
 		retry: { retries: 3 },
-		timeout: 10000
+		timeout: 3000
 	},
 	// proxy: {
 	// 	'/api': { target: ENV[process.env.MODE].BASE_URL, pathRewrite: { '/api': '' } }
