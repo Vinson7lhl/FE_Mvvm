@@ -1,7 +1,8 @@
 <template>
-  <div class="hello">
-      这里是首页-{{msg}}
-  </div>
+	<div class="hello">
+		<div class='blockLine'>这里是首页-{{msg}}</div>
+		<div class='blockLine'><span class='attName'>provide => inject：</span>{{ multi_deep_data }}</div>
+	</div>
 </template>
 
 <script>
@@ -12,24 +13,22 @@ export default {
 		return {
 			name: '欧阳锋'
 		}
-	}
+	},
+	// 获取爷爷级别的组件传递过来的数据
+	inject: ['multi_deep_data']
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-h3 {
-    margin: 40px 0 0
+.blockLine{
+	line-height: 24px;
+	margin-bottom:4px;
+	background-color: bisque;
+	text-align: left;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
+.attName{
+	font-weight: bold;
+	font-style: italic;
 }
 </style>

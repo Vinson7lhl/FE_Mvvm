@@ -25,9 +25,11 @@ export default {
 	name: 'Home',
 	components: {
 		HelloWorld,
+		// 异步导入组件
 		OtherComp: defineAsyncComponent(() =>
 			import('@/components/other-page/OtherPage.vue'))
 	},
+	// 局部指令
 	directives: {
 		focus: {
 			// 指令的定义
@@ -38,13 +40,23 @@ export default {
 	},
 	data () {
 		return {
-			name: '欧阳锋'
+			name: '欧阳锋',
+			multi_deep_data: '徐霞客'
 		}
 	},
 	computed: {
 		new_name () {
 			return this.$fun_1(this.name)
 		}
+	},
+	// provide 注入多层次组件数据，如果依赖data则必须以函数形式体现
+	provide () {
+		return {
+			multi_deep_data: this.multi_deep_data
+		}
+	},
+	mounted () {
+		console.log('this.$data.name', this.$data.name)
 	}
 }
 </script>
