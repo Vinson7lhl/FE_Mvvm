@@ -12,7 +12,7 @@ export default ({ app }, inject) => {
 		return `仅server ---${str}`
 	}
 	// server 端和 client都可以用
-	inject('$fun_2', str => {
+	inject('fun_2', str => {
 		// 做点啥
 		return `server + client---${str}`
 	})

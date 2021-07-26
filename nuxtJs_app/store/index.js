@@ -15,8 +15,14 @@ export const state = () => {
 		state2: 3,
 		state3: 4,
 		login_name: '',
-		login_number: '13888877671',
-		G_map: ''
+		login_number: '',
+		G_map: '',
+		// 是否显示登陆浮窗
+		is_show_login_dialog: false,
+		// 登陆后的token
+		token: '',
+		// 用户名
+		user_name: ''
 	}
 }
 
@@ -30,6 +36,20 @@ export const mutations = {
 	minus: (state, data) => { state.count = state.count - data },
 	changeUserName: (state, data) => {
 		state.login_name = data
+	},
+	/**
+	 * @description 打开登陆弹窗
+	 * @param {object} state
+	 */
+	showLoginDialog: state => {
+		state.is_show_login_dialog = true
+	},
+	/**
+	 * @description 关闭登陆弹窗
+	 * @param {object} state
+	 */
+	hideLoginDialog: state => {
+		state.is_show_login_dialog = false
 	}
 }
 

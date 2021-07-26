@@ -36,7 +36,8 @@ export default {
 	plugins: [
 		'@/plugins/element-ui',
 		'@/plugins/axios.js',
-		'@/plugins/index_api.js'
+		'@/plugins/index_api.js',
+		{ src: '@/plugins/map.js', mode: 'client' }
 	],
 
 	// 自动导入组件
