@@ -52,9 +52,7 @@
       </div>
     </div>
     <!--地图面板-->
-    <div id='map_container' class='mapContainer'>
-      地图
-    </div>
+    <div id='map_container' class='mapContainer' />
   </div>
 </template>
 
@@ -201,7 +199,9 @@ export default {
 		}
 	}
 	.mapContainer{
+		position: relative;
 		flex:1;
+		height:800px;
 	}
 }
 </style>
