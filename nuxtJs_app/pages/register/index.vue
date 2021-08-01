@@ -1,13 +1,24 @@
+<!--注册page-->
 <template>
-	<div>注册</div>
+	<CompLogin />
 </template>
 
 <script>
+// 导入登录+注册组件
+import CompLogin from '@/components/login/CompLogin'
 export default {
+	components: { CompLogin },
+	layout: 'login',
+	data () {
+		return {
+		}
+	},
 	head () {
 		return {
-			title: '注册'
+			title: '请完成注册'
 		}
+	},
+	methods: {
 	}
 }
 </script>
