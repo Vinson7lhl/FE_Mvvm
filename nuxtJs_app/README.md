@@ -1,4 +1,4 @@
-# 箱箱商城
+# nuxtJs
 
 ## 启动步骤
 
@@ -9,19 +9,12 @@ $ npm i || cnpm i
 # 默认以localhost:3000为热启动
 $ npm run dev
 
-# 构建测试环境
-$ npm run test
-$ npm run start
-
 # 构建生产环境
 $ npm run build
 $ npm run start
 
-# 构建静态（暂时用不上）
+# 构建静态
 $ npm run generate
-
-# 单元测试（暂时用不上）
-$ npm run jest
 ```
 
 

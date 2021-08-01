@@ -29,7 +29,9 @@ export default {
 	// 全局引入基本css，包括库和自定义reset等样式
 	css: [
 		'element-ui/lib/theme-chalk/index.css',
-		'@/assets/css/base.scss'
+		{ src: '@/assets/css/base.scss', lang: 'scss' },
+		{ src: '@/assets/css/customizeElement.scss', lang: 'scss' },
+		'@/assets/iconfont/iconfont.css'
 	],
 
 	// 插件配置：即在server端和client端配置的公用方法，也可指定此某文件在某端运行
@@ -37,8 +39,13 @@ export default {
 		'@/plugins/element-ui',
 		'@/plugins/axios.js',
 		'@/plugins/index_api.js',
-		{ src: '@/plugins/map.js', mode: 'client' }
+		'@/plugins/user_api.js',
+		{ src: '@/plugins/map.js', mode: 'client' },
+		{ src: '@/assets/iconfont/iconfont.js', mode: 'client' }
 	],
+
+	// 中间件用来全局拦截路由，判断404、是否需要登陆、重定向等
+	router: { middleware: 'router' },
 
 	// 自动导入组件
 	components: true,
@@ -58,15 +65,16 @@ export default {
 
 	axios: {
 		// 根据package.json文件中的webpack mode
-		baseURL: ENV[process.env.MODE].BASE_URL,
-		proxy: false,
+		// baseURL: ENV[process.env.MODE].BASE_URL,
+		baseURL: '',
+		proxy: true,
 		https: false,
 		retry: { retries: 3 },
 		timeout: 3000
 	},
-	// proxy: {
-	// 	'/api': { target: ENV[process.env.MODE].BASE_URL, pathRewrite: { '/api': '' } }
-	// },
+	proxy: {
+		'/api': { target: ENV[process.env.MODE].BASE_URL, pathRewrite: { '/api': '' } }
+	},
 
 	// Build Configuration: https://go.nuxtjs.dev/config-build
 	build: {

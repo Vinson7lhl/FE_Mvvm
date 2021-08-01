@@ -1,17 +1,14 @@
 body {
-    background-color: #4e4e4e;
-}
-// reset-css设置
-html,body,section,article,h1,h2,h3,h4,h5,h6,div,dl,dt,dd,ul,ol,li,p,blockquote,pre,hr,figure,table,caption,th,td,form,fieldset,legend,input,button,textarea,menu{
-	margin:0;
-	padding:0;
-	box-sizing: border-box;
-}
-body {
-    background-color:#FFFFFF;
+    background-color: #F0F1F2;
     color:#666666;
     font-family:Helvetica,Arial,sans-serif;
     font-size:14px;
+}
+// reset-css设置
+html,body,section,article,h1,h2,h3,h4,h5,h6,div,dl,dt,dd,ul,ol,li,p,blockquote,pre,hr,figure,table,caption,th,td,form,fieldset,legend,input,button,textarea,menu{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
 }
 img{border:0;}
 table{border-collapse:collapse;border-spacing:0;}
@@ -57,12 +54,98 @@ a,a:hover{color:#333;}
     -webkit-line-clamp:2;
     -webkit-box-orient:vertical;
 }
+
 // 默认指示向
 .xx-pointer {
 	cursor:pointer;
 }
+
 // 默认圆角4px
 .xx-radius{
 	border-radius: 4px;
 }
 
+// 去掉高德左下角logo等图标
+.amap-logo,
+.amap-copyright { display:none !important; }
+
+// spacing
+
+// spacing-margin
+.xx-mt-1{
+    margin-top: 8px;
+}
+.xx-mt-2{
+    margin-top: 16px;
+}
+.xx-mt-3{
+    margin-top: 24px;
+}
+.xx-mt-4{
+    margin-top: 32px;
+}
+.xx-mb-0{
+    margin-bottom: 0 !important;
+}
+
+.xx-ml-1{
+    margin-left: 8px;
+}
+.xx-ml-2{
+    margin-left: 16px;
+}
+.xx-ml-3{
+    margin-left: 24px;
+}
+.xx-ml-4{
+    margin-left: 32px;
+}
+
+// spacing-padding
+.xx-pt-1{
+    padding-top: 8px;
+}
+.xx-pt-3{
+    padding-top: 24px;
+}
+
+.xx-pl-1{
+    padding-left: 8px;
+}
+.xx-pl-2{
+    padding-left: 16px;
+}
+
+.xx-pr-1{
+    padding-right: 8px;
+}
+
+.xx-d-flex{
+    display: flex;
+}
+.xx-flex-auto{
+    flex: 1 1 auto;
+}
+.xx-flex-col{
+    flex-direction: column;
+}
+.xx-flex-items-center{
+    align-items: center;
+}
+.xx-justify-center{
+    justify-content: center;
+}
+.xx-justify-between{
+    justify-content: space-between;
+}
+.xx-flex-wrap{
+    flex-wrap: wrap;
+}
+.xx-justify-end{
+    justify-content: flex-end;
+}
+
+// border
+.xx-b-t{
+    border-top: 1px solid #EEEEEE;
+}

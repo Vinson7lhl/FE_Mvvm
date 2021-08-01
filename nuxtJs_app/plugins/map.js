@@ -1,3 +1,6 @@
+/**
+ * @description 地图插件，默认绑定在全局$initMap上，需要传入一个id容器，一个回调函数——用来接收GMap对象
+ */
 import Vue from 'vue'
 import AMapLoader from '@amap/amap-jsapi-loader'
 

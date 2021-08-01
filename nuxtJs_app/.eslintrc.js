@@ -58,7 +58,11 @@ module.exports = {
 		'no-tabs': 0,
 		// 是否在非空文件中必须有个空行，不必
 		'eol-last': [0],
-		// 箭头函数只有一个参数时必须有括号，不必
-		'arrow-parens': ['error', 'as-needed']
+		// 箭头函数只有一个参数时不能有括号
+		'arrow-parens': ['error', 'as-needed'],
+		// 格式化vue文件中html模板（右键格式化即可），用1个tab，可参考：https://eslint.vuejs.org/rules/html-indent.html
+		'vue/html-indent': ['error', 'tab', {
+			baseIndent: 1
+		}]
 	}
 }

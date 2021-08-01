@@ -1,0 +1,147 @@
+// input
+.el-input__inner,.el-textarea__inner{
+    height: 48px;
+    background: #FFFFFF;
+    border-radius: 4px;
+    border-color:  #DDDDDD;
+    line-height: 48px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #666666;
+    &:hover,&:focus{
+        border-color:  #67A92A;
+    }
+
+    &::-webkit-input-placeholder,
+    &:-moz-placeholder,
+    &::-moz-placeholder,
+    &:-ms-input-placeholder{  /* WebKit, Blink, Edge */
+        font-size: 14px;
+        font-family: 'PingFangSC-Regular, PingFang SC';
+        font-weight: 400;
+        color: #B1B6BD;
+        line-height: 20px;
+    }
+}
+
+.el-form-item.is-error .el-input__inner, .el-form-item.is-error .el-input__inner:focus, .el-form-item.is-error .el-textarea__inner, .el-form-item.is-error .el-textarea__inner:focus, .el-message-box__input input.invalid, .el-message-box__input input.invalid:focus{
+    border-color: #f74141;
+}
+.el-input.is-disabled .el-input__inner {
+    border-radius: 4px;
+    background-color: #F3F3F3;
+    border-color: #DDDDDD;
+    color: #C0C4CC;
+    cursor: not-allowed;
+}
+
+// checkbox
+.el-checkbox__input.is-checked .el-checkbox__inner, .el-checkbox__input.is-indeterminate .el-checkbox__inner{
+    background-color: #67A92A;
+    border-color: #67A92A;
+}
+.el-checkbox__input.is-checked+.el-checkbox__label{
+    color: #67A92A;
+}
+.el-checkbox__inner:hover{
+    border-color: #67A92A;
+}
+.el-checkbox__input.is-focus .el-checkbox__inner{
+    border-color: #67A92A;
+}
+
+
+
+// button
+.el-button{
+    min-width: 104px;
+    height: 40px;
+}
+.el-button--primary{
+    background: #67A92A;
+    border-color: #67A92A;
+    &:hover,&:active,&:focus{
+        background: #87CD49;
+        border-color:#87CD49;
+    }
+}
+.el-button--default{
+    border-color: #DBDBDB;
+    color: #666666;
+    &:hover,&:active,&:focus{
+        background: #FFFFFF;
+        border-color:#67A92A;
+        color: #67A92A;
+    }
+    &.defaultPrimary{
+        border-color: #67A92A;
+        color: #67A92A;
+        &:hover,&:active,&:focus{
+            background: #67A92A;
+            border-color:#67A92A;
+            color: #fff;
+        }
+    }
+}
+.el-button--primary.is-disabled, .el-button--primary.is-disabled:active, .el-button--primary.is-disabled:focus, .el-button--primary.is-disabled:hover{
+    color: #FFF;
+    background-color: #CCCCCC;
+    border-color: #CCCCCC;
+}
+
+// dialog
+
+.el-dialog__header{
+    padding: 24px 24px 16px 24px;
+}
+.el-dialog__body{
+    padding: 16px 24px;
+}
+.el-dialog__footer{
+    padding: 16px 24px 24px 24px;
+}
+
+.el-form-item__label{
+    color: #666666;
+}
+.el-dialog__headerbtn:focus .el-dialog__close, 
+.el-dialog__headerbtn:hover .el-dialog__close{
+   color: #87CD49;
+}
+.el-dialog__title{
+    width: 108px;
+    height: 25px;
+    font-size: 18px;
+    font-family: PingFangSC-Regular, PingFang SC;
+    font-weight: 400;
+    color: #2C2C2C;
+    line-height: 25px;
+}
+
+.el-message{
+    padding: 10px 16px;
+    height: 40px;
+    border-radius: 4px;
+    min-width: 184px;
+}
+.el-message,.el-message--success{
+    background: #FFFFFF;
+    box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.06);
+    border-color: #fff;
+}
+.el-message__content{
+    font-size: 14px;
+    font-family: PingFangSC-Regular, PingFang SC;
+    font-weight: 400;
+    color: #666666;
+    line-height: 20px;
+}
+.el-message--success .el-message__content{
+    color: #666666;
+}
+
+.xx-message-notice{
+    left: unset;
+    right: 0px;
+    transform: unset;
+}

@@ -1,23 +1,23 @@
 <template>
-  <div class='defaultLayout'>
-    <!--登陆对话框-->
-    <el-dialog
-      title='提示'
-      :visible='is_show_login_dialog'
-      width='30%'
-      @close='closeDialog'
-    >
-      <span>登陆</span>
-      <span slot='footer' class='dialog-footer'>
-        <el-button @click='closeDialog'>取 消</el-button>
-        <el-button type='primary' @click='submitLogin'>确 定</el-button>
-      </span>
-    </el-dialog>
-    <!--这里是首页等页面的base-layout-->
-    <Header />
-    <nuxt />
-    <Footer />
-  </div>
+	<div class='defaultLayout'>
+		<!--登陆对话框-->
+		<el-dialog
+			title='提示'
+			:visible='is_show_login_dialog'
+			width='30%'
+			@close='closeDialog'
+		>
+			<span>登陆</span>
+			<span slot='footer' class='dialog-footer'>
+				<el-button @click='closeDialog'>取 消</el-button>
+				<el-button type='primary' @click='submitLogin'>确 定</el-button>
+			</span>
+		</el-dialog>
+		<!--这里是首页等页面的base-layout-->
+		<Header />
+		<nuxt />
+		<Footer />
+	</div>
 </template>
 
 <script>
