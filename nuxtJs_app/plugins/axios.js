@@ -7,19 +7,23 @@ export default ({ app, redirect, route }) => {
 		// console.log('/***** request拦截器 *****/')
 		// config.headers.organizationId = 'all'
 		// config.headers.platformId = '100'
+		// 有token则注入
 		if (app.$cookies.get('token')) {
 			config.headers.Authorization = app.$cookies.get('token')
 		}
 		// 在发送请求之前做些什么
 		return config
-	}, function (error) {
-		// 对请求错误做些什么
+	}, error => {
+		// 处理请求报错
+		console.log('---request Error---')
+		if (process.client) {
+			app.$message.error('请求错误！', error)
+		}
 		return Promise.reject(error)
 	})
 
 	// 添加响应拦截器
 	app.$axios.onResponse(response => {
-		console.log('response拦截器:', response)
 		if (response.status === 200) {
 			return response.data
 		} else if (response.status === 401) {
@@ -37,8 +41,11 @@ export default ({ app, redirect, route }) => {
 			return { data: '' }
 		}
 	}, error => {
-		// 对响应错误做点什么
+		// 处理响应错误
 		console.error('---response::500---')
+		if (process.client) {
+			app.$message.error('服务器错误500！')
+		}
 		return Promise.reject(error)
 	})
 	/**

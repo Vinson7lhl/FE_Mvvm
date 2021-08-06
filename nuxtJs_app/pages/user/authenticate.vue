@@ -12,7 +12,18 @@ export default {
 	},
 	data () {
 		return {
-			currentTabComponent: 'uncertified-page'
+			currentTabComponent: 'certified-page',
+			userInfo: null
+		}
+	},
+	computed: {
+
+	},
+	created () {
+		this.userInfo = this.$cookies.get('user_info')
+		const status = [1, 2]
+		if (!!this.userInfo && !status.includes(this.userInfo.auditStatus) && !!this.$route.query.action) {
+			this.currentTabComponent = 'uncertified-page'
 		}
 	},
 	mounted () {

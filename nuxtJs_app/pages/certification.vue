@@ -63,7 +63,6 @@ export default {
 	},
 	mounted () {
 		this.countdown()
-		console.log(sessionStorage.getItem('previousLocation'), '====>previousLocation')
 	},
 	methods: {
 		countdown () {
@@ -78,7 +77,9 @@ export default {
 			if (this.timeId) {
 				clearTimeout(this.timeId)
 			}
-			// window.location.href = '/user'
+			const previousLocation = sessionStorage.getItem('previousLocation')
+			sessionStorage.removeItem('previousLocation')
+			window.location.href = previousLocation
 		}
 	}
 }

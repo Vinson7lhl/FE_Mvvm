@@ -167,9 +167,9 @@ export default {
         height:350px;
 		font-size:11px;
 		color:#3E4046;
-		margin-top:10px;
 		overflow: hidden;
 		.footerFrame{
+			margin-top:10px;
 			width:1225px;
 			margin-left:auto;
 			margin-right:auto;

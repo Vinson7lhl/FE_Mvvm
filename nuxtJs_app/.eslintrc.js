@@ -50,10 +50,14 @@ module.exports = {
 		quotes: [2, 'single'],
 		// vue-html模板中字符串用单引号
 		'vue/html-quotes': [2, 'single'],
+		// 不强制要求props写类型
+		'vue/require-prop-types': 0,
 		// 强制用绝对等于 === 和 !== 来判断
 		eqeqeq: [2],
 		// 不强制驼峰命名规则
 		camelcase: 0,
+		// 不强制推荐使用常量
+		'prefer-const': 0,
 		// 允许使用tab
 		'no-tabs': 0,
 		// 是否在非空文件中必须有个空行，不必

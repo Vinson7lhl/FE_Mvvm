@@ -1,7 +1,7 @@
 /**
  * @description 首页的api,server、client都可用。调用方式：client:this.$API_INDEX();server:context.app.$API_INDEX()
  */
-export default ({ app }, inject) => {
+export default ({ app, env }, inject) => {
 	inject('API_USER', () => {
 		// 做点啥
 		return {
@@ -13,6 +13,12 @@ export default ({ app }, inject) => {
 			 */
 			get_geo: (data = {}) => {
 				return app.$_get('https://hxkj.vip/demo/mapData/pcas-code.json', data)
+			},
+			get_authentication_info: (data = {}) => {
+				return app.$_get(`${env.BASE_URL}/user/api/mall/front/user/userAudit`, data)
+			},
+			post_authentication: (data = {}) => {
+				return app.$_post(`${env.BASE_URL}/user/api/mall/front/user/userAudit`, data)
 			}
 		}
 	})

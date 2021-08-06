@@ -69,6 +69,19 @@ a,a:hover{color:#333;}
 .amap-logo,
 .amap-copyright { display:none !important; }
 
+// Vue transition动画
+.xx-enter-active, .xx-leave-active {
+	transition: all 0.3s;
+}
+.xx-enter, .xx-leave-to {
+	opacity: 0;
+	transform: translateX(-10px);
+}
+.xx-enter-to {
+  transform: translateX(0px);
+  opacity: 1;
+}
+
 // spacing
 
 // spacing-margin

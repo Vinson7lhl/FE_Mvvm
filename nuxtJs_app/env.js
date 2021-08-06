@@ -1,7 +1,7 @@
 export default {
 	dev: {
 		MODE: 'development',
-		BASE_URL: 'http://61.153.224.202:15109'
+		BASE_URL: 'http://192.168.18.29:15109'
 	},
 	test: {
 		MODE: 'production',

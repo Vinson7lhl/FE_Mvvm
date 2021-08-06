@@ -10,7 +10,9 @@
 			:on-progress='handleProgress'
 			:before-upload='handleBeforUpload'
 			:on-error='handleUploadError'
-			action='https://jsonplaceholder.typicode.com/posts/'
+			:action='actionUrl'
+			:headers='headersUpload'
+			:data='dataImgInfo'
 		>
 			<i class='el-icon-upload' />
 			<div class='el-upload__text'>
@@ -42,10 +44,10 @@
 				<el-avatar shape='square' :size='128' fit='fill' :src='imgSrc' />
 				<div v-show='showPreActions' :class='["actions",{"active":showPreActions}]'>
 					<span @click='dialogVisible = true'>
-						<i class='el-icon-zoom-in' />
+						<i class='iconfont icon-a-Group9' />
 					</span>
 					<span v-if='!!fileUrl' class='xx-ml-3' @click='handleRemoveFile'>
-						<i class='el-icon-delete' />
+						<i class='iconfont icon-a-Group15' />
 					</span>
 				</div>
 			</div>
@@ -62,7 +64,12 @@
 <script>
 export default {
 	name: 'UploadLicense',
-	props: ['value'],
+	props: {
+		value: {
+			type: String,
+			default: ''
+		}
+	},
 	data () {
 		return {
 			progressStyle: '',
@@ -73,7 +80,13 @@ export default {
 			defaultImgUrl: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
 			fileUrl: '',
 			file: '',
-			isProgress: false
+			isProgress: false,
+			actionUrl: '',
+			headersUpload: {},
+			dataImgInfo: {
+				fileSource: 'workorderServer',
+				fileClassify: 'photosOrVideos'
+			}
 		}
 	},
 	computed: {
@@ -84,11 +97,15 @@ export default {
 		}
 	},
 	mounted () {
+		console.log(this.value, 'this.value')
 		this.fileUrl = this.value
+		this.actionUrl = `${this.$nuxt.context.env.BASE_URL}/file/api/file/upload`
+		this.headersUpload = { Authorization: this.$cookies.get('token') }
 	},
 	methods: {
-		handleUploadSuccess (response, file) {
-			this.$emit('input', file)
+		handleUploadSuccess (res) {
+			this.$emit('input', res.data.filePath)
+			this.fileUrl = res.data.filePath
 			this.setErrorMsg('')
 			this.resetProgress()
 		},
@@ -118,10 +135,8 @@ export default {
 			}
 			return isLt10M && isIMG
 		},
-		handleUploadError (err, file, fileList) {
-			console.log(err, file, fileList)
-			// todo:删除。
-			this.$emit('input', file)
+		handleUploadError () {
+			// err, file, fileList
 			this.errorMsg = '上传失败,请稍后重试'
 			this.resetProgress()
 		},
@@ -223,6 +238,9 @@ export default {
         right: 4px;
         bottom: 8px;
     }
+}
+.iconfont{
+    font-size: 20px;
 }
 </style>
 <style lang='scss'>

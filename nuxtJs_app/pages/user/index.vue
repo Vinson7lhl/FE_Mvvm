@@ -36,7 +36,7 @@
 					<el-form-item label='企业名称' prop='companyName' class='xx-d-flex xx-flex-items-center'>
 						<div class='xx-d-flex xx-flex-items-center'>
 							<el-input v-model='editCompanyName' :disabled='!!userInfo.auditStatus' placeholder='请输入企业全称' />
-							<xx-authentication-notice :authentication='!!userInfo.auditStatus' />
+							<xx-authentication-notice :status='userInfo.auditStatus * 1' />
 						</div>
 					</el-form-item>
 				</el-form>
@@ -160,7 +160,7 @@ export default {
 		return {
 			isEditingUserName: false,
 			userInfo: {
-				auditStatus: 1,
+				auditStatus: -1,
 				companyName: '',
 				photoUrl: '',
 				userMobile: ''
@@ -218,6 +218,13 @@ export default {
 			return profile
 		}
 	},
+	created () {
+		this.$API_INDEX().post_user_info().then(res => {
+			this.userInfo = { ...res }
+			this.telInfo.userMobile = this.userInfo.userMobile
+			this.editCompanyName = this.userInfo.companyName
+		})
+	},
 	mounted () {
 		const breadcrumb = [
 			{ label: '首页', path: '/' },
@@ -225,13 +232,6 @@ export default {
 		]
 		// 设置当前页面的面包屑导航
 		this.$parent.setBreadcrumb(breadcrumb)
-
-		this.editUserName = this.userInfo.userName
-		sessionStorage.setItem('previousLocation', 'order')
-		this.userInfo = { ...this.$cookies.get('user_info') }
-		this.telInfo.userMobile = this.userInfo.userMobile
-		console.log(this.userInfo)
-		this.editCompanyName = this.userInfo.companyName
 	},
 	methods: {
 		uploaded (imgSrc) {

@@ -4,6 +4,8 @@ import ENV from './env'
 export default {
 	// 此处用来配置本地server端的ip/port。默认localhost,3000
 	server: {
+		// port: 3000,
+		// host: '192.168.18.84' // default: localhost
 	},
 	// 设置环境变量供server端和client共享的变量
 	env: {
@@ -65,16 +67,16 @@ export default {
 
 	axios: {
 		// 根据package.json文件中的webpack mode
-		// baseURL: ENV[process.env.MODE].BASE_URL,
-		baseURL: '',
-		proxy: true,
+		baseURL: ENV[process.env.MODE].BASE_URL,
+		// baseURL: '',
+		proxy: false,
 		https: false,
 		retry: { retries: 3 },
 		timeout: 3000
 	},
-	proxy: {
-		'/api': { target: ENV[process.env.MODE].BASE_URL, pathRewrite: { '/api': '' } }
-	},
+	// proxy: {
+	// 	'/api': { target: ENV[process.env.MODE].BASE_URL, pathRewrite: { '/api': '' } }
+	// },
 
 	// Build Configuration: https://go.nuxtjs.dev/config-build
 	build: {

@@ -14,19 +14,20 @@
 						<div class='infoLabel'>
 							工商营业执照
 						</div>
-						<img src='/imgs/icon/test.jpeg'>
+						<span v-if='!auditInfo.businessLicense'>---</span>
+						<img v-else :src='auditInfo.businessLicense'>
 					</div>
 					<div class='xx-d-flex xx-mt-2'>
 						<div class='infoLabel'>
 							企业全称
 						</div>
-						<span>上海箱箱智能科技有限公司</span>
+						<span>{{ !!auditInfo.companyName?auditInfo.companyName:'---' }}</span>
 					</div>
 					<div class='xx-d-flex xx-mt-2'>
 						<div class='infoLabel'>
 							统一社会信用代码
 						</div>
-						<span>4301110000888888</span>
+						<span>{{ !!auditInfo.creditCode?auditInfo.creditCode:'---' }}</span>
 					</div>
 				</div>
 			</div>
@@ -40,25 +41,25 @@
 						<div class='infoLabel'>
 							开户名称
 						</div>
-						<span>招商银行</span>
+						<span>{{ !!auditInfo.accountName?auditInfo.accountName:'---' }}</span>
 					</div>
 					<div class='xx-d-flex xx-mt-2'>
 						<div class='infoLabel'>
 							开户支行
 						</div>
-						<span>上海晨会支行</span>
+						<span>{{ !!auditInfo.bankName?auditInfo.bankName:'---' }}</span>
 					</div>
 					<div class='xx-d-flex xx-mt-2'>
 						<div class='infoLabel'>
 							对公银行账号
 						</div>
-						<span>---</span>
+						<span>{{ !!auditInfo.bankAccount?auditInfo.bankAccount:'---' }}</span>
 					</div>
 					<div class='xx-d-flex xx-mt-2'>
 						<div class='infoLabel'>
 							地址
 						</div>
-						<span>---</span>
+						<span> {{ !!auditInfo.detailAddress?auditInfo.detailAddress:'---' }} </span>
 					</div>
 				</div>
 			</div>
@@ -74,9 +75,51 @@ export default {
 	},
 	data () {
 		return {
-			certificationStatus: 2
+			certificationStatus: -1,
+			userInfo: null,
+			auditInfo: {
+				// 营业执照
+				businessLicense: '',
+				// 统一社会信用代码
+				creditCode: '',
+				// 企业全称
+				companyName: '',
+				// 开户名称
+				accountName: '',
+				// 开户银行
+				bankName: '',
+				// 对公银行账号
+				bankAccount: '',
+				// 详细地址
+				detailAddress: '',
+				// 认证状态
+				auditStatus: -1
+			}
+		}
+	},
+	created () {
+		this.userInfo = this.$cookies.get('user_info')
+		this.fetchCertificationInfo()
+	},
+	methods: {
+		fetchCertificationInfo () {
+			this.$API_USER().get_authentication_info({
+				userId: this.userInfo.userId,
+				userMobile: this.userInfo.userMobile
+			})
+				.then(res => {
+					if (res.data) {
+						// console.log(res)
+						this.auditInfo = { ...res.data }
+						this.certificationStatus = this.auditInfo.auditStatus * 1
+					}
+				})
+				.catch(() => {
+					// console.log(error, '===>error')
+				})
 		}
 	}
+
 }
 </script>
 <style lang="scss" scoped>

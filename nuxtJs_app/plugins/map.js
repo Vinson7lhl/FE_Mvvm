@@ -11,12 +11,12 @@ Vue.prototype.$initMap = (container, callback) => {
 		// 指定要加载的 JSAPI 的版本，缺省时默认为 1.4.15
 		version: '2.0',
 		// 需要使用的的插件列表，如比例尺'AMap.Scale'等
-		plugins: [],
+		plugins: ['AMap.DistrictSearch', 'AMap.InfoWindow'],
 		// 是否加载 AMapUI，缺省不加载
 		AMapUI: {
 			version: '1.1',
 			// 需要加载的 AMapUI ui插件
-			plugins: []
+			plugins: ['misc/PathSimplifier']
 		},
 		// 是否加载 Loca， 缺省不加载
 		Loca: {
@@ -24,7 +24,10 @@ Vue.prototype.$initMap = (container, callback) => {
 		}
 	}).then(AMap => {
 		const MAP_OBJ = new AMap.Map(container)
-		callback(MAP_OBJ)
+		// 设定MAP风格
+		MAP_OBJ.setMapStyle('amap://styles/whitesmoke')
+		const PATH_OBJ = window.AMapUI.PathSimplifier
+		callback(MAP_OBJ, PATH_OBJ, AMap)
 	}).catch(e => {
 		console.log(e)
 	})

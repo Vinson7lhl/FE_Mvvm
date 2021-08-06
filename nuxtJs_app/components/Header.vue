@@ -3,76 +3,61 @@
 		<!--菜单列表-->
 		<div class='menuList'>
 			<!--公司logo-->
-			<img class='headerLogo' src='@/assets/imgs/header_logo.png' alt='箱箱'>
-			<!--农副食品-->
-			<el-dropdown class='dropdownMenu' :show-timeout='50'>
-				<span class='dropdownName'>
-					<span class='mainMenuName'>农副食品</span><i class='el-icon-arrow-down el-icon--right' />
-				</span>
-				<el-dropdown-menu slot='dropdown'>
-					<el-dropdown-item class='perDetailMenu'>
-						黄金糕
-					</el-dropdown-item>
-					<el-dropdown-item class='perDetailMenu'>
-						狮子头
-					</el-dropdown-item>
-				</el-dropdown-menu>
-			</el-dropdown>
-			<!--酒水饮料-->
-			<el-dropdown trigger='click' class='dropdownMenu'>
-				<span class='dropdownName'>
-					酒水饮料<i class='el-icon-arrow-down el-icon--right' />
-				</span>
-				<el-dropdown-menu slot='dropdown'>
-					<el-dropdown-item class='perDetailMenu'>
-						黄金糕
-					</el-dropdown-item>
-					<el-dropdown-item>狮子头</el-dropdown-item>
-				</el-dropdown-menu>
-			</el-dropdown>
-			<!--调味制品-->
-			<el-dropdown trigger='click' class='dropdownMenu'>
-				<span class='dropdownName'>
-					调味制品<i class='el-icon-arrow-down el-icon--right' />
-				</span>
-				<el-dropdown-menu slot='dropdown'>
-					<el-dropdown-item class='perDetailMenu'>
-						黄金糕
-					</el-dropdown-item>
-					<el-dropdown-item>狮子头</el-dropdown-item>
-				</el-dropdown-menu>
-			</el-dropdown>
-			<!--化学制品-->
-			<el-dropdown trigger='click' class='dropdownMenu'>
-				<span class='dropdownName'>
-					化学制品<i class='el-icon-arrow-down el-icon--right' />
-				</span>
-				<el-dropdown-menu slot='dropdown'>
-					<el-dropdown-item class='perDetailMenu'>
-						黄金糕
-					</el-dropdown-item>
-					<el-dropdown-item>狮子头</el-dropdown-item>
-				</el-dropdown-menu>
-			</el-dropdown>
-			<!--油脂产品-->
-			<el-dropdown trigger='click' class='dropdownMenu'>
-				<span class='dropdownName'>
-					油脂产品<i class='el-icon-arrow-down el-icon--right' />
-				</span>
-				<el-dropdown-menu slot='dropdown'>
-					<el-dropdown-item class='perDetailMenu'>
-						黄金糕
-					</el-dropdown-item>
-					<el-dropdown-item>狮子头</el-dropdown-item>
-				</el-dropdown-menu>
-			</el-dropdown>
+			<img class='headerLogo xx-pointer' src='@/assets/imgs/header_logo.png' alt='箱箱' @click='routeToIndex'>
+			<el-menu
+				background-color='#161616'
+				text-color='#ffffff'
+				:default-active='activeIndex'
+				class='headerNav'
+				mode='horizontal'
+				@select='switchMenu'
+			>
+				<el-submenu v-for='item in header_menu' :key='item.industryCode' class='submenu' :index='item.parentCode + "-" + item.industryCode'>
+					<template slot='title'>
+						{{ item.industryName }}
+					</template>
+					<el-menu-item v-for='sub_menu in item.subList' :key='sub_menu.industryCode' :index='sub_menu.parentCode + "-" + sub_menu.industryCode'>
+						{{ sub_menu.industryName }}
+					</el-menu-item>
+				</el-submenu>
+			</el-menu>
 		</div>
 		<!--登陆状态-->
 		<div class='loginStatus'>
 			<div v-if='!is_login' class='noLoginModel' @click='openLoginDialog'>
 				登陆 / 注册
 			</div>
-			<img v-else class='userHeadImg' src='@/assets/imgs/user_default_head.png'>
+			<div v-if='is_login' class='userMenuArea' @mouseover='hover = true' @mouseleave='hover = false'>
+				<img class='userHeadImg' src='@/assets/imgs/user_default_head.png'>
+				<div v-show='hover' class='menuContainer'>
+					<div class='userMenu'>
+						<div class='perMenu'>
+							<nuxt-link to='/user'>
+								账号信息
+							</nuxt-link>
+						</div>
+						<div class='perMenu'>
+							<nuxt-link to='/user/order'>
+								订单中心
+							</nuxt-link>
+						</div>
+						<div class='perMenu'>
+							地址管理
+							<nuxt-link to='/user/address'>
+								地址管理
+							</nuxt-link>
+						</div>
+						<div class='perMenu'>
+							<nuxt-link to='/user/authenticate'>
+								企业认证
+							</nuxt-link>
+						</div>
+						<div class='perMenu logoutButton' @click='logout'>
+							退出
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </template>
@@ -83,8 +68,12 @@ export default {
 	props: [],
 	data () {
 		return {
-			login_name: '欧阳锋',
-			is_login: false
+			is_login: false,
+			activeIndex: '',
+			// 顶部菜单产品类目数据
+			header_menu: [],
+			// 用户登录后hover头像显示菜单与否
+			hover: false
 		}
 	},
 	beforeCreate () {
@@ -97,9 +86,14 @@ export default {
 		console.log('header:beforeMount')
 	},
 	mounted () {
-		console.log('header:mounted')
-		this.login_name = '白七爷'
 		this.is_login = this.$cookies.get('token')
+		// 获取菜单列表
+		this.$API_INDEX().get_header_menu().then(data => {
+			console.log('header:', data)
+			if (data) {
+				this.header_menu = data[0].subList
+			}
+		})
 	},
 	methods: {
 		/**
@@ -107,16 +101,38 @@ export default {
 		 */
 		openLoginDialog () {
 			this.$store.commit('showLoginDialog')
+		},
+		/**
+		 * @description 切换产品类目
+		 */
+		switchMenu (index) {
+			// 激活当前菜单
+			this.activeIndex = index
+			// 修改路由
+			this.$router.push({ path: '/', query: { product_type: index } })
+		},
+		/**
+		 * @description 用户登出
+		 */
+		logout () {
+			this.$cookies.remove('token')
+			this.$cookies.remove('user_info')
+			// 如果在首页
+			if (this.$route.path === '/') {
+				location.reload()
+			} else {
+				this.$router.push('/')
+			}
+		},
+		/**
+		 * @description 跳转到首页
+		 */
+		routeToIndex () {
+			this.$router.push('/')
 		}
 	}
 }
 </script>
-<style lang="scss">
-	// .perDetailMenu:focus, .perDetailMenu:not(.is-disabled):hover {
-	// 	background-color: #000000;
-	// 	color:#ffffff;
-	// }
-</style>
 <style lang="scss" scoped>
     .headerModel {
 		padding-left:80px;
@@ -138,21 +154,10 @@ export default {
 			width:110px;
 			height:30px;
 		}
-		.dropdownMenu{
+		.headerNav{
 			margin-left:72px;
-			cursor: pointer;
 			font-size: 16px;
-		}
-		.dropdownName{
-			color:#ffffff;
-			.mainMenuName{
-				padding-bottom:9px;
-				transition:all 0.3s;
-				border-bottom: 2px solid rgba(103,169,42,0);
-			}
-			.mainMenuName:hover{
-				border-bottom: 2px solid rgba(103,169,42,1);
-			}
+			border:0;
 		}
 		.loginStatus{
 			color:#ffffff;
@@ -166,10 +171,48 @@ export default {
 				border-radius: 4px;
 			}
 		}
+		.userMenuArea{
+			position: relative;
+			width:120px;
+			height:60px;
+			line-height:60px;
+			text-align: center;
+		}
+		.menuContainer{
+			position: absolute;
+			z-index: 1;
+			top:56px;
+			right:-40px;
+			width:184px;
+			height:250px;
+		}
 		.userHeadImg{
+			vertical-align: middle;
 			width:28px;
 			height:28px;
+			text-align: center;
 			border-radius: 50%;
+		}
+		.userMenu{
+			width:184px;
+			height:232px;
+			border-radius: 4px;
+			background-color: #ffffff;
+			color:#666666;
+			padding-top:16px;
+			margin-top:10px;
+			.perMenu{
+				line-height: 40px;
+				transition:all 0.3s;
+				padding-left:16px;
+				text-align: left;
+			}
+			.perMenu:hover{
+				background-color: #f5f5f5;
+			}
+			.logoutButton{
+				border-top:1px solid #EDEDED;
+			}
 		}
     }
 </style>

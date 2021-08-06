@@ -3,192 +3,299 @@
 		<!--产品列表面板，和地图-->
 		<div class='productModel'>
 			<div class='productListBoard'>
-				<!--顶部headerTab切换-->
-				<div class='baseBoardTop boardTypeTab xx-f-16'>
-					<div class='perTab xx-pointer' :class='{activedTab: current_tab_type === "allSolutionTab"}' @click='triggerTab("allSolutionTab")'>
-						解决方案
-					<!-- <span class='iconfont iconwujiaoxing' /> -->
-					</div>
-					<div class='perTab xx-pointer' :class='{activedTab: current_tab_type === "allProductTab"}' @click='triggerTab("allProductTab")'>
-						全部产品
-					</div>
-				</div>
-				<!--解决方案列表-->
-				<div v-show='current_tab_type === "allSolutionTab"' class='normalList solutionList'>
-					<div class='perSolution xx-radius'>
-						<!--顶部图片-->
-						<div class='solutionPic'>
-							pic
-						</div>
-						<!--简略描述-->
-						<div class='sketch'>
-							<div class='part1'>
-								<div class='baseName solutionName xx-elli'>
-									农副食品解决方案农副食品解决方案农副食品解决方案农副食品解决方案
-								</div>
-								<div class='loginVisibleButton xx-f-12 xx-pointer'>
-									￥登陆可见
-								</div>
-								<div class='visiblePrice'>
-									<span class='redPrice productPrice xx-f-20'>￥111</span>
-								</div>
+				<!--产品、方案、配件列表-->
+				<transition name='xx'>
+					<div v-show='is_show_all_list' class='listBoard'>
+						<!--顶部headerTab切换-->
+						<div class='baseBoardTop boardTypeTab xx-f-16'>
+							<div class='perTab xx-pointer' :class='{activedTab: current_tab_type === "allSolutionTab"}' @click='triggerTab("allSolutionTab")'>
+								解决方案
+								<!-- <span class='iconfont iconwujiaoxing' /> -->
 							</div>
-							<div class='baseDetailDes xx-elli'>
-								蛋液、淀粉、蔬菜加工品等包装解决方案
+							<div class='perTab xx-pointer' :class='{activedTab: current_tab_type === "allProductTab"}' @click='triggerTab("allProductTab")'>
+								全部产品
 							</div>
 						</div>
-					</div>
-				</div>
+						<!--方案列表-->
+						<div v-show='current_tab_type === "allSolutionTab"' class='normalList solutionList'>
+							<div class='perSolution xx-radius' @click='openSolutionDetail'>
+								<!--顶部图片-->
+								<div class='solutionPic'>
+									<img src=''>
+								</div>
+								<!--简略描述-->
+								<div class='sketch'>
+									<div class='baseName solutionName xx-elli'>
+										农副食品解决方案农副食品解决方案农副食品解决方案农副食品解决方案
+									</div>
 
-				<!--产品列表-->
-				<div v-show='current_tab_type === "allProductTab"' class='normalList allProductList'>
-					<div class='perProGroup'>
-						<p class='groupName xx-f-18'>
-							组1
-						</p>
-						<div class='perProduct xx-radius xx-mt-1 xx-pointer'>
-							<div class='productImg'>
-								产品图
+									<div class='baseDetailDes xx-elli'>
+										蛋液、淀粉、蔬菜加工品等包装解决方案
+									</div>
+									<div class='visiblePrice soVisiblePrice'>
+										<span class='productPrice xx-f-20'>￥111</span>
+									</div>
+								</div>
+							</div>
+							<div class='perSolution xx-radius' @click='openSolutionDetail'>
+								<!--顶部图片-->
+								<div class='solutionPic'>
+									<img src=''>
+								</div>
+								<!--简略描述-->
+								<div class='sketch'>
+									<div class='part1'>
+										<div class='baseName solutionName xx-elli'>
+											农副食品解决方案农副食品解决方案农副食品解决方案农副食品解决方案
+										</div>
+									</div>
+									<div class='baseDetailDes xx-elli'>
+										蛋液、淀粉、蔬菜加工品等包装解决方案
+									</div>
+									<div class='loginVisibleButton soLoginVisibleButton xx-f-12 xx-pointer' @click.stop='triggerLogin'>
+										￥登陆可见
+									</div>
+								</div>
+							</div>
+						<!-- <div v-for='per_scheme in scheme_list' :key='per_scheme.id' class='perSolution xx-radius'>
+							<div class='solutionPic'>
+								<img :src='per_scheme.fileList[0].fileUrl'>
 							</div>
 							<div class='sketch'>
-								<p class='baseName productName xx-elli'>
-									产品名 <span class='sTypeName xx-f-14'>折叠吨箱IBC</span>
-								</p>
-								<p class='baseDetailDes baseProDetailDes xx-elli'>
-									内容积1024L，可折叠，支持九字内容积1024L，可折叠，支持九字
-								</p>
-								<div class='loginVisibleButton xx-f-12 xx-pointer'>
-									￥登陆可见
+								<div class='part1'>
+									<div class='baseName solutionName xx-elli'>
+										{{ per_scheme.name }}
+									</div>
+									<div class='loginVisibleButton xx-f-12 xx-pointer'>
+										￥登陆可见
+									</div>
+									<div class='visiblePrice'>
+										<span class='redPrice productPrice xx-f-20'>￥{{ per_scheme.price }}</span>
+									</div>
 								</div>
-								<div class='visiblePrice'>
-									<span class='redPrice productPrice xx-f-20'>￥111</span> /套/趟（<span>40</span>天）
+								<div class='baseDetailDes xx-elli'>
+									{{ per_scheme.introduce }}
 								</div>
 							</div>
+						</div> -->
 						</div>
-						<p class='groupName xx-f-18'>
-							组2
-						</p>
-						<div class='perProduct xx-radius xx-mt-1 xx-pointer'>
-							<div class='productImg'>
-								产品图
+						<!--产品列表-->
+						<div v-show='current_tab_type === "allProductTab"' class='normalList allProductList'>
+							<div class='productGroup'>
+								<!--全部产品-->
+								<div class='perProduct xx-radius xx-mt-1 xx-pointer' @click='openProductDetail'>
+									<img src='' class='productImg'>
+									<div class='sketch'>
+										<p class='baseName productName xx-elli'>
+											产品名1 <span class='sTypeName xx-f-14'>折叠吨箱IBC</span>
+										</p>
+										<div class='visiblePrice xx-elli'>
+											<span class='productPrice xx-f-20'>￥111</span> /套/趟（40天）
+										</div>
+									</div>
+								</div>
+								<div class='perProduct xx-radius xx-mt-1 xx-pointer' @click='openProductDetail'>
+									<img src='' class='productImg'>
+									<div class='sketch'>
+										<p class='baseName productName xx-elli'>
+											产品名2 <span class='sTypeName xx-f-14'>折叠吨箱IBC</span>
+										</p>
+										<div class='loginVisibleButton productLoginVisibleButton xx-f-12 xx-pointer'>
+											￥登陆可见
+										</div>
+									</div>
+								</div>
+								<!-- <div v-for='per_product in product_list.dataList' :key='per_product.id' class='perProduct xx-radius xx-mt-1 xx-pointer' @click='openProductDetail(per_product.id)'>
+									<img :src='per_product.fileUrl' class='productImg'>
+									<div class='sketch'>
+										<p class='baseName productName xx-elli'>
+											{{ per_product.productName }} <span class='sTypeName xx-f-14'>{{ per_product.seriesName }}</span>
+										</p>
+										<div class='loginVisibleButton xx-f-12 xx-pointer'>
+											￥登陆可见
+										</div>
+										<div class='visiblePrice xx-elli'>
+											<span class='productPrice xx-f-20'>￥{{ per_product.price }}</span> {{ per_product.priceUnit }}
+										</div>
+									</div>
+								</div> -->
 							</div>
-							<div class='sketch'>
-								<p class='baseName productName xx-elli'>
-									产品名 <span class='sTypeName xx-f-14'>折叠吨箱IBC</span>
-								</p>
-								<p class='baseDetailDes baseProDetailDes xx-elli'>
-									内容积1024L，可折叠，支持九字内容积1024L，可折叠，支持九字
-								</p>
-								<div class='loginVisibleButton xx-f-12 xx-pointer'>
-									￥登陆可见
+							<!--全部配件-->
+							<p class='groupName xx-f-16'>
+								产品配件
+							</p>
+							<div class='perFitting xx-radius xx-mt-1 xx-pointer' @click='openProductDetail'>
+								<img src='' class='fittingImg'>
+								<div class='fittingSketch'>
+									<p class='baseName productName xx-elli'>
+										配件1
+									</p>
+									<div class='visiblePrice'>
+										<span class='productPrice xx-f-20'>￥111</span> /套/趟（<span>40</span>天）
+									</div>
 								</div>
 							</div>
+							<div class='perFitting xx-radius xx-mt-1 xx-pointer' @click='openProductDetail'>
+								<img src='' class='fittingImg'>
+								<div class='fittingSketch'>
+									<p class='baseName productName xx-elli'>
+										配件2
+									</p>
+									<div class='loginVisibleButton fittingLoginVisibleButton xx-f-12 xx-pointer' @click.stop='triggerLogin'>
+										￥登陆可见
+									</div>
+								</div>
+							</div>
+							<!-- <div v-for='per_fitting in fitting_list' :key='per_fitting.id' class='perProduct xx-radius xx-mt-1 xx-pointer'>
+								<img :src='per_product.fileUrl' class='productImg'>
+								<div class='sketch'>
+									<p class='baseName productName xx-elli'>
+										{{ per_fitting.partsName }} <span class='sTypeName xx-f-14'>{{ per_fitting.categoryName }}</span>
+									</p>
+									<p class='baseDetailDes baseProDetailDes xx-elli'>
+										内容积1024L，可折叠，支持九字内容积1024L，可折叠，支持九字
+									</p>
+									<div class='loginVisibleButton xx-f-12 xx-pointer'>
+										￥登陆可见
+									</div>
+									<div class='visiblePrice'>
+										<span class='redPrice productPrice xx-f-20'>￥{{ per_fitting.price }}</span> {{ per_fitting.specifications }}
+									</div>
+								</div>
+							</div> -->
 						</div>
 					</div>
-				</div>
+				</transition>
 
 				<!--方案详情-->
-				<div class='baseDetailBoard solutionDetailBoard'>
-					<div class='banner'>
-						方案详情页
-						<svg class='icon closeDetailBoard' title='关闭详情' aria-hidden='true'>
-							<use xlink:href='#icon-a-Group26' />
-						</svg>
-					</div>
-					<div class='solutionDetails'>
-						<div class='baseName solutionWholeName xx-elli'>
-							农副食品解决方案农副食品解决方案农副食品解决方案农副食品解决方案
+				<transition name='xx'>
+					<div v-show='is_show_solu_detail' class='baseDetailBoard solutionDetailBoard'>
+						<div class='banner'>
+							<el-carousel trigger='click' height='232px'>
+								<el-carousel-item>
+									<img class='bannerPic' src='@/assets/imgs/login_banner_01.png'>
+								</el-carousel-item>
+								<el-carousel-item>
+									<img class='bannerPic' src='@/assets/imgs/login_banner_02.png'>
+								</el-carousel-item>
+								<el-carousel-item>
+									<img class='bannerPic' src='@/assets/imgs/login_banner_03.png'>
+								</el-carousel-item>
+							</el-carousel>
+							<svg class='icon closeDetailBoard' title='关闭详情' aria-hidden='true' @click='closeSolutionDetail'>
+								<use xlink:href='#icon-a-Group26' />
+							</svg>
 						</div>
-						<div class='baseDetailWholeDes xx-elli'>
-							蛋液、淀粉、蔬菜加工品等包装解决方案蛋液、淀粉、蔬菜加工品等包装解决方案蛋液、淀粉、蔬菜加工品等包装解决方案蛋液、淀粉、蔬菜加工品等包装解决方案
-						</div>
-						<!--登录后可见的价格-->
-						<div class='detailBoardPrice xx-mt-1'>
-							<div class='priceLeft'>
-								<span class='redPrice productPrice xx-f-20'>￥111</span>/套/趟（40天）
-							</div> <span>*超一口价区域运费另算</span>
-						</div>
-						<!--方案详细-->
-						<div class='schemeTitle xx-f-16 xx-mt-3'>
-							解决方案组成
-						</div>
-						<div class='schemeBox xx-mt-2 xx-d-flex'>
-							<div class='schemeBoxPic xx-radius' />
-							<div class='schemeBoxDes xx-ml-2'>
-								<div class='schemeBoxTitle xx-f-16'>
-									吨立方
-								</div>
-								<div class='schemeBoxSubTitle xx-mt-1'>
-									折叠吨箱IBC
+						<div class='solutionDetails'>
+							<div class='baseName solutionWholeName xx-elli'>
+								农副食品解决方案农副食品解决方案农副食品解决方案农副食品解决方案
+							</div>
+							<div class='baseDetailWholeDes xx-elli'>
+								蛋液、淀粉、蔬菜加工品等包装解决方案蛋液、淀粉、蔬菜加工品等包装解决方案蛋液、淀粉、蔬菜加工品等包装解决方案蛋液、淀粉、蔬菜加工品等包装解决方案
+							</div>
+							<!--登录后可见的价格-->
+							<div class='detailBoardPrice xx-mt-1'>
+								<div class='priceLeft'>
+									<span class='redPrice productPrice xx-f-20'>￥111</span>/套/趟（40天）
+								</div> <span>*超一口价区域运费另算</span>
+							</div>
+							<!--方案详细-->
+							<div class='schemeTitle xx-f-16 xx-mt-3'>
+								解决方案组成
+							</div>
+							<div class='schemeBox xx-mt-2 xx-d-flex'>
+								<div class='schemeBoxPic xx-radius' />
+								<div class='schemeBoxDes xx-ml-2'>
+									<div class='schemeBoxTitle xx-f-16'>
+										吨立方
+									</div>
+									<div class='schemeBoxSubTitle xx-mt-1'>
+										折叠吨箱IBC
+									</div>
 								</div>
 							</div>
-						</div>
-						<!--方案组成-->
-						<!--三角-->
-						<i class='triagle el-icon-caret-top' />
-						<div class='schemeBoxDetail xx-radius'>
-							<el-select v-model='value' size='small' class='sTypeSelect'>
-								<el-option
-									v-for='item in options'
-									:key='item.value'
-									:label='item.label'
-									:value='item.value'
-								/>
-							</el-select>
-							<!--方案内产品列表-->
-							<div class='schemeBoxList xx-d-flex'>
-								<div class='perBoxDetail xx-mt-2 xx-d-flex'>
-									<div class='schemeSBoxPic xx-radius' />
-									<div class='schemeBoxDes xx-ml-2'>
-										<div class='schemeBoxTitle'>
-											吨方
-										</div>
-										<div class='schemeSBoxSubTitle'>
-											折叠吨箱IBC
+							<!--方案组成-->
+							<!--三角-->
+							<i class='triagle el-icon-caret-top' />
+							<div class='schemeBoxDetail xx-radius'>
+								<el-select v-model='value' size='small' class='sTypeSelect'>
+									<el-option
+										v-for='item in options'
+										:key='item.value'
+										:label='item.label'
+										:value='item.value'
+									/>
+								</el-select>
+								<!--方案内产品列表-->
+								<div class='schemeBoxList'>
+									<div class='perBoxDetail xx-mt-2 xx-d-flex'>
+										<div class='schemeSBoxPic xx-radius' />
+										<div class='schemeBoxDes xx-ml-2'>
+											<div class='schemeBoxTitle'>
+												吨方
+											</div>
+											<div class='schemeSBoxSubTitle'>
+												折叠吨箱IBC
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-					<!--提交按钮组-->
-					<div class='orderButtons'>
-						<div class='baseButton freeTrialButton xx-radius'>
-							免费试用
-							<div class='top100Tips xx-f-10'>
-								限前100名
+						<!--提交按钮组-->
+						<div class='orderButtons'>
+							<div class='baseButton freeTrialButton xx-radius' @click='openLeaveMessage'>
+								免费试用
+								<div class='top100Tips xx-f-10'>
+									限前100名
+								</div>
+							</div>
+							<div class='baseButton orderButton xx-ml-2 xx-radius' @click='openOrdering'>
+								立即下单
 							</div>
 						</div>
-						<div class='baseButton orderButton xx-ml-2 xx-radius'>
-							立即下单
-						</div>
 					</div>
-				</div>
+				</transition>
 
-				<!--产品详情-->
-				<div class='baseDetailBoard productDetailBoard'>
-					<div class='banner'>
-						banner
-					</div>
-					<div class='solutionDetails'>
-						<div class='baseName productName xx-elli'>
-							产品名 <span class='sTypeName xx-f-14'>折叠吨箱IBC</span>
+				<!--产品详情 || 配件详情-->
+				<transition name='xx'>
+					<div v-show='is_show_pro_detail' class='baseDetailBoard productDetailBoard'>
+						<div class='banner'>
+							<el-carousel trigger='click' height='232px'>
+								<el-carousel-item>
+									<img class='bannerPic' src='@/assets/imgs/login_banner_01.png'>
+								</el-carousel-item>
+								<el-carousel-item>
+									<img class='bannerPic' src='@/assets/imgs/login_banner_02.png'>
+								</el-carousel-item>
+								<el-carousel-item>
+									<img class='bannerPic' src='@/assets/imgs/login_banner_03.png'>
+								</el-carousel-item>
+							</el-carousel>
+							<svg class='icon closeDetailBoard' title='关闭详情' aria-hidden='true' @click='closeProductDetail'>
+								<use xlink:href='#icon-a-Group26' />
+							</svg>
 						</div>
-						<p class='baseDetailDes proDetailDes xx-elli'>
-							内容积1024L，可折叠，支持九字内容积1024L，可折叠，支持九字
-						</p>
-						<!--登录后可见的价格-->
-						<div class='detailBoardPrice xx-mt-1'>
-							<div class='priceLeft'>
-								<span class='redPrice productPrice xx-f-20'>￥111</span>/套/趟（40天）
-							</div> <span class='xx-f-12'>*超一口价区域运费另算</span>
-						</div>
-						<!--产品参数-->
-						<div class='proParams'>
-							<p class='paramsTitle xx-f-16 xx-mt-3'>
-								产品参数 <i class='el-icon-warning' />
+						<div class='productDetails'>
+							<div class='baseName productName xx-elli'>
+								产品名 <span class='sTypeName xx-f-14'>折叠吨箱IBC</span>
+							</div>
+							<p class='proDetailDes xx-elli'>
+								内容积1024L，可折叠，支持九字内容积1024L，可折叠，支持九字
 							</p>
-							<div class='perParam'>
+							<!--登录后可见的价格-->
+							<div class='detailBoardPrice xx-mt-1'>
+								<div class='priceLeft'>
+									<span class='productPrice xx-f-20'>￥111</span>/套/趟（40天）
+								</div> <span class='xx-f-12'>*超一口价区域运费另算</span>
+							</div>
+							<!--产品参数-->
+							<div class='proParams'>
+								<p class='paramsTitle xx-f-16 xx-mt-3'>
+									产品参数 <i class='el-icon-warning' />
+								</p>
+								<img src='' alt=''>
+							<!-- <div class='perParam'>
 								<span class='proKeyName'>外尺寸（mm）</span>
 								<span class='proKeyVal'>122*222*333</span>
 							</div>
@@ -207,414 +314,443 @@
 							<div class='perParam'>
 								<span class='proKeyName'>外尺寸（mm）</span>
 								<span class='proKeyVal'>122*222*333</span>
+							</div> -->
+							</div>
+						</div>
+						<!--提交按钮组-->
+						<div class='orderButtons'>
+							<div class='baseButton freeTrialButton xx-radius' @click='openLeaveMessage'>
+								免费试用
+								<div class='top100Tips xx-f-10'>
+									限前100名
+								</div>
+							</div>
+							<div class='baseButton orderButton xx-ml-2 xx-radius' @click='openOrdering'>
+								立即下单
 							</div>
 						</div>
 					</div>
-					<!--提交按钮组-->
-					<div class='orderButtons'>
-						<div class='baseButton freeTrialButton xx-radius'>
-							免费试用
-							<div class='top100Tips xx-f-10'>
-								限前100名
-							</div>
-						</div>
-						<div class='baseButton orderButton xx-ml-2 xx-radius'>
-							立即下单
-						</div>
-					</div>
-				</div>
+				</transition>
 
-				<!--方案确认订单页-->
-				<div class='baseDetailBoard confirmOrderPage'>
-					<div class='baseBoardTop routeBackTop xx-f-16'>
-						<div class='baseBoardTopContent'>
-							<i class='el-icon-back backIcon' />订单确认
-						</div>
-					</div>
-					<!--增加地址-->
-					<div class='addressTabsmodel'>
-						<div class='tabsGroup'>
-							<el-tabs v-model='editableTabsValue' type='card' closable @tab-remove='removeTab'>
-								<el-tab-pane
-									v-for='(item) in editableTabs'
-									:key='item.name'
-									:label='item.title'
-									:name='item.name'
-								/>
-							</el-tabs>
-						</div>
-						<i class='addNewAddress el-icon-circle-plus-outline' @click='addTab' />
-					</div>
-					<div class='orderContent'>
-						<!--送收货地址-->
-						<section class='deliverAddr xx-mt-2'>
-							<p class='desStr xx-f-16'>
-								送收箱路线
-							</p>
-							<div class='addrInput startAddr xx-mt-2 xx-radius'>
-								<span class='signText send xx-radius'>发</span>
-								<el-input v-model='input' class='inputModel' size='small' placeholder='从哪里发货（上游）' />
-								<!--已存在的地址-->
-								<el-dropdown class='existAddrList xx-f-12'>
-									<span class='el-dropdown-link'>
-										<i class='el-icon-location-information' />地址簿
-									</span>
-									<el-dropdown-menu slot='dropdown'>
-										<el-dropdown-item>黄金糕</el-dropdown-item>
-										<el-dropdown-item>狮子头</el-dropdown-item>
-									</el-dropdown-menu>
-								</el-dropdown>
-							</div>
-							<div class='addrInput endAddr xx-mt-1 xx-radius'>
-								<span class='signText receive xx-radius'>收</span>
-								<el-input v-model='input' class='inputModel' size='small' placeholder='从哪里收货（下游）' />
-								<!--已存在的地址-->
-								<el-dropdown class='existAddrList xx-f-12'>
-									<span class='el-dropdown-link'>
-										<i class='el-icon-location-information' />地址簿
-									</span>
-									<el-dropdown-menu slot='dropdown'>
-										<el-dropdown-item>黄金糕</el-dropdown-item>
-										<el-dropdown-item>狮子头</el-dropdown-item>
-									</el-dropdown-menu>
-								</el-dropdown>
-							</div>
-						</section>
-						<!--下单的商品信息-->
-						<div class='schemeTitle xx-f-16 xx-mt-3'>
-							商品信息
-						</div>
-						<div class='schemeBox xx-mt-2 xx-d-flex'>
-							<div class='schemeBoxPic xx-radius' />
-							<div class='orderSchemeBoxDes xx-ml-2'>
-								<div class='schemeBoxTitle xx-f-16'>
-									吨立方
-								</div>
-								<div class='orderSolutionInfo xx-mt-1'>
-									<span class='orderSolutionPerPrice xx-f-16'>￥444</span> /套/趟（40天）
-								</div>
-							</div>
-							<div class=''>
-								<el-input-number
-									v-model='num'
-									class='countNum xx-radius'
-									size='small'
-									controls-position='right'
-									:min='50'
-									@change='handleChange'
-								/>
-								<div class='countNumTips xx-f-12'>
-									50套起订
-								</div>
+				<!--下订单页-->
+				<transition name='xx'>
+					<div v-show='is_show_order' class='baseDetailBoard confirmOrderPage'>
+						<div class='baseBoardTop routeBackTop xx-f-16'>
+							<div class='baseBoardTopContent'>
+								<i class='el-icon-back backIcon' />订单确认
 							</div>
 						</div>
-						<!--方案组成-->
-						<!--三角-->
-						<i class='triagle el-icon-caret-top' />
-						<div class='schemeBoxDetail orderSchemeBoxDetail xx-radius'>
-							<!--方案内产品列表-->
-							<div class='perBoxDetailContainer'>
-								<div class='perBoxDetail xx-d-flex'>
-									<!--产品图-->
-									<div class='schemeMBoxPic xx-radius' />
-									<!--描述-->
-									<div class='orderSolutionDes xx-ml-2'>
-										<div class='schemeBoxTitle'>
-											吨方
+						<!--地址tabs-->
+						<div class='addressTabsmodel'>
+							<div class='tabsGroup'>
+								<el-tabs v-model='editableTabsValue' type='card' closable @tab-remove='removeTab'>
+									<el-tab-pane
+										v-for='(item) in editableTabs'
+										:key='item.name'
+										:label='item.title'
+										:name='item.name'
+									/>
+								</el-tabs>
+							</div>
+							<i class='addNewAddress el-icon-circle-plus-outline' @click='addTab' />
+						</div>
+						<div class='orderingContent'>
+							<!--送收货地址-->
+							<section class='deliverAddr xx-mt-2'>
+								<p class='desStr xx-f-16'>
+									送收箱路线
+								</p>
+								<div class='inputAddrContainer xx-mt-2'>
+									<div class='signText send xx-radius'>
+										送
+									</div>
+									<div class='addrInputs'>
+										<el-input v-model='input' class='addrInput' size='small' placeholder='从哪里发货（上游）' />
+										<!--已存在的地址-->
+										<div class='addressButton xx-f-12 xx-pointer'>
+											<svg class='icon locationIcon' aria-hidden='true'>
+												<use xlink:href='#icon-a-Group12' />
+											</svg>
+											地址簿
 										</div>
-										<div class='schemeSBoxSubTitle'>
-											折叠吨箱IBC
+										<el-input v-model='input' class='addrContactsInput' size='small' placeholder='请输入联系人' />
+										<el-input v-model='input' class='addrPhoneInput' size='small' placeholder='请输入电话' />
+										<div class='outlineTips xx-f-12'>
+											*该地址已超出一口价区域
 										</div>
 									</div>
 								</div>
-								<!--数量-->
-								<div class='perBoxDetailNum'>
-									X 3件
-								</div>
-							</div>
-							<div class='perBoxDetailContainer'>
-								<div class='perBoxDetail xx-d-flex'>
-									<!--产品图-->
-									<div class='schemeSBoxPic xx-radius' />
-									<!--描述-->
-									<div class='orderSolutionDes xx-ml-3'>
-										<div class='schemeBoxTitle'>
-											吨方
+								<div class='inputAddrContainer xx-mt-1'>
+									<span class='signText receive xx-radius'>收</span>
+									<div class='addrInputs'>
+										<el-input v-model='input' class='addrInput' size='small' placeholder='从哪里收货（下游）' />
+										<!--已存在的地址-->
+										<div class='addressButton xx-f-12 xx-pointer'>
+											<svg class='icon locationIcon' aria-hidden='true'>
+												<use xlink:href='#icon-a-Group12' />
+											</svg>
+											地址簿
 										</div>
-										<div class='schemeSBoxSubTitle'>
-											折叠吨箱IBC
-										</div>
-									</div>
-								</div>
-								<!--数量-->
-								<div class='perBoxDetailNum'>
-									X 3件
-								</div>
-							</div>
-							<div class='perBoxDetailContainer'>
-								<div class='perBoxDetail xx-d-flex'>
-									<!--产品图-->
-									<div class='schemeSBoxPic xx-radius' />
-									<!--描述-->
-									<div class='orderSolutionDes xx-ml-3'>
-										<div class='schemeBoxTitle'>
-											吨方
-										</div>
-										<div class='schemeSBoxSubTitle'>
-											折叠吨箱IBC
+										<el-input v-model='input' class='addrContactsInput' size='small' placeholder='请输入联系人' />
+										<el-input v-model='input' class='addrPhoneInput' size='small' placeholder='请输入电话' />
+										<div class='outlineTips xx-f-12'>
+											*该地址已超出一口价区域
 										</div>
 									</div>
 								</div>
-								<!--数量-->
-								<div class='perBoxDetailNum'>
-									X 3件
+							</section>
+							<!--下单的商品信息-->
+							<div class='schemeTitle xx-f-16 xx-mt-3'>
+								商品信息
+							</div>
+							<div class='orderBox xx-mt-2 xx-d-flex'>
+								<div class='orderBoxPicContainer xx-radius'>
+									<img class='orderBoxPic' src='' alt=''>
+								</div>
+								<div class='orderSchemeBoxDes xx-ml-2'>
+									<div class='schemeBoxTitle xx-f-16'>
+										吨立方
+									</div>
+									<div class='orderSolutionInfo xx-mt-1'>
+										<span class='orderSolutionPerPrice xx-f-16'>￥444</span> /套/趟（40天）
+									</div>
+									<div class='counterBar xx-d-flex'>
+										<el-input-number
+											v-model='num'
+											class='countNum xx-radius'
+											size='small'
+											controls-position='right'
+											:min='50'
+											@change='changeOrderNum'
+										/>
+										<div class='countNumTips xx-f-12'>
+											50套起订
+										</div>
+									</div>
+								</div>
+							</div>
+							<!--方案组成-->
+							<!--三角-->
+							<i class='triagle el-icon-caret-top' />
+							<div class='schemeBoxDetail orderSchemeBoxDetail xx-radius'>
+								<!--方案内产品列表-->
+								<div class='perBoxDetailContainer'>
+									<div class='perBoxDetail xx-d-flex'>
+										<!--产品图-->
+										<div class='schemeMBoxPic xx-radius' />
+										<!--描述-->
+										<div class='orderSolutionDes xx-ml-2'>
+											<div class='schemeBoxTitle'>
+												吨方
+											</div>
+											<div class='schemeSBoxSubTitle'>
+												折叠吨箱IBC
+											</div>
+										</div>
+									</div>
+									<!--数量-->
+									<div class='perBoxDetailNum'>
+										X 3件
+									</div>
+								</div>
+								<div class='perBoxDetailContainer'>
+									<div class='perBoxDetail xx-d-flex'>
+										<!--产品图-->
+										<div class='schemeSBoxPic xx-radius' />
+										<!--描述-->
+										<div class='orderSolutionDes xx-ml-3'>
+											<div class='schemeBoxTitle'>
+												吨方
+											</div>
+											<div class='schemeSBoxSubTitle'>
+												折叠吨箱IBC
+											</div>
+										</div>
+									</div>
+									<!--数量-->
+									<div class='perBoxDetailNum'>
+										X 3件
+									</div>
+								</div>
+								<div class='perBoxDetailContainer'>
+									<div class='perBoxDetail xx-d-flex'>
+										<!--产品图-->
+										<div class='schemeSBoxPic xx-radius' />
+										<!--描述-->
+										<div class='orderSolutionDes xx-ml-3'>
+											<div class='schemeBoxTitle'>
+												吨方
+											</div>
+											<div class='schemeSBoxSubTitle'>
+												折叠吨箱IBC
+											</div>
+										</div>
+									</div>
+									<!--数量-->
+									<div class='perBoxDetailNum'>
+										X 3件
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-					<!--提交按钮组-->
-					<div class='orderSubmitModel'>
-						<div class='allScheamPrice'>
-							合计：<span class='redPrice xx-f-20'>￥12233</span> <span class='uselessPrice'>12333</span>
-							<div class='allRoutes'>
-								共<span class='routeNum'> 5 </span>条送箱路线
+						<!--提交按钮组-->
+						<div class='orderSubmitModel'>
+							<div class='allScheamPrice'>
+								合计：<span class='redPrice xx-f-20'>￥12233</span> <span class='uselessPrice'>12333</span>
+								<div class='allRoutes'>
+									共<span class='routeNum'> 5 </span>条送箱路线
+								</div>
+							</div>
+							<div class='baseButton orderButton xx-ml-2 xx-radius' @click='openOrdering'>
+								立即下单
 							</div>
 						</div>
-						<div class='baseButton orderButton xx-ml-2 xx-radius'>
-							立即下单
-						</div>
 					</div>
-				</div>
+				</transition>
 
 				<!--方案订单结果页-->
-				<div class='baseDetailBoard orderResultPage'>
-					<!--页面头-->
-					<div class='baseBoardTop routeBackTop xx-f-16'>
-						<div class='baseBoardTopContent'>
-							<i class='el-icon-back backIcon' />订单确认
-						</div>
-					</div>
-					<!--待支付-->
-					<div class='unpaidModel xx-mt-2'>
-						<p class='unpaidTipInfo'>
-							<span class='unpaidInfoText xx-f-18'>待支付</span>
-							<span class='unpaidInfoTime xx-f-12'>订单将在 <span class='deadLine'>23时33分44秒</span> 自动关闭</span>
-						</p>
-						<!--待支付单据-->
-						<div class='baseOrderResultFrame unpaidBasicInfo'>
-							<div class='perInfo'>
-								<div class='title'>
-									应付金额：
-								</div>
-								<div class='values price'>
-									<span class='redPrice xx-f-20'>￥3333</span>（含税：6%）<span class='uselessPrice'>￥5555</span>
-								</div>
-							</div>
-							<div class='perInfo'>
-								<div class='title'>
-									订单号：
-								</div>
-								<div class='values'>
-									3231321321323132
-								</div>
-							</div>
-							<div class='perInfo'>
-								<div class='title'>
-									下单时间：
-								</div>
-								<div class='values'>
-									2021.07.26 14:45:23
-								</div>
+				<transition name='xx'>
+					<div v-show='is_show_confirm_order' class='baseDetailBoard orderResultPage'>
+						<!--页面头-->
+						<div class='baseBoardTop routeBackTop xx-f-16'>
+							<div class='baseBoardTopContent'>
+								<i class='el-icon-back backIcon' />订单确认
 							</div>
 						</div>
-					</div>
-					<!--付款方式-->
-					<div class='baseModelName xx-f-18 xx-mt-2'>
-						付款方式
-					</div>
-					<div class='orderContent orderPayWayContent xx-mt-1'>
-						<div class='perPayInfo'>
-							<div class='perPayKey'>
-								支付方式：
-							</div>
-							<div class='perPayVal'>
-								对公打款
-							</div>
-						</div>
-						<div class='perPayInfo'>
-							<div class='perPayKey'>
-								收款人户名：
-							</div>
-							<div class='perPayVal'>
-								上海箱箱智能科技有限公司
-							</div>
-						</div>
-						<div class='perPayInfo'>
-							<div class='perPayKey'>
-								银行卡号：
-							</div>
-							<div class='perPayVal bankNum'>
-								--
-							</div>
-						</div>
-						<div class='perPayInfo payBankInfo'>
-							<div class='perPayKey'>
-								开户银行
-							</div>
-							<div class='perPayVal'>
-								--
-							</div>
-						</div>
-						<div class='payWayWarning'>
-							<p class='warnTitle'>
-								注意事项
+						<!--待支付-->
+						<div class='unpaidModel xx-mt-2'>
+							<p class='unpaidTipInfo'>
+								<span class='unpaidInfoText xx-f-18'>待支付</span>
+								<span class='unpaidInfoTime xx-f-12'>订单将在 <span class='deadLine'>23时33分44秒</span> 自动关闭</span>
 							</p>
-							<p class='perWarn'>
-								1.下单后请尽快转账，转账金额需与订单金额一致，请勿多转、少转或分次转，否则影响对账进度；
-							</p>
-							<p class='perWarn'>
-								2.汇款时将订单号填写至汇款单“用途/备注/摘要栏”
-							</p>
-						</div>
-					</div>
-					<!--订单信息-->
-					<div class='baseModelName xx-f-18 xx-mt-2'>
-						订单信息
-					</div>
-					<div class='addressTabsmodel addressTabsOrderedmodel'>
-						<div class='tabsGroup'>
-							<el-tabs v-model='editableTabsValue' type='card' closable @tab-remove='removeTab'>
-								<el-tab-pane
-									v-for='(item) in editableTabs'
-									:key='item.name'
-									:label='item.title'
-									:name='item.name'
-								/>
-							</el-tabs>
-						</div>
-					</div>
-					<div class='orderContent'>
-						<!--送收货地址-->
-						<section class='deliverAddr orderDeliverAddr xx-mt-2'>
-							<p class='desStr xx-f-16'>
-								送收箱路线
-							</p>
-							<div class='sendInfoBox'>
-								<span class='signText send xx-radius'>发</span>
-								<div class='senderInfo'>
-									<div class='infoName xx-f-16'>网二 13555555555</div>
-									<div class='infoAddress xx-mt-1'>湖南省张家界市永定区回龙路10号</div>
-									<div class='outsideTips xx-f-12'>*该地址超出一口价区域，会增加超区运输费</div>
+							<!--待支付单据-->
+							<div class='baseOrderResultFrame unpaidBasicInfo'>
+								<div class='perInfo'>
+									<div class='title'>
+										应付金额：
+									</div>
+									<div class='values price'>
+										<span class='redPrice xx-f-20'>￥3333</span>（含税：6%）<span class='uselessPrice'>￥5555</span>
+									</div>
+								</div>
+								<div class='perInfo'>
+									<div class='title'>
+										订单号：
+									</div>
+									<div class='values'>
+										3231321321323132
+									</div>
+								</div>
+								<div class='perInfo'>
+									<div class='title'>
+										下单时间：
+									</div>
+									<div class='values'>
+										2021.07.26 14:45:23
+									</div>
 								</div>
 							</div>
-							<div class='receiveInfoBox'>
-								<span class='signText receive xx-radius'>收</span>
-								<div class='senderInfo'>
-									<div class='infoName xx-f-16'>网二 13555555555</div>
-									<div class='infoAddress xx-mt-1'>湖南省张家界市永定区回龙路10号</div>
-									<div class='outsideTips xx-f-12'>*该地址超出一口价区域，会增加超区运输费</div>
-								</div>
-							</div>
-						</section>
-						<!--下单的商品信息-->
-						<div class='schemeTitle xx-f-16 xx-mt-2'>
-							商品信息
 						</div>
-						<div class='schemeBox xx-mt-2 xx-d-flex'>
-							<div class='schemeBoxPic xx-radius' />
-							<div class='orderSchemeBoxDes xx-ml-2'>
-								<div class='schemeBoxTitle xx-f-16'>
-									吨立方
+						<!--付款方式-->
+						<div class='baseModelName xx-f-18 xx-mt-2'>
+							付款方式
+						</div>
+						<div class='orderContent orderPayWayContent xx-mt-1'>
+							<div class='perPayInfo'>
+								<div class='perPayKey'>
+									支付方式：
 								</div>
-								<div class='orderSolutionInfo xx-mt-1'>
-									<span class='orderSolutionPerPrice xx-f-16'>￥444</span> /套/趟（40天）
+								<div class='perPayVal'>
+									对公打款
 								</div>
 							</div>
-							<div class='orderGeneralNum xx-f-16'>
-								X 3 件
+							<div class='perPayInfo'>
+								<div class='perPayKey'>
+									收款人户名：
+								</div>
+								<div class='perPayVal'>
+									上海箱箱智能科技有限公司
+								</div>
+							</div>
+							<div class='perPayInfo'>
+								<div class='perPayKey'>
+									银行卡号：
+								</div>
+								<div class='perPayVal bankNum'>
+									--
+								</div>
+							</div>
+							<div class='perPayInfo payBankInfo'>
+								<div class='perPayKey'>
+									开户银行
+								</div>
+								<div class='perPayVal'>
+									--
+								</div>
+							</div>
+							<div class='payWayWarning'>
+								<p class='warnTitle'>
+									注意事项
+								</p>
+								<p class='perWarn'>
+									1.下单后请尽快转账，转账金额需与订单金额一致，请勿多转、少转或分次转，否则影响对账进度；
+								</p>
+								<p class='perWarn'>
+									2.汇款时将订单号填写至汇款单“用途/备注/摘要栏”
+								</p>
 							</div>
 						</div>
-						<!--方案组成-->
-						<i class='triagle el-icon-caret-top' />
-						<div class='schemeBoxDetail xx-radius'>
-							<!--方案内产品列表-->
-							<div class='perBoxDetailContainer'>
-								<div class='perBoxDetail xx-d-flex'>
-									<!--产品图-->
-									<div class='schemeMBoxPic xx-radius' />
-									<!--描述-->
-									<div class='orderSolutionDes xx-ml-2'>
-										<div class='schemeBoxTitle'>
-											吨方
+						<!--订单信息-->
+						<div class='baseModelName xx-f-18 xx-mt-2'>
+							订单信息
+						</div>
+						<div class='addressTabsmodel addressTabsOrderedmodel'>
+							<div class='tabsGroup'>
+								<el-tabs v-model='editableTabsValue' type='card' closable @tab-remove='removeTab'>
+									<el-tab-pane
+										v-for='(item) in editableTabs'
+										:key='item.name'
+										:label='item.title'
+										:name='item.name'
+									/>
+								</el-tabs>
+							</div>
+						</div>
+						<div class='orderContent'>
+							<!--送收货地址-->
+							<section class='deliverAddr orderDeliverAddr xx-mt-2'>
+								<p class='desStr xx-f-16'>
+									送收箱路线
+								</p>
+								<div class='sendInfoBox'>
+									<span class='signText send xx-radius'>发</span>
+									<div class='senderInfo'>
+										<div class='infoName xx-f-16'>
+											网二 13555555555
 										</div>
-										<div class='schemeSBoxSubTitle'>
-											折叠吨箱IBC
+										<div class='infoAddress xx-mt-1'>
+											湖南省张家界市永定区回龙路10号
+										</div>
+										<div class='outsideTips xx-f-12'>
+											*该地址超出一口价区域，会增加超区运输费
 										</div>
 									</div>
 								</div>
-								<!--数量-->
-								<div class='perBoxDetailNum'>
+								<div class='receiveInfoBox'>
+									<span class='signText receive xx-radius'>收</span>
+									<div class='senderInfo'>
+										<div class='infoName xx-f-16'>
+											网二 13555555555
+										</div>
+										<div class='infoAddress xx-mt-1'>
+											湖南省张家界市永定区回龙路10号
+										</div>
+										<div class='outsideTips xx-f-12'>
+											*该地址超出一口价区域，会增加超区运输费
+										</div>
+									</div>
+								</div>
+							</section>
+							<!--下单的商品信息-->
+							<div class='schemeTitle xx-f-16 xx-mt-2'>
+								商品信息
+							</div>
+							<div class='schemeBox xx-mt-2 xx-d-flex'>
+								<div class='schemeBoxPic xx-radius' />
+								<div class='orderSchemeBoxDes xx-ml-2'>
+									<div class='schemeBoxTitle xx-f-16'>
+										吨立方
+									</div>
+									<div class='orderSolutionInfo xx-mt-1'>
+										<span class='orderSolutionPerPrice xx-f-16'>￥444</span> /套/趟（40天）
+									</div>
+								</div>
+								<div class='orderGeneralNum xx-f-16'>
 									X 3 件
 								</div>
 							</div>
-							<div class='perBoxDetailContainer'>
-								<div class='perBoxDetail xx-d-flex'>
-									<!--产品图-->
-									<div class='schemeSBoxPic xx-radius' />
-									<!--描述-->
-									<div class='orderSolutionDes xx-ml-3'>
-										<div class='schemeBoxTitle'>
-											吨方
-										</div>
-										<div class='schemeSBoxSubTitle'>
-											折叠吨箱IBC
+							<!--方案组成-->
+							<i class='triagle el-icon-caret-top' />
+							<div class='schemeBoxDetail xx-radius'>
+								<!--方案内产品列表-->
+								<div class='perBoxDetailContainer'>
+									<div class='perBoxDetail xx-d-flex'>
+										<!--产品图-->
+										<div class='schemeMBoxPic xx-radius' />
+										<!--描述-->
+										<div class='orderSolutionDes xx-ml-2'>
+											<div class='schemeBoxTitle'>
+												吨方
+											</div>
+											<div class='schemeSBoxSubTitle'>
+												折叠吨箱IBC
+											</div>
 										</div>
 									</div>
+									<!--数量-->
+									<div class='perBoxDetailNum'>
+										X 3 件
+									</div>
 								</div>
-								<!--数量-->
-								<div class='perBoxDetailNum'>
-									X 3件
+								<div class='perBoxDetailContainer'>
+									<div class='perBoxDetail xx-d-flex'>
+										<!--产品图-->
+										<div class='schemeSBoxPic xx-radius' />
+										<!--描述-->
+										<div class='orderSolutionDes xx-ml-3'>
+											<div class='schemeBoxTitle'>
+												吨方
+											</div>
+											<div class='schemeSBoxSubTitle'>
+												折叠吨箱IBC
+											</div>
+										</div>
+									</div>
+									<!--数量-->
+									<div class='perBoxDetailNum'>
+										X 3件
+									</div>
+								</div>
+								<div class='perBoxDetailContainer'>
+									<div class='perBoxDetail xx-d-flex'>
+										<!--产品图-->
+										<div class='schemeSBoxPic xx-radius' />
+										<!--描述-->
+										<div class='orderSolutionDes xx-ml-3'>
+											<div class='schemeBoxTitle'>
+												吨方
+											</div>
+											<div class='schemeSBoxSubTitle'>
+												折叠吨箱IBC
+											</div>
+										</div>
+									</div>
+									<!--数量-->
+									<div class='perBoxDetailNum'>
+										X 3件
+									</div>
 								</div>
 							</div>
-							<div class='perBoxDetailContainer'>
-								<div class='perBoxDetail xx-d-flex'>
-									<!--产品图-->
-									<div class='schemeSBoxPic xx-radius' />
-									<!--描述-->
-									<div class='orderSolutionDes xx-ml-3'>
-										<div class='schemeBoxTitle'>
-											吨方
-										</div>
-										<div class='schemeSBoxSubTitle'>
-											折叠吨箱IBC
-										</div>
-									</div>
+							<div class='orderTotalPrice'>
+								<div class='perLinePrice'>
+									<span class='perTypeTitle'>用箱费用：</span><span class='perTypePrice'>￥44333</span>
 								</div>
-								<!--数量-->
-								<div class='perBoxDetailNum'>
-									X 3件
+								<div class='perLinePrice'>
+									<span class='perTypeTitle'>超区运费：</span><span class='perTypePrice'>￥44333</span>
+								</div>
+								<div class='perLinePrice'>
+									<span class='perTypeTitle'>小计：</span><span class='perTypePrice'>￥44333</span>
 								</div>
 							</div>
 						</div>
-						<div class='orderTotalPrice'>
-							<div class='perLinePrice'>
-								<span class='perTypeTitle'>用箱费用：</span><span class='perTypePrice'>￥44333</span>
-							</div>
-							<div class='perLinePrice'>
-								<span class='perTypeTitle'>超区运费：</span><span class='perTypePrice'>￥44333</span>
-							</div>
-							<div class='perLinePrice'>
-								<span class='perTypeTitle'>小计：</span><span class='perTypePrice'>￥44333</span>
-							</div>
+						<div class='goToMyOrder xx-pointer xx-mt-3'>
+							前往我的订单
 						</div>
 					</div>
-					<div class='goToMyOrder xx-pointer xx-mt-3'>
-						前往我的订单
-					</div>
-				</div>
+				</transition>
 			</div>
 			<!--地图面板-->
-			<div id='map_container' class='mapContainer' />
+			<Map @getAMap='getAMap' @getMapObj='getMapObj' />
 		</div>
 		<!--其它模块1-->
 		<div class='otherModel'>
@@ -661,42 +797,42 @@
 			</div>
 			<div class='otherModelSwitchContent'>
 				<div class='videoTabs'>
-					<div class='perTab' :class='{perTabActive: current_video_tab === 0}' @click='switchThistab(0)'>
+					<div class='perTab' :class='{perTabActive: current_video_tab === 0}' @click='switchThisTab(0)'>
 						散装液体解决方案
 					</div>
-					<div class='perTab' :class='{perTabActive: current_video_tab === 1}' @click='switchThistab(1)'>
+					<div class='perTab' :class='{perTabActive: current_video_tab === 1}' @click='switchThisTab(1)'>
 						生鲜果蔬解决方案
 					</div>
-					<div class='perTab' :class='{perTabActive: current_video_tab === 2}' @click='switchThistab(2)'>
+					<div class='perTab' :class='{perTabActive: current_video_tab === 2}' @click='switchThisTab(2)'>
 						汽配快运解决方案
 					</div>
-					<div class='perTab' :class='{perTabActive: current_video_tab === 3}' @click='switchThistab(3)'>
+					<div class='perTab' :class='{perTabActive: current_video_tab === 3}' @click='switchThisTab(3)'>
 						智能托盘解决方案
 					</div>
 				</div>
 				<div v-show='current_video_tab===0' class='perVideoContent'>
 					<div class='videoText'>
-						驾驭澎湃之力
+						在立方组合之间&nbsp;&nbsp;探索流动的极限
 					</div>
-					<img class='videoSize' src='@/assets/imgs/ton.png'>
+					<video ref='dom_video_0' class='videoSize' autoplay loop src='@/static/video/water.mp4' />
 				</div>
 				<div v-show='current_video_tab===1' class='perVideoContent'>
 					<div class='videoText'>
-						驾驭澎湃之力2
+						清风徐来&nbsp;&nbsp;&nbsp;&nbsp;生而为鲜
 					</div>
-					<img class='videoSize' src='@/assets/imgs/ton.png'>
+					<video ref='dom_video_1' class='videoSize' loop src='@/static/video/friuts.mp4' />
 				</div>
-				<div v-show='current_video_tab===2' class='perVideoContent'>
+				<div v-show='current_video_tab===2' class='perVideoContent perVideoContentWhite'>
 					<div class='videoText'>
-						驾驭澎湃之力3
+						在时空变幻中&nbsp;&nbsp;&nbsp;&nbsp;穿梭循环
 					</div>
-					<img class='videoSize' src='@/assets/imgs/ton.png'>
+					<video ref='dom_video_2' class='videoSize' loop src='@/static/video/car.mp4' />
 				</div>
-				<div v-show='current_video_tab===3' class='perVideoContent'>
+				<div v-show='current_video_tab===3' class='perVideoContent perVideoContentWhite'>
 					<div class='videoText'>
-						驾驭澎湃之力4
+						气吞万象&nbsp;&nbsp;&nbsp;&nbsp;固若金汤
 					</div>
-					<img class='videoSize' src='@/assets/imgs/ton.png'>
+					<video ref='dom_video_3' class='videoSize' loop src='@/static/video/tp.mp4' />
 				</div>
 			</div>
 		</div>
@@ -717,12 +853,15 @@
 						从祖国到世界各地，我们的每一次巡展都期待有你箱伴
 					</div>
 				</div>
-				<div class='imgBoxP3 imgBoxP3_2'>
-					<div class='imgTitle'>
-						数智＋
-					</div>
-					<div class='imgSTitle'>
-						高效循环不怕丢
+				<div class='imgBoxP3'>
+					<video ref='dom_video_4' class='videoSize2' autoplay loop src='@/static/video/num.mp4' />
+					<div class='positionAb'>
+						<div class='imgTitle'>
+							数智＋
+						</div>
+						<div class='imgSTitle'>
+							高效循环不怕丢
+						</div>
 					</div>
 				</div>
 			</div>
@@ -731,29 +870,34 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+// import { mapState } from 'vuex'
+import Map from '@/components/index/Map.vue'
 
 export default {
 	name: 'IndexPage',
-	components: {},
+	components: { Map },
 	props: [],
-	asyncData (context) {
-		console.log('server设置cookie-token')
-		context.app.$cookies.set('lhl', '8429482480294820420')
-		// console.log('server取出cookie-token', context.app.$cookies.get('lhl'))
-		// context.app.$API_INDEX().get_index_list({ q: 'girls' }).then(data => {
-		// 	console.log('server返回data啦！', data.data[0].id)
-		// })
-		// console.log('服务端测试：', app.API_INDEX.get_index_list())
-		// console.log('----', context.app.$_get)
-		// const data = await context.app.$axios.get('/api/assets/api/product/getAllModuleProducts')
-		// console.log(context)
-		// console.log(data)
-		// if (data) {
-		// 	return { project: data || '哈哈哈' }
-		// }
-		// return { project: '哈哈哈' }
-	},
+	// async asyncData (context) {
+	// 	let route_query = context.route.query.product_type || ''
+	// 	if (context.app.$cookies.get('token')) {
+	// 		// 获取产品列表
+	// 		let product_list = await context.app.$API_INDEX().get_product_full_list({ fullCode: route_query, page: 1, pageSize: 1000 })
+	// 		// 获取方案列表
+	// 		let scheme_list = await context.app.$API_INDEX().get_scheme_full_list({ fullCode: route_query })
+	// 		// 获取配件列表
+	// 		let fitting_list = await context.app.$API_INDEX().get_fitting_full_list({ fullCode: route_query })
+	// 		return { product_list, scheme_list, fitting_list }
+	// 	} else {
+	// 		// 获取产品列表
+	// 		let product_list = await context.app.$API_INDEX().post_product_list({ fullCode: route_query, page: 1, pageSize: 1000 })
+	// 		console.log('所有产品', product_list)
+	// 		// 获取方案列表
+	// 		let scheme_list = await context.app.$API_INDEX().get_scheme_list({ fullCode: route_query })
+	// 		// 获取配件列表
+	// 		let fitting_list = await context.app.$API_INDEX().get_index_list({ fullCode: route_query })
+	// 		return { product_list, scheme_list, fitting_list }
+	// 	}
+	// },
 	data () {
 		return {
 			current_tab_type: 'allSolutionTab',
@@ -787,17 +931,40 @@ export default {
 			tabIndex: 2,
 			num: '',
 			input: '这里是地址',
-			current_video_tab: 0
+			current_video_tab: 0,
+			// AMap
+			AMap: '',
+			// map实例
+			map_obj: '',
+			// 是否显示产品列表/配件
+			is_show_all_list: true,
+			// 是否显示产品 || 方案详情
+			is_show_pro_detail: false,
+			// 是否显示方案详情
+			is_show_solu_detail: false,
+			// 是否显示下订单页面
+			is_show_order: false,
+			// 是否显示订单确认页
+			is_show_confirm_order: false,
+			// 方案详情数据
+			solution_detail: '',
+			// 产品详情数据
+			product_detail: '',
+			// 配件详情数据
+			fitting_detail: '',
+			// ---
+			product_list: [],
+			scheme_list: [],
+			fitting_list: []
 		}
 	},
-	computed: {
-		test1 () {
-			return this.page_name + 'computed'
-		},
-		...mapState({
-			count: state => state.count,
-			state1: state => state.state1
-		})
+	computed: {},
+	watch: {
+		// 监听路由参数变化
+		'$route.query' () {
+			console.log('路由变了')
+			location.reload()
+		}
 	},
 	beforeCreate () {
 		console.log('index:beforeCreate')
@@ -809,33 +976,26 @@ export default {
 		console.log('index:beforeMount')
 	},
 	mounted () {
-		console.log('index:mounted')
-		this.$API_INDEX().get_index_list().then(data => {
-			console.log('异步返回的data：', data)
-		})
-		// console.log('设置cookie-token')
-		// this.$cookies.set('lhl2', '阿西吧xxx2')
-		// console.log('server取出cookie-token', this.$cookies.get('lhl'))
-		// console.log('取出cookie-token', this.$cookies.get('lhl2'))
-		// console.log('客户端测试：', Vue, INDEX_API.GET_LIST())
-		// this.$axios.get('/api/assets/api/product/getAllModuleProducts')
-		this.$initMap('map_container', map_obj => {
-			console.log('地图初始化完毕：', map_obj)
+		this.$API_INDEX().post_product_list({ fullCode: '', page: 1, pageSize: 1000 }).then(data => {
+			this.product_list = data.dataList
 		})
 	},
 	methods: {
-		/**
-		 * @description 获取用户名
-		 */
-		getUserName () {
-			alert(this.user_name)
+		getAMap (AMap) {
+			this.AMap = AMap
+		},
+		getMapObj (map_obj) {
+			this.map_obj = map_obj
 		},
 		/**
-		 * @description 切换方案和所有产品的列表
+		 * @description 切换方案和所有产品（配件）的列表
 		 */
 		triggerTab (tab_type) {
 			this.current_tab_type = tab_type
 		},
+		/**
+		 * @description 下订单增加新地址
+		 */
 		addTab (targetName) {
 			console.log('新增地址tab：', targetName)
 			const newTabName = ++this.tabIndex + ''
@@ -846,6 +1006,9 @@ export default {
 			})
 			this.editableTabsValue = newTabName
 		},
+		/**
+		 * @description 移除某地址
+		 */
 		removeTab (targetName) {
 			const tabs = this.editableTabs
 			let activeName = this.editableTabsValue
@@ -863,11 +1026,76 @@ export default {
 			this.editableTabsValue = activeName
 			this.editableTabs = tabs.filter(tab => tab.name !== targetName)
 		},
-		handleChange (value) {
+		/**
+		 * @description 修改下单数
+		 */
+		changeOrderNum (value) {
 			console.log(value)
 		},
-		switchThistab (tab_index) {
+		/**
+		 * @description 切换多个地址
+		 */
+		switchThisTab (tab_index) {
 			this.current_video_tab = tab_index
+			this.$refs[`dom_video_${tab_index}`].play()
+		},
+		/**
+		 * @description 显示产品详情
+		 * @param { string } product_id 产品id || 配件id
+		 */
+		openProductDetail (product_id) {
+			console.log(product_id)
+			this.is_show_pro_detail = true
+			this.is_show_solu_detail = false
+			// this.$API_INDEX.get_product_detail({ id: product_id }).then(data => {
+			// 	if (data) {
+			// 		this.product_detail = data
+			// 	}
+			// })
+		},
+		/**
+		 * @description 关闭产品详情面板
+		 */
+		closeProductDetail () {
+			this.is_show_pro_detail = false
+		},
+		/**
+		 * @description 打开方案详情
+		 * @param { string } solution_id 解决方案id
+		 */
+		openSolutionDetail (solution_id) {
+			console.log('解决方案id', solution_id)
+			this.is_show_solu_detail = true
+			this.is_show_pro_detail = false
+		},
+		/**
+		 * @description 关闭方案详情
+		 */
+		closeSolutionDetail () {
+			this.is_show_solu_detail = false
+		},
+		openOrdering () {
+			// 关闭产品/配件/方案列表
+			this.is_show_all_list = false
+			// 关闭产品/配件/方案
+			this.is_show_solu_detail = false
+			this.is_show_pro_detail = false
+			// 关闭确认订单页
+			this.is_show_confirm_order = false
+			// 显示下单页面
+			this.is_show_order = true
+		},
+		/**
+		 * @description 打开留咨窗口
+		 */
+		openLeaveMessage () {
+			this.$store.commit('showLeaveMessageDialog')
+		},
+		/**
+		 * @description 打开登陆
+		 */
+		triggerLogin () {
+			this.$store.commit('showLoginDialog')
 		}
 	}
 }
@@ -901,8 +1129,8 @@ export default {
 			text-align: center;
 			margin-right:40px;
 			width:64px;
-			height:52px;
-			line-height: 52px;
+			height:56px;
+			line-height: 56px;
 			transition:all 0.3s;
 			border-bottom: 4px solid rgba(103,169,42,0);
 		}
@@ -918,23 +1146,24 @@ export default {
 		/*----- 解决方案 -----*/
 		.perSolution{
 			width:100%;
-			height:225px;
+			height:349px;
 			background-color: #ffffff;
 			margin-bottom:16px;
 		}
 		.solutionPic{
-			height:140px;
-			background-color: #D8D8D8;
+			height:238px;
 		}
-		.sketch{
+		.sketch,.fittingSketch{
 			padding:16px;
 		}
-		.part1{
+		.fittingSketch{
 			display: flex;
-			justify-content: space-between;
+			flex-direction: column;
+			justify-content: center;
 		}
 		.baseDetailDes{
-			width:266px;
+			width:100%;
+			line-height: 28px;
 		}
 		.baseDetailWholeDes{
 			margin-top:8px;
@@ -949,7 +1178,7 @@ export default {
 			color:#2C2C2C;
 		}
 		.solutionName{
-			width:266px;
+			width:100%;
 		}
 		.solutionWholeName{
 			width:100%;
@@ -957,23 +1186,47 @@ export default {
 		.loginVisibleButton{
 			width:80px;
 			height:28px;
+			margin-top:10px;
 			text-align: center;
 			line-height: 28px;
 			color:#67A92A;
 			border:1px solid #67A92A;
 			border-radius: 14px;
 		}
+		.fittingLoginVisibleButton{
+			margin-top:16px;
+		}
+		.productLoginVisibleButton{
+			margin-top:18px;
+		}
 		.visiblePrice{
-			color:#aaaaaa;
 			display:flex;
+			width:100%;
+			margin-top:12px;
+			color:#aaaaaa;
 			align-items: center;
+		}
+		.soVisiblePrice{
+			margin-top:8px;
 		}
 		.priceLeft{
 			display:flex;
 			align-items: center;
 		}
 		.productPrice {
+			color:#2c2c2c;
+			font-weight:bold;
 			padding-right:4px;
+		}
+		.listBoard{
+			width:440px;
+			height:800px;
+			position: absolute;
+			z-index: 3;
+			left:0;
+			top:0;
+			background-color: #F0F1F2;
+			box-shadow: 20px 0px 25px 0px rgba(0, 0, 0, 0.07);
 		}
 		.baseDetailBoard{
 			width:440px;
@@ -991,7 +1244,6 @@ export default {
 		.banner{
 			width:440px;
 			height:224px;
-			background-color: #d8d8d8;
 		}
 		.closeDetailBoard{
 			width:26px;
@@ -1004,8 +1256,14 @@ export default {
 			cursor:pointer;
 		}
 		.solutionDetails{
-			height:584px;
+			height:508px;
 			padding:16px;
+			overflow-y: auto;
+		}
+		.productDetails{
+			height:508px;
+			padding:16px;
+			overflow-y: auto;
 		}
 		.detailBoardPrice{
 			display: flex;
@@ -1013,13 +1271,18 @@ export default {
 			justify-content: space-between;
 			align-items: center;
 		}
-		.schemeBox{
+		.schemeBox, .orderBox{
 			align-items: center;
 		}
-		.schemeBoxPic{
+		.schemeBoxPic, .orderBoxPicContainer{
 			width:88px;
 			height:88px;
 			background-color: #D8D8D8;
+		}
+		.orderBoxPicContainer{
+			width:155px;
+			height:88px;
+			margin-right:16px;
 		}
 		.schemeBoxTitle{
 			color:#2C2C2C;
@@ -1096,30 +1359,41 @@ export default {
 			z-index: 1;
 		}
 		/*----- 产品列表 -----*/
-		.perProGroup{
-			margin-bottom:24px;
+		.productGroup{
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
 		}
 		.groupName{
 			color:#2c2c2c;
+			margin-bottom:24px;
+			margin-bottom:16px;
 		}
-		.perProduct{
-			width:100%;
-			height:129px;
-			margin-bottom:12px;
+		.perProduct, .perFitting{
+			width:180px;
+			height:283px;
+			margin-bottom:16px;
 			background-color: #ffffff;
-			display: flex;
-			align-items: center;
 			transition:all 0.3s;
 			box-shadow:  4px 4px 8px -1px rgba(0, 0, 0, 0);
 		}
-		.perProduct:hover{
+		.perFitting{
+			width:100%;
+			height:136px;
+			display: flex;
+		}
+		.perProduct:hover, .perFitting:hover{
 			box-shadow:  4px 4px 8px -1px rgba(0, 0, 0, 0.1);
 		}
-		.productImg{
-			width:144px;
-			height:129px;
+		.productImg, .fittingImg{
+			display: block;
+			width:180px;
+			height:180px;
 			border-radius: 4px 0 0 4px;
-			background-color: #E3E3E3;
+		}
+		.fittingImg{
+			width:125px;
+			height:136px;
 		}
 		.productName{
 			margin-bottom:4px;
@@ -1140,19 +1414,22 @@ export default {
 			font-size:16px;
 			margin-bottom:16px;
 		}
-		.perParam{
-			display: flex;
-			line-height: 40px;
-			justify-content: space-between;
+		.el-icon-warning{
+			color:#aaaaaa;
 		}
-		.proKeyName{
-			color:#2C2C2C;
-			font-weight:bold;
-		}
+		// .perParam{
+		// 	display: flex;
+		// 	line-height: 40px;
+		// 	justify-content: space-between;
+		// }
+		// .proKeyName{
+		// 	color:#2C2C2C;
+		// 	font-weight:bold;
+		// }
 		/*----- 方案下单/确认订单页 -----*/
 		.confirmOrderPage{
 			background-color: #F0F1F2;
-			left:880px;
+			left:0px;
 		}
 		.routeBackTop{
 			display: flex;
@@ -1179,7 +1456,7 @@ export default {
 			color:#67A92A;
 			font-size:22px;
 		}
-		.orderContent{
+		.orderContent, .orderingContent{
 			background-color: #ffffff;
 			width:408px;
 			margin-left:auto;
@@ -1187,32 +1464,74 @@ export default {
 			border-radius: 0px 4px 4px 4px;
 			padding:16px 16px;
 		}
-		.addrInput{
+		.orderingContent{
+			height:616px;
+			overflow-y: auto;
+		}
+		.inputAddrContainer{
 			width: 376px;
-			height: 48px;
-			background: #FFFFFF;
-			border: 1px solid #DDDDDD;
-			position:relative;
 			display: flex;
-			align-items: center;
-			padding:0 16px;
+		}
+		.addrInputs{
+			width:340px;
+			position: relative;
+			margin-left:16px;
+		}
+		.addrInput{
+			width:340px;
+			padding-left:0;
+			padding-right:40px;
+			border-left:0;
+			border-right:0;
+			border-top:0;
+			border-bottom:1px solid #eeeeee;
+			margin-bottom:12px;
+		}
+		.addrContactsInput{
+			width:127px;
+			border-bottom:1px solid #eeeeee;
+			margin-right:16px;
+		}
+		.addrPhoneInput{
+			width:192px;
+			border-bottom:1px solid #eeeeee;
+		}
+		.outlineTips{
+			margin-top:16px;
+			color:#F74141;
 		}
 		.orderDeliverAddr{
 			border-bottom:1px solid #EDEDED;
 			padding-bottom:16px;
 		}
+		.addressButton{
+			height:22px;
+			line-height:22px;
+			border-left:1px solid #eeeeee;
+			padding-left:8px;
+			position: absolute;
+			z-index: 1;
+			right:16px;
+			top:8px;
+		}
+		.locationIcon{
+			width:12px;
+			height:12px;
+		}
 		.signText{
-			width: 24px;
-			height: 24px;
+			width: 20px;
+			height: 20px;
 			text-align: center;
-			line-height: 24px;
+			line-height: 20px;
 			color:#ffffff;
+			margin-top:8px;
 		}
 		.send{
-			background: #67A92A;
+			background: #0E7AFF;
 		}
 		.receive{
-			background: #0E7AFF;
+			color:#4A3000;
+			background: #FFA703;
 		}
 		.sendInfoBox, .receiveInfoBox{
 			display: flex;
@@ -1237,12 +1556,17 @@ export default {
 		.orderSolutionInfo{
 			color:#aaaaaa;
 		}
+		.counterBar{
+			margin-top:16px;
+			align-items: center;
+		}
 		.countNum{
 			width:84px;
 			display: block;
 			border:1px solid #dddddd;
 			text-align: left;
 			color:#666666;
+			margin-right:8px;
 		}
 		.orderSchemeBoxDes{
 			width:210px;
@@ -1277,10 +1601,6 @@ export default {
 			justify-content: space-between;
 			align-items: center;
 		}
-		.orderSchemeBoxDetail{
-			height:260px;
-			overflow-y: auto;
-		}
 		.redPrice{
 			color:#F74141;
 		}
@@ -1304,7 +1624,7 @@ export default {
 		}
 		.orderResultPage{
 			background-color: #F0F1F2;
-			left:1328px;
+			left:0px;
 			overflow: auto;
 		}
 		.unpaidModel {
@@ -1418,6 +1738,9 @@ export default {
 		overflow: hidden;
 		background-color: #ffffff;
 	}
+	.otherModel:last-child{
+		height:1000px;
+	}
 	.otherModelTitle{
 		text-align: center;
 		font-weight:bold;
@@ -1469,8 +1792,10 @@ export default {
 		}
 		.imgBoxP3{
 			width:702px;
-			height:580px;
-			background-size:702px 580px;
+			height:450px;
+			overflow: hidden;
+			position: relative;
+			background-size:702px 450px;
 			text-align: center;
 			.imgTitle, .imgSTitle{
 				color:#ffffff;
@@ -1479,8 +1804,12 @@ export default {
 		.imgBoxP3_1{
 			background-image: url('@/assets/imgs/index_p1.png')
 		}
-		.imgBoxP3_2{
-			background-image: url('@/assets/imgs/index_p2.png')
+		.positionAb{
+			position: absolute;
+			z-index: 1;
+		}
+		.videoSize2{
+			width:702px;
 		}
 	}
 	.otherModelSwitchContent{
@@ -1508,6 +1837,10 @@ export default {
 		}
 		.perVideoContent{
 			position: relative;
+			color:#3E4046;
+		}
+		.perVideoContentWhite{
+			color:#ffffff;
 		}
 		.videoText{
 			position: absolute;
@@ -1517,29 +1850,19 @@ export default {
 			text-align: center;
 			top:113px;
 			font-size:40px;
-			color:#3E4046;
 			left:0;
 			right:0;
 			margin:auto;
 		}
 		.videoSize{
 			width:1440px;
-			height:640px;
+			height:480px;
 		}
 	}
-	/*----- 地图 -----*/
-	.mapContainer{
-		position: relative;
-		flex:1;
-		height:800px;
-	}
-    .iconwujiaoxing{
-        font-size:12px;
-        color:red;
-    }
-	.existAddrList{
-		color:#2C2C2C
-	}
+    // .iconwujiaoxing{
+    //     font-size:12px;
+    //     color:red;
+    // }
 	.countNumTips{
 		color:#aaaaaa;
 		margin: top 2px;
@@ -1587,6 +1910,7 @@ export default {
 <style lang="scss">
 .indexPage{
 	.sTypeSelect{
+		border:1px solid #E8E8E8;
 		width:128px;
 		.el-input__inner{
 			background-color: #f4f4f4;
@@ -1595,6 +1919,7 @@ export default {
 			border-color:#dddddd;
 		}
 	}
+	// elementUI - tabs
 	.el-tabs__header{
 		margin-bottom:0;
 		border-bottom:0;
@@ -1611,9 +1936,11 @@ export default {
 	.el-tabs__item:hover{
 		color:#666666
 	}
-	.is-active{
-		background-color: #ffffff;
-		border-bottom:0;
+	.el-tabs__nav{
+		.is-active{
+			background-color: #ffffff;
+			border-bottom:0;
+		}
 	}
 	.el-input__inner{
 		border:0;
