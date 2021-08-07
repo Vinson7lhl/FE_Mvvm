@@ -91,105 +91,66 @@ export default ({ app }, inject) => {
 				})
 			},
 			/**
-			 * @description 获取产品list（未登录）
+			 * @description 获取产品列表
 			 */
 			post_product_list: (data = {}) => {
 				return app.$_post('/mall/api/product/list', data).then(res => {
 					if (res.code === 200 && res.data) {
 						return res.data
 					} else {
-						console.error(' 获取产品list（未登录） - Error！')
+						console.error(' 获取产品列表 - Error！')
 						return ''
 					}
 				})
 			},
 			/**
-			 * @description 获取产品list（登录）
-			 */
-			post_product_full_list: (data = {}) => {
-				return app.$_post('/mall/api/product/list', data).then(res => {
-					if (res.code === 200 && res.data) {
-						return res.data
-					} else {
-						console.error(' 获取产品list（登录） - Error！')
-						return ''
-					}
-				})
-			},
-			/**
-			 * @description 获取产品详情（未登录）
+			 * @description 获取产品详情
 			 */
 			get_product_detail: (data = {}) => {
 				return app.$_get('/mall/api/product/details', data).then(res => {
 					if (res.code === 200 && res.data) {
 						return res.data
 					} else {
-						console.error(' 获取产品详情（未登录） - Error！')
+						console.error(' 获取产品详情 - Error！')
 						return ''
 					}
 				})
 			},
 			/**
-			 * @description 获取产品详情（登录）
+			 * @description 获取方案列表
 			 */
-			get_product_full_detail: (data = {}) => {
-				return app.$_get('/mall/api/product/details', data).then(res => {
+			get_scheme_list: (data = {}) => {
+				return app.$_get('/mall/api/setMeal/client/list', data).then(res => {
 					if (res.code === 200 && res.data) {
 						return res.data
 					} else {
-						console.error(' 获取产品详情（登录） - Error！')
+						console.error(' 获取方案列表 - Error！')
 						return ''
 					}
 				})
 			},
 			/**
-			 * @description 获取方案list（未登录）
+			 * @description 获取配件列表 /mall/api/parts/details
 			 */
-			get_scheme_list: () => {
-				return app.$_get('/mall/api/setMeal/client/list').then(res => {
+			post_fitting_list: (data = {}) => {
+				return app.$_post('/mall/api/parts/list', data).then(res => {
 					if (res.code === 200 && res.data) {
 						return res.data
 					} else {
-						console.error(' 获取方案list（未登录） - Error！')
+						console.error(' 获取配件列表 - Error！')
 						return ''
 					}
 				})
 			},
 			/**
-			 * @description 获取方案list（登录）
+			 * @description 获取配件详情
 			 */
-			get_scheme_full_list: () => {
-				return app.$_get('/mall/api/setMeal/client/right/list').then(res => {
+			get_fitting_detail: (data = {}) => {
+				return app.$_get('/mall/api/parts/details', data).then(res => {
 					if (res.code === 200 && res.data) {
 						return res.data
 					} else {
-						console.error(' 获取方案list（登录） - Error！')
-						return ''
-					}
-				})
-			},
-			/**
-			 * @description 获取配件list（未登录）
-			 */
-			post_fitting_list: () => {
-				return app.$_post('/mall/api/parts/list').then(res => {
-					if (res.code === 200 && res.data) {
-						return res.data
-					} else {
-						console.error(' 获取配件list（未登录） - Error！')
-						return ''
-					}
-				})
-			},
-			/**
-			 * @description 获取配件list（登录）
-			 */
-			post_fitting_full_list: () => {
-				return app.$_post('/mall/api/parts/list').then(res => {
-					if (res.code === 200 && res.data) {
-						return res.data
-					} else {
-						console.error(' 获取配件list（登录） - Error！')
+						console.error(' 获取配件详情 - Error！')
 						return ''
 					}
 				})

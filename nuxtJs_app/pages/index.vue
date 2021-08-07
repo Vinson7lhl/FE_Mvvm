@@ -18,12 +18,10 @@
 						</div>
 						<!--方案列表-->
 						<div v-show='current_tab_type === "allSolutionTab"' class='normalList solutionList'>
-							<div class='perSolution xx-radius' @click='openSolutionDetail'>
-								<!--顶部图片-->
+							<!-- <div class='perSolution xx-radius' @click='openSolutionDetail'>
 								<div class='solutionPic'>
 									<img src=''>
 								</div>
-								<!--简略描述-->
 								<div class='sketch'>
 									<div class='baseName solutionName xx-elli'>
 										农副食品解决方案农副食品解决方案农副食品解决方案农副食品解决方案
@@ -38,11 +36,9 @@
 								</div>
 							</div>
 							<div class='perSolution xx-radius' @click='openSolutionDetail'>
-								<!--顶部图片-->
 								<div class='solutionPic'>
 									<img src=''>
 								</div>
-								<!--简略描述-->
 								<div class='sketch'>
 									<div class='part1'>
 										<div class='baseName solutionName xx-elli'>
@@ -56,34 +52,38 @@
 										￥登陆可见
 									</div>
 								</div>
-							</div>
-						<!-- <div v-for='per_scheme in scheme_list' :key='per_scheme.id' class='perSolution xx-radius'>
-							<div class='solutionPic'>
-								<img :src='per_scheme.fileList[0].fileUrl'>
-							</div>
-							<div class='sketch'>
-								<div class='part1'>
-									<div class='baseName solutionName xx-elli'>
-										{{ per_scheme.name }}
-									</div>
-									<div class='loginVisibleButton xx-f-12 xx-pointer'>
-										￥登陆可见
-									</div>
-									<div class='visiblePrice'>
-										<span class='redPrice productPrice xx-f-20'>￥{{ per_scheme.price }}</span>
+							</div> -->
+
+							<div v-for='per_scheme in scheme_list' :key='per_scheme.id' class='perSolution xx-radius' @click='openSolutionDetail(per_scheme.id)'>
+								<div class='solutionPic'>
+									<template v-for='per_img in per_scheme.fileList'>
+										<img v-if='per_img.classification === "1"' :key='per_img.id' :src='per_img.fileUrl'>
+									</template>
+								</div>
+								<div class='sketch'>
+									<div class='part1'>
+										<div class='baseName solutionName xx-elli'>
+											{{ per_scheme.name }}
+										</div>
+										<div class='baseDetailDes xx-elli'>
+											{{ per_scheme.introduce }}
+										</div>
+										<div v-if='!per_scheme.programmeList[0].programmePrice' class='loginVisibleButton soLoginVisibleButton xx-f-12 xx-pointer'>
+											￥登陆可见
+										</div>
+										<div v-if='per_scheme.programmeList[0].programmePrice' class='visiblePrice soVisiblePrice'>
+											<span class='productPrice xx-f-20'>￥{{ per_scheme.programmeList[0].programmePrice }} </span>
+											<span>{{ per_scheme.programmeList[0].priceUnit }}</span>
+										</div>
 									</div>
 								</div>
-								<div class='baseDetailDes xx-elli'>
-									{{ per_scheme.introduce }}
-								</div>
 							</div>
-						</div> -->
 						</div>
 						<!--产品列表-->
 						<div v-show='current_tab_type === "allProductTab"' class='normalList allProductList'>
 							<div class='productGroup'>
 								<!--全部产品-->
-								<div class='perProduct xx-radius xx-mt-1 xx-pointer' @click='openProductDetail'>
+								<!-- <div class='perProduct xx-radius xx-mt-1 xx-pointer' @click='openProductDetail'>
 									<img src='' class='productImg'>
 									<div class='sketch'>
 										<p class='baseName productName xx-elli'>
@@ -104,44 +104,40 @@
 											￥登陆可见
 										</div>
 									</div>
-								</div>
-								<!-- <div v-for='per_product in product_list.dataList' :key='per_product.id' class='perProduct xx-radius xx-mt-1 xx-pointer' @click='openProductDetail(per_product.id)'>
-									<img :src='per_product.fileUrl' class='productImg'>
+								</div> -->
+								<div v-for='per_product in product_list.dataList' :key='per_product.id' class='perProduct xx-radius xx-mt-1 xx-pointer' @click='openProductDetail(per_product.id, "product")'>
+									<template v-for='per_img in per_product.fileList'>
+										<img v-if='per_img.classification === "1"' :key='per_img.id' :src='per_img.fileUrl' class='productImg'>
+									</template>
 									<div class='sketch'>
 										<p class='baseName productName xx-elli'>
-											{{ per_product.productName }} <span class='sTypeName xx-f-14'>{{ per_product.seriesName }}</span>
+											{{ per_product.productName }} <span v-if='per_product.seriesName' class='sTypeName xx-f-14'>{{ per_product.seriesName }}</span>
 										</p>
-										<div class='loginVisibleButton xx-f-12 xx-pointer'>
+										<div v-if='!per_product.groupDTOList[0].price' class='loginVisibleButton xx-f-12 xx-pointer' @click.stop='triggerLogin'>
 											￥登陆可见
 										</div>
-										<div class='visiblePrice xx-elli'>
-											<span class='productPrice xx-f-20'>￥{{ per_product.price }}</span> {{ per_product.priceUnit }}
+										<div v-if='per_product.groupDTOList[0].price' class='visiblePrice xx-elli'>
+											<span class='productPrice xx-f-20'>￥{{ per_product.groupDTOList[0].price }}</span> {{ per_product.groupDTOList[0].priceUnit }}
 										</div>
 									</div>
-								</div> -->
+								</div>
 							</div>
 							<!--全部配件-->
 							<p class='groupName xx-f-16'>
 								产品配件
 							</p>
-							<div class='perFitting xx-radius xx-mt-1 xx-pointer' @click='openProductDetail'>
-								<img src='' class='fittingImg'>
+							<div v-for='per_fitting in fitting_list.dataList' :key='per_fitting.id' class='perFitting xx-radius xx-mt-1 xx-pointer' @click='openProductDetail(per_fitting.id, "fitting")'>
+								<template v-for='per_img in per_fitting.partsFiles'>
+									<img v-if='per_img.classification === "1"' :key='per_img.id' :src='per_img.fileUrl' class='fittingImg'>
+								</template>
 								<div class='fittingSketch'>
 									<p class='baseName productName xx-elli'>
-										配件1
+										{{ per_fitting.name }}
 									</p>
-									<div class='visiblePrice'>
-										<span class='productPrice xx-f-20'>￥111</span> /套/趟（<span>40</span>天）
+									<div v-if='per_fitting.price' class='visiblePrice'>
+										<span class='productPrice xx-f-20'>￥{{ per_fitting.price }}</span> /件
 									</div>
-								</div>
-							</div>
-							<div class='perFitting xx-radius xx-mt-1 xx-pointer' @click='openProductDetail'>
-								<img src='' class='fittingImg'>
-								<div class='fittingSketch'>
-									<p class='baseName productName xx-elli'>
-										配件2
-									</p>
-									<div class='loginVisibleButton fittingLoginVisibleButton xx-f-12 xx-pointer' @click.stop='triggerLogin'>
+									<div v-if='!per_fitting.price' class='loginVisibleButton fittingLoginVisibleButton xx-f-12 xx-pointer' @click.stop='triggerLogin'>
 										￥登陆可见
 									</div>
 								</div>
@@ -186,31 +182,34 @@
 								<use xlink:href='#icon-a-Group26' />
 							</svg>
 						</div>
-						<div class='solutionDetails'>
+						<div v-if='solution_detail' class='solutionDetails'>
 							<div class='baseName solutionWholeName xx-elli'>
-								农副食品解决方案农副食品解决方案农副食品解决方案农副食品解决方案
+								{{ solution_detail.name }}
 							</div>
 							<div class='baseDetailWholeDes xx-elli'>
-								蛋液、淀粉、蔬菜加工品等包装解决方案蛋液、淀粉、蔬菜加工品等包装解决方案蛋液、淀粉、蔬菜加工品等包装解决方案蛋液、淀粉、蔬菜加工品等包装解决方案
+								{{ solution_detail.introduce }}
 							</div>
 							<!--登录后可见的价格-->
-							<div class='detailBoardPrice xx-mt-1'>
+							<div v-if='solution_detail.programmeList' class='detailBoardPrice xx-mt-1'>
 								<div class='priceLeft'>
-									<span class='redPrice productPrice xx-f-20'>￥111</span>/套/趟（40天）
-								</div> <span>*超一口价区域运费另算</span>
+									<span class='redPrice productPrice xx-f-20'>￥{{ current_solution.programmePrice }}</span>{{ current_solution.priceUnit }}
+								</div>
+								<span>*超一口价区域运费另算</span>
 							</div>
 							<!--方案详细-->
 							<div class='schemeTitle xx-f-16 xx-mt-3'>
 								解决方案组成
 							</div>
-							<div class='schemeBox xx-mt-2 xx-d-flex'>
-								<div class='schemeBoxPic xx-radius' />
+							<div v-if='solution_detail.setMealProductDTO' class='schemeBox xx-mt-2 xx-d-flex'>
+								<template v-for='per_detail_img in solution_detail.setMealProductDTO.fileList'>
+									<img v-if='per_detail_img.classification === "2"' :key='per_detail_img.id' class='schemeBoxPic xx-radius' src='per_detail_img.fileUrl'>
+								</template>
 								<div class='schemeBoxDes xx-ml-2'>
 									<div class='schemeBoxTitle xx-f-16'>
-										吨立方
+										{{ solution_detail.setMealProductDTO.relationName }}
 									</div>
 									<div class='schemeBoxSubTitle xx-mt-1'>
-										折叠吨箱IBC
+										{{ solution_detail.setMealProductDTO.introduce }}
 									</div>
 								</div>
 							</div>
@@ -218,24 +217,26 @@
 							<!--三角-->
 							<i class='triagle el-icon-caret-top' />
 							<div class='schemeBoxDetail xx-radius'>
-								<el-select v-model='value' size='small' class='sTypeSelect'>
+								<el-select v-model='current_solution' size='small' class='sTypeSelect'>
 									<el-option
-										v-for='item in options'
-										:key='item.value'
-										:label='item.label'
-										:value='item.value'
+										v-for='item in solution_detail.programmeList'
+										:key='item.id'
+										:label='item.programmeName'
+										:value='item'
 									/>
 								</el-select>
 								<!--方案内产品列表-->
 								<div class='schemeBoxList'>
-									<div class='perBoxDetail xx-mt-2 xx-d-flex'>
-										<div class='schemeSBoxPic xx-radius' />
+									<div v-if='current_solution' class='perBoxDetail xx-mt-2 xx-d-flex'>
+										<template v-for='item in current_solution.fileList'>
+											<img v-if='item.classification === "2"' :key='item.id' class='schemeSBoxPic xx-radius' :src='item.fileUrl'>
+										</template>
 										<div class='schemeBoxDes xx-ml-2'>
 											<div class='schemeBoxTitle'>
-												吨方
+												{{ current_solution.relationName }}
 											</div>
 											<div class='schemeSBoxSubTitle'>
-												折叠吨箱IBC
+												???
 											</div>
 										</div>
 									</div>
@@ -260,61 +261,81 @@
 				<!--产品详情 || 配件详情-->
 				<transition name='xx'>
 					<div v-show='is_show_pro_detail' class='baseDetailBoard productDetailBoard'>
-						<div class='banner'>
+						<div v-if='detail_type === "product"' class='banner'>
 							<el-carousel trigger='click' height='232px'>
-								<el-carousel-item>
-									<img class='bannerPic' src='@/assets/imgs/login_banner_01.png'>
-								</el-carousel-item>
-								<el-carousel-item>
-									<img class='bannerPic' src='@/assets/imgs/login_banner_02.png'>
-								</el-carousel-item>
-								<el-carousel-item>
-									<img class='bannerPic' src='@/assets/imgs/login_banner_03.png'>
-								</el-carousel-item>
+								<template v-for='per_img in product_detail.fileList'>
+									<el-carousel-item :key='per_img.id'>
+										<img v-if='per_img.classification === "2"' class='bannerPic' src='per_img.fileUrl'>
+									</el-carousel-item>
+								</template>
 							</el-carousel>
 							<svg class='icon closeDetailBoard' title='关闭详情' aria-hidden='true' @click='closeProductDetail'>
 								<use xlink:href='#icon-a-Group26' />
 							</svg>
 						</div>
-						<div class='productDetails'>
-							<div class='baseName productName xx-elli'>
-								产品名 <span class='sTypeName xx-f-14'>折叠吨箱IBC</span>
+						<div v-if='detail_type === "product"' class='productDetails'>
+							<div v-if='product_detail && product_detail.productName' class='baseName productName xx-elli'>
+								{{ product_detail.productName }} <span v-if='product_detail.seriesName' class='sTypeName xx-f-14'>{{ product_detail.seriesName }}</span>
 							</div>
-							<p class='proDetailDes xx-elli'>
-								内容积1024L，可折叠，支持九字内容积1024L，可折叠，支持九字
+							<p v-if='product_detail && product_detail.introduce' class='proDetailDes xx-elli'>
+								{{ product_detail.introduce }}
 							</p>
-							<!--登录后可见的价格-->
-							<div class='detailBoardPrice xx-mt-1'>
-								<div class='priceLeft'>
-									<span class='productPrice xx-f-20'>￥111</span>/套/趟（40天）
-								</div> <span class='xx-f-12'>*超一口价区域运费另算</span>
-							</div>
+							<!--价格-->
+							<template v-if='product_detail && product_detail.groupDTOList && product_detail.groupDTOList[0].price'>
+								<div class='detailBoardPrice xx-mt-1'>
+									<div class='priceLeft'>
+										<span class='productPrice xx-f-20'>￥{{ product_detail.groupDTOList[0].price }}</span>{{ product_detail.groupDTOList[0].priceUnit }}
+									</div>
+									<span class='xx-f-12'>*超一口价区域运费另算</span>
+								</div>
+							</template>
 							<!--产品参数-->
 							<div class='proParams'>
 								<p class='paramsTitle xx-f-16 xx-mt-3'>
 									产品参数 <i class='el-icon-warning' />
 								</p>
-								<img src='' alt=''>
-							<!-- <div class='perParam'>
-								<span class='proKeyName'>外尺寸（mm）</span>
-								<span class='proKeyVal'>122*222*333</span>
+								<template v-for='per_detail_img in product_detail.fileList'>
+									<img v-if='per_detail_img.classification === "3"' :key='per_detail_img.id' class='paramDetailImg' src='per_detail_img.fileUrl'>
+								</template>
 							</div>
-							<div class='perParam'>
-								<span class='proKeyName'>外尺寸（mm）</span>
-								<span class='proKeyVal'>122*222*333</span>
+						</div>
+
+						<div v-if='detail_type === "fitting"' class='banner'>
+							<el-carousel trigger='click' height='232px'>
+								<template v-for='per_img in fitting_detail.fileList'>
+									<el-carousel-item :key='per_img.id'>
+										<img v-if='per_img.classification === "2"' class='bannerPic' src='per_img.fileUrl'>
+									</el-carousel-item>
+								</template>
+							</el-carousel>
+							<svg class='icon closeDetailBoard' title='关闭详情' aria-hidden='true' @click='closeProductDetail'>
+								<use xlink:href='#icon-a-Group26' />
+							</svg>
+						</div>
+						<div v-if='detail_type === "fitting"' class='productDetails'>
+							<div v-if='fitting_detail && fitting_detail.partsName' class='baseName productName xx-elli'>
+								{{ fitting_detail.partsName }}
 							</div>
-							<div class='perParam'>
-								<span class='proKeyName'>外尺寸（mm）</span>
-								<span class='proKeyVal'>122*222*333</span>
-							</div>
-							<div class='perParam'>
-								<span class='proKeyName'>外尺寸（mm）</span>
-								<span class='proKeyVal'>122*222*333</span>
-							</div>
-							<div class='perParam'>
-								<span class='proKeyName'>外尺寸（mm）</span>
-								<span class='proKeyVal'>122*222*333</span>
-							</div> -->
+							<p v-if='fitting_detail && fitting_detail.purpose' class='proDetailDes xx-elli'>
+								{{ fitting_detail.purpose }}
+							</p>
+							<!--价格-->
+							<template v-if='fitting_detail && fitting_detail.price'>
+								<div class='detailBoardPrice xx-mt-1'>
+									<div class='priceLeft'>
+										<span class='productPrice xx-f-20'>￥{{ fitting_detail.price }}</span>件
+									</div>
+									<span class='xx-f-12'>*超一口价区域运费另算</span>
+								</div>
+							</template>
+							<!--产品参数-->
+							<div class='proParams'>
+								<p class='paramsTitle xx-f-16 xx-mt-3'>
+									配件参数 <i class='el-icon-warning' />
+								</p>
+								<template v-for='per_detail_img in fitting_detail.partsFiles'>
+									<img v-if='per_detail_img.classification === "3"' :key='per_detail_img.id' class='paramDetailImg' src='per_detail_img.fileUrl'>
+								</template>
 							</div>
 						</div>
 						<!--提交按钮组-->
@@ -877,27 +898,19 @@ export default {
 	name: 'IndexPage',
 	components: { Map },
 	props: [],
-	// async asyncData (context) {
-	// 	let route_query = context.route.query.product_type || ''
-	// 	if (context.app.$cookies.get('token')) {
-	// 		// 获取产品列表
-	// 		let product_list = await context.app.$API_INDEX().get_product_full_list({ fullCode: route_query, page: 1, pageSize: 1000 })
-	// 		// 获取方案列表
-	// 		let scheme_list = await context.app.$API_INDEX().get_scheme_full_list({ fullCode: route_query })
-	// 		// 获取配件列表
-	// 		let fitting_list = await context.app.$API_INDEX().get_fitting_full_list({ fullCode: route_query })
-	// 		return { product_list, scheme_list, fitting_list }
-	// 	} else {
-	// 		// 获取产品列表
-	// 		let product_list = await context.app.$API_INDEX().post_product_list({ fullCode: route_query, page: 1, pageSize: 1000 })
-	// 		console.log('所有产品', product_list)
-	// 		// 获取方案列表
-	// 		let scheme_list = await context.app.$API_INDEX().get_scheme_list({ fullCode: route_query })
-	// 		// 获取配件列表
-	// 		let fitting_list = await context.app.$API_INDEX().get_index_list({ fullCode: route_query })
-	// 		return { product_list, scheme_list, fitting_list }
-	// 	}
-	// },
+	async asyncData (context) {
+		let route_query = context.route.query.product_type || ''
+		// 获取产品列表
+		let product_list = await context.app.$API_INDEX().post_product_list({ fullCode: route_query, page: 1, pageSize: 1000 })
+		console.log('所有产品', product_list)
+		// 获取配件列表
+		let fitting_list = await context.app.$API_INDEX().post_fitting_list({ fullCode: route_query, page: 1, pageSize: 1000 })
+		console.log('所有配件', fitting_list)
+		// 获取方案列表
+		let scheme_list = await context.app.$API_INDEX().get_scheme_list({ fullCode: route_query })
+		console.log('所有方案', scheme_list)
+		return { product_list, scheme_list, fitting_list }
+	},
 	data () {
 		return {
 			current_tab_type: 'allSolutionTab',
@@ -950,12 +963,12 @@ export default {
 			solution_detail: '',
 			// 产品详情数据
 			product_detail: '',
+			// 当前子方案
+			current_solution: '',
 			// 配件详情数据
 			fitting_detail: '',
-			// ---
-			product_list: [],
-			scheme_list: [],
-			fitting_list: []
+			// 配件/产品的详情类型（因为公用一个页面）
+			detail_type: ''
 		}
 	},
 	computed: {},
@@ -975,11 +988,7 @@ export default {
 	beforeMount () {
 		console.log('index:beforeMount')
 	},
-	mounted () {
-		this.$API_INDEX().post_product_list({ fullCode: '', page: 1, pageSize: 1000 }).then(data => {
-			this.product_list = data.dataList
-		})
-	},
+	mounted () {},
 	methods: {
 		getAMap (AMap) {
 			this.AMap = AMap
@@ -992,6 +1001,20 @@ export default {
 		 */
 		triggerTab (tab_type) {
 			this.current_tab_type = tab_type
+		},
+		/**
+		 * @description 获取配件详情
+		 * @param { string } id 配件id
+		 */
+		getFittingDetail (id) {
+			console.log('配件id:', id)
+		},
+		/**
+		 * @description 获取方案详情
+		 * @param { string } id 方案id
+		 */
+		getSchemeDetail (id) {
+			console.log('方案id:', id)
 		},
 		/**
 		 * @description 下订单增加新地址
@@ -1042,16 +1065,28 @@ export default {
 		/**
 		 * @description 显示产品详情
 		 * @param { string } product_id 产品id || 配件id
+		 * @param { type } type 产品 product/配件 fitting
 		 */
-		openProductDetail (product_id) {
-			console.log(product_id)
-			this.is_show_pro_detail = true
+		openProductDetail (id, type) {
+			// 关闭方案详情
 			this.is_show_solu_detail = false
-			// this.$API_INDEX.get_product_detail({ id: product_id }).then(data => {
-			// 	if (data) {
-			// 		this.product_detail = data
-			// 	}
-			// })
+			// 打开产品/配件详情
+			this.is_show_pro_detail = true
+			this.detail_type = type
+			if (type === 'product') {
+				this.$API_INDEX().get_product_detail({ id }).then(data => {
+					if (data) {
+						this.product_detail = data
+					}
+				})
+			}
+			if (type === 'fitting') {
+				this.$API_INDEX().get_fitting_detail({ id }).then(data => {
+					if (data) {
+						this.fitting_detail = data
+					}
+				})
+			}
 		},
 		/**
 		 * @description 关闭产品详情面板
@@ -1061,12 +1096,17 @@ export default {
 		},
 		/**
 		 * @description 打开方案详情
-		 * @param { string } solution_id 解决方案id
+		 * @param { string } id 解决方案id
 		 */
-		openSolutionDetail (solution_id) {
-			console.log('解决方案id', solution_id)
+		openSolutionDetail (id) {
+			console.log('解决方案id', id)
 			this.is_show_solu_detail = true
 			this.is_show_pro_detail = false
+			this.$API_INDEX().get_scheme_list({ id }).then(data => {
+				if (data) {
+					this.solution_detail = data
+				}
+			})
 		},
 		/**
 		 * @description 关闭方案详情
@@ -1275,6 +1315,7 @@ export default {
 			align-items: center;
 		}
 		.schemeBoxPic, .orderBoxPicContainer{
+			display: block;
 			width:88px;
 			height:88px;
 			background-color: #D8D8D8;
@@ -1413,6 +1454,10 @@ export default {
 			color:#2c2c2c;
 			font-size:16px;
 			margin-bottom:16px;
+		}
+		.paramDetailImg{
+			display: block;
+			width:100%;
 		}
 		.el-icon-warning{
 			color:#aaaaaa;
