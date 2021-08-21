@@ -43,28 +43,27 @@ export default {
 		},
 		xiShi () {
 			this.district_obj.search(this.city_value, (status, result) => {
-				console.log('获取城市OK？，', status)
 				let bounds = result.districtList[0].boundaries
-				console.log(this.city_value, bounds)
 				for (let i = 0, l = bounds.length; i < l; i++) {
 					// 过滤所有polygon中的经纬度少于500个的polygon，不渲染（比如一些非常小的polygon，小岛等），提高渲染速度
 					if (bounds[i].length > 500) {
 						// 生成行政区划polygon
+						console.log('原始经纬度：', bounds[i])
 						let new_lng_lat_arr = this.filterLngLat(bounds[i], 10)
-						console.log('过滤后：', new_lng_lat_arr)
-						let polygon = new AMap.Polygon({
-							strokeWeight: 0.5,
-							path: new_lng_lat_arr,
-							fillOpacity: 0.1,
-							fillColor: '#67A92A',
-							strokeColor: '#67A92A',
-							zIndex: 9
-						})
-						this.free_polygons.push(polygon)
+						console.log('得到的filter经纬度：', this.city_value, new_lng_lat_arr)
+						// let polygon = new AMap.Polygon({
+						// 	strokeWeight: 0.5,
+						// 	path: new_lng_lat_arr,
+						// 	fillOpacity: 0.1,
+						// 	fillColor: '#67A92A',
+						// 	strokeColor: '#67A92A',
+						// 	zIndex: 9
+						// })
+						// this.free_polygons.push(polygon)
 					}
 				}
 				// 获取一口价区域
-				this.map_obj.add(this.free_polygons)
+				// this.map_obj.add(this.free_polygons)
 			})
 		},
 		filterLngLat (lng_lag_arr, filter_level) {
@@ -75,7 +74,11 @@ export default {
 					new_lng_lat_arr.push([lng_lag_arr[i].getLng(), lng_lag_arr[i].getLat()])
 				}
 				// 除去第一个和最后一个，且是偶数的，排除
-				if (i >= 1 && i % filter_level === 0 && i !== length - 1) { new_lng_lat_arr.push([lng_lag_arr[i].getLng(), lng_lag_arr[i].getLat()]) }
+				if (i >= 1 && i % filter_level === 0 && i !== length - 1) {
+					let lng = lng_lag_arr[i].getLng()
+					let lat = lng_lag_arr[i].getLat()
+					new_lng_lat_arr.push([lng, lat])
+				}
 			}
 			return new_lng_lat_arr
 		}
