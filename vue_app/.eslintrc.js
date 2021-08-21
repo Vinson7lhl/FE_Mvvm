@@ -45,6 +45,8 @@ module.exports = {
     "camelcase": 0,
     // 允许使用tab
     "no-tabs": 0,
+    // 允许使用未定义的插件变量 AMap
+    "no-undef": 0
   },
   parserOptions: {
     parser: 'babel-eslint'

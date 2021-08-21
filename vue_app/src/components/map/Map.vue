@@ -23,7 +23,7 @@ export default {
 	},
 	mounted () {
 		this.map = new AMap.Map('map_container', {
-			zoom: 11.57,
+			zoom: 6,
 			center: [114.341232, 30.567523],
 			viewMode: '3D',
 			// showLabel: false,
@@ -57,21 +57,21 @@ export default {
 		light_point.setMap(this.map)
 
 		// 聚合test
-		let markers = []
-		let points = window.points
-		for (let i = 0; i < points.length; i++) {
-			markers.push(new AMap.Marker({
-				position: points[i]['lnglat']
-			}))
-		}
-		this.count = markers.length
-		let cluster = new AMap.MarkerClusterer(this.map, markers, {
-			gridSize: 80,
-			renderClusterMarker: context => {
-				this.clusterSetting(context)
-			}
-		})
-		console.log(cluster)
+		// let markers = []
+		// let points = window.points
+		// for (let i = 0; i < points.length; i++) {
+		// 	markers.push(new AMap.Marker({
+		// 		position: points[i]['lnglat']
+		// 	}))
+		// }
+		// this.count = markers.length
+		// let cluster = new AMap.MarkerClusterer(this.map, markers, {
+		// 	gridSize: 80,
+		// 	renderClusterMarker: context => {
+		// 		this.clusterSetting(context)
+		// 	}
+		// })
+		// console.log(cluster)
 
 		if (!this.G_map) {
 
