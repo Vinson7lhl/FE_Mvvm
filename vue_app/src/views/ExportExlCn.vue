@@ -216,12 +216,13 @@ export default {
 					zip: 200333
 				}
 			],
-			html_str: ''
+			html_str: '',
+			pivot: ''
 		}
 	},
 	mounted () {
 		let _this = this
-		let pivot = new WebDataRocks({
+		this.pivot = new WebDataRocks({
 			container: '#wdr-component',
 			height: 530,
 			toolbar: true,

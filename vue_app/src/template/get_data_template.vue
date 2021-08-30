@@ -5,12 +5,9 @@
 </template>
 
 <script>
+
 export default {
 	name: 'get_data_temp',
 	props: ['passData']
 }
 </script>
-
-<style lang="stylus" scoped>
-
-</style>

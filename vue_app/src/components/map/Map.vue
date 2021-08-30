@@ -5,7 +5,8 @@
 	</div>
 </template>
 <script>
-import { mapState } from 'Vuex'
+import { mapState } from 'vuex'
+import read from 'readable-stream'
 // import mapData from '@/configs/map_test_data.json'
 // 引入地图打点图片
 // import mapStar from '@/assets/img/map_star.png'
@@ -22,6 +23,7 @@ export default {
 		...mapState(['G_map'])
 	},
 	mounted () {
+		console.log('read', read)
 		this.map = new AMap.Map('map_container', {
 			zoom: 6,
 			center: [114.341232, 30.567523],
