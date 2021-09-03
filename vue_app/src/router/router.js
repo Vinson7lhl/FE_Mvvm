@@ -54,21 +54,21 @@ const router = new Router({
 				}
 			]
 		},
-		{
-			path: '/ex',
-			name: 'export_excel',
-			component: () => import(/* webpackChunkName: "export-excel" */ '../views/ExportExl.vue')
-		},
-		{
-			path: '/dashboard',
-			name: 'page_dashboard',
-			component: () => import(/* webpackChunkName: "dashboard" */ '../views/echartsTable.vue')
-		},
-		{
-			path: '/exCn',
-			name: 'export_excel_cn',
-			component: () => import(/* webpackChunkName: "export-excel-cn" */ '../views/ExportExlCn.vue')
-		},
+		// {
+		// 	path: '/ex',
+		// 	name: 'export_excel',
+		// 	component: () => import(/* webpackChunkName: "export-excel" */ '../views/ExportExl.vue')
+		// },
+		// {
+		// 	path: '/dashboard',
+		// 	name: 'page_dashboard',
+		// 	component: () => import(/* webpackChunkName: "dashboard" */ '../views/echartsTable.vue')
+		// },
+		// {
+		// 	path: '/exCn',
+		// 	name: 'export_excel_cn',
+		// 	component: () => import(/* webpackChunkName: "export-excel-cn" */ '../views/ExportExlCn.vue')
+		// },
 		{
 			path: '/list',
 			name: 'list',
