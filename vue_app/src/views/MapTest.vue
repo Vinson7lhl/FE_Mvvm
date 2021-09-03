@@ -46,6 +46,7 @@ export default {
 				let bounds = result.districtList[0].boundaries
 				for (let i = 0, l = bounds.length; i < l; i++) {
 					// 过滤所有polygon中的经纬度少于500个的polygon，不渲染（比如一些非常小的polygon，小岛等），提高渲染速度
+					console.log('获取城市：', bounds)
 					if (bounds[i].length > 500) {
 						// 生成行政区划polygon
 						console.log('原始经纬度：', bounds[i])
