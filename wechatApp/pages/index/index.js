@@ -52,7 +52,7 @@ Page({
     })
   },
   onLoad() {
-    console.log('首页：onLoad')
+    console.log('index-onLoad')
     // 设置转发
     wx.showShareMenu()
     if (app.globalData.userInfo) {
@@ -83,17 +83,20 @@ Page({
     }
   },
   onShow() {
-    console.log('首页：onShow')
+    console.log('index-onShow')
     console.log('首页数据motto：', this.data.motto)
     console.log('公共函数：', util.formatTime(new Date()))
     console.log('api：', api.get_proudct_list)
   },
   onReady() {
-    console.log('首页：onReady')
+    console.log('index-onReady')
     console.log('首页数据motto：', this.data.motto)
   },
   onHide() {
-    console.log('首页hide')
+    console.log('index-onHide')
+  },
+  onUnload() {
+    console.log('index-onUnload')
   },
   getUserInfo(e) {
     console.log(e)
