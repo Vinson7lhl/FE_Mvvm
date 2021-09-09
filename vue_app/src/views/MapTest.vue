@@ -1,7 +1,10 @@
 <template>
   <div>
-    <input type="text" name="city" id="city" v-model='city_value'>
-    <button @click='xiShi'>提交</button>
+    <label for='city_name'>城市名</label><input type="text" name="city_name" id="city_name" v-model='city_name_value'>
+    <label for='city_code'>行政区划码</label><input type="text" name="city_code" id="city_code" v-model='city_code_value'>
+    <label for='city_code'>经纬阈值</label><input placeholder='经纬度个数低于此值不会绘制' type="number" name="threshold" id="threshold" v-model='threshold_value'>
+    <label for='city_code'>稀释度</label><input placeholder='N分之一' type="number" name="dilutability" id="dilutability" v-model='dilutability_value'>
+    <button @click='drawFilterPolygon'>绘制</button>
     <MapCtrl :map-obj='map_obj'/>
     <Map @sendMapObj = 'getMapObj' />
   </div>
@@ -16,7 +19,14 @@ export default {
 		return {
 			map_obj: '',
 			marker_obj: '',
-			city_value: '',
+			// 城市中文名
+			city_name_value: '',
+			// 城市code
+			city_code_value: '',
+			// 阈值（polygon经纬点数低于此阈值则不会绘制）
+			threshold_value: '',
+			// 经纬度稀释度
+			dilutability_value: '',
 			district_obj: '',
 			free_polygons: []
 		}
@@ -41,30 +51,34 @@ export default {
 				level: 'district'
 			})
 		},
-		xiShi () {
-			this.district_obj.search(this.city_value, (status, result) => {
+		drawFilterPolygon () {
+			this.district_obj.search(this.city_code_value, (status, result) => {
+				console.log('结果：', status, result)
+				this.free_polygons = []
 				let bounds = result.districtList[0].boundaries
 				for (let i = 0, l = bounds.length; i < l; i++) {
 					// 过滤所有polygon中的经纬度少于500个的polygon，不渲染（比如一些非常小的polygon，小岛等），提高渲染速度
 					console.log('获取城市：', bounds)
-					if (bounds[i].length > 500) {
+					if (bounds[i].length > this.threshold_value) {
 						// 生成行政区划polygon
 						console.log('原始经纬度：', bounds[i])
-						let new_lng_lat_arr = this.filterLngLat(bounds[i], 10)
-						console.log('得到的filter经纬度：', this.city_value, new_lng_lat_arr)
-						// let polygon = new AMap.Polygon({
-						// 	strokeWeight: 0.5,
-						// 	path: new_lng_lat_arr,
-						// 	fillOpacity: 0.1,
-						// 	fillColor: '#67A92A',
-						// 	strokeColor: '#67A92A',
-						// 	zIndex: 9
-						// })
-						// this.free_polygons.push(polygon)
+						let new_lng_lat_arr = this.filterLngLat(bounds[i], this.dilutability_value)
+						console.log('稀释后经纬度：', new_lng_lat_arr)
+						let polygon = new AMap.Polygon({
+							strokeWeight: 0.5,
+							path: new_lng_lat_arr,
+							fillOpacity: 0.1,
+							fillColor: '#67A92A',
+							strokeColor: '#67A92A',
+							zIndex: 9
+						})
+						this.free_polygons.push(polygon)
 					}
 				}
 				// 获取一口价区域
-				// this.map_obj.add(this.free_polygons)
+				this.map_obj.clearMap()
+				this.map_obj.add(this.free_polygons)
+				this.map_obj.setFitView(this.free_polygons)
 			})
 		},
 		filterLngLat (lng_lag_arr, filter_level) {

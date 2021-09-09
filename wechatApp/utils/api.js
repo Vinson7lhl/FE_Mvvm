@@ -1,8 +1,8 @@
 const BASE_DOMAIN = {
-    'test': 'https://test/',
     'dev': 'https://dev/',
+    'test': 'https://test/',
     'pre': 'https://pre/',
-    'rel': 'https://rel/'
+    'pro': 'https://rel/'
 }
 
 const CURRENT_DOMAIN = BASE_DOMAIN.test
