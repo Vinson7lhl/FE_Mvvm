@@ -1,0 +1,11 @@
+{
+  "name": "electron_app",
+  "version": "1.0.0",
+  "description": "electron-app",
+  "main": "index.js",
+  "scripts": {
+    "dev": "electron ."
+  },
+  "author": "李宏磊",
+  "license": "ISC"
+}
