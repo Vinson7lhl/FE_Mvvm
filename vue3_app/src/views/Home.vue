@@ -49,7 +49,7 @@ export default {
 			return this.$fun_1(this.name)
 		}
 	},
-	// provide 注入多层次组件数据，如果依赖data则必须以函数形式体现
+	// provide 注入多层次组件数据，如果依赖data则必须以函数形式体现！
 	provide () {
 		return {
 			multi_deep_data: this.multi_deep_data
