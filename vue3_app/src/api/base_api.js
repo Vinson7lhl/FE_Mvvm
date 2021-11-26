@@ -9,6 +9,9 @@ const AXIOS_OBJ = axios.create({
 	timeout: 3000,
 	headers: {
 		'Content-Type': 'application/json;charset=UTF-8;'
+	},
+	proxy: {
+		host: 'https://www-api.huxiu.com/v1/ad/getConfig'
 	}
 })
 
@@ -45,6 +48,12 @@ const BASE_API = {
 	},
 	POST: (url, data = {}) => {
 		return AXIOS_OBJ.post(url, { data })
+	},
+	DELETE: (url, data = {}) => {
+		return AXIOS_OBJ.delete(url, { data })
+	},
+	PUT: (url, data = {}) => {
+		return AXIOS_OBJ.put(url, { data })
 	}
 }
 

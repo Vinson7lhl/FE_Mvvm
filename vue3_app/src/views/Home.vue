@@ -17,6 +17,7 @@
 <script>
 // @ is an alias to /src
 import HelloWorld from '@/components/index-page/HelloWorld.vue'
+import INDEX_PAGE_API from '@/api/index-page-api/index_page_api.js'
 // import OtherComp from '@/components/other-page/OtherPage.vue'
 
 import { defineAsyncComponent } from 'vue'
@@ -57,6 +58,14 @@ export default {
 	},
 	mounted () {
 		console.log('this.$data.name', this.$data.name)
+		this.getData()
+	},
+	methods: {
+		getData () {
+			INDEX_PAGE_API.get_data().then(data => {
+				console.log('跨域data：', data)
+			})
+		}
 	}
 }
 </script>

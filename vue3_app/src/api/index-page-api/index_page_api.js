@@ -4,13 +4,13 @@ const INDEX_PAGE_API = {
 	/**
 	 * @description 获取用户列表
 	 */
-	get_users: (params) => {
-		return BASE_API.GET('真实url地址', params)
+	get_data: (params) => {
+		return BASE_API.GET('https://www-api.huxiu.com/v1/ad/getConfig', params)
 	},
 	/**
 	 * @description 获取用户列表
 	 */
-	 post_form: (data) => {
+	post_form: (data) => {
 		return BASE_API.POST('真实url地址', data)
 	}
 }
