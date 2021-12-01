@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 /**
- * 创建请求实例
+ * @description 创建请求实例
  */
 const AXIOS_OBJ = axios.create({
 	// 根据环境不同从而匹配不同的api
@@ -16,7 +16,7 @@ const AXIOS_OBJ = axios.create({
 })
 
 /**
- * 添加请求拦截器
+ * @description 添加请求拦截器
  */
 AXIOS_OBJ.interceptors.request.use(config => {
 	// 在发送请求之前做些什么
@@ -28,7 +28,7 @@ AXIOS_OBJ.interceptors.request.use(config => {
 })
 
 /**
- * 添加响应拦截器
+ * @description 添加响应拦截器
  */
 AXIOS_OBJ.interceptors.response.use(res => {
 	// 对响应数据做点什么
