@@ -6,6 +6,7 @@
 		<about-us />
 		<button @click='changeRoute'>触发绑定</button>
 		<button @click='showHome'>切换首页</button>
+		<a href="/pdf/Node即学即用.pdf">pdf链接</a>
 	</div>
 </template>
 

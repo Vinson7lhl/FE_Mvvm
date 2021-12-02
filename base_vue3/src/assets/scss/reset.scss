@@ -1,0 +1,98 @@
+/*--------------------------------------------------------------
+重置样式
+--------------------------------------------------------------*/
+body {
+    color:#4e4e4e;
+    font-family: -apple-system,BlinkMacSystemFont,"Helvetica Neue",PingFang SC,Source Han Sans SC,Noto Sans CJK SC,"Segoe UI","Roboto","Oxygen","Ubuntu",Arial,sans-serif;
+    font-size:14px;
+}
+// reset-css设置
+html,body,section,article,h1,h2,h3,h4,h5,h6,div,dl,dt,dd,ul,ol,li,p,blockquote,pre,hr,figure,table,caption,th,td,form,fieldset,legend,input,button,textarea,menu{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+	font-family: -apple-system,BlinkMacSystemFont,"Helvetica Neue",PingFang SC,Source Han Sans SC,Noto Sans CJK SC,"Segoe UI","Roboto","Oxygen","Ubuntu",Arial,sans-serif;
+}
+img{border:0;}
+table{border-collapse:collapse;border-spacing:0;}
+li{list-style:none;}
+textarea{overflow:auto;resize:none;}
+a,a:hover{text-decoration:none !important;}
+a,a:hover{color:#333;}
+
+// 覆盖Chrome内核的浏览器自动填充表单的颜色
+input:-webkit-autofill{
+	box-shadow:0 0 0 1000px white inset;
+}
+
+
+/*--------------------------------------------------------------
+自定义常用样式
+--------------------------------------------------------------*/
+// 常用色号
+// 常用字号
+.xx-f-10 {font-size:10px;}
+
+// 盒模型方式默认都为border-box
+.xx-bb {box-sizing: border-box;}
+.xx-cb {box-sizing: content-box;}
+
+// 清除浮动
+.xx-clear {
+    content:'';
+    display:block;
+    clear:both;
+}
+
+// 单行省略号（宽度）
+.xx-ell {
+    overflow:hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+// 第二行省略号（+宽高）
+.xx-ell-2 {
+    overflow:hidden;
+    text-overflow: ellipsis;
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+}
+
+// 默认指示向
+.xx-poi {
+	cursor:pointer;
+}
+
+// 默认圆角4px
+.xx-rad{
+	border-radius: 4px;
+}
+
+// Vue transition动画
+.xx-enter-active, .xx-leave-active {
+	transition: all 0.3s;
+}
+.xx-enter, .xx-leave-to {
+	opacity: 0;
+	transform: translateX(-10px);
+}
+.xx-enter-to {
+  transform: translateX(0px);
+  opacity: 1;
+}
+
+
+// border
+.xx-b-t{
+    border-top: 1px solid #EEEEEE;
+}
+.xx-b-b{
+    border-bottom: 1px solid #EEEEEE;
+}
+
+
+/*--------------------------------------------------------------
+覆盖elementUI样式
+--------------------------------------------------------------*/

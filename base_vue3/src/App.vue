@@ -23,6 +23,7 @@
         <el-icon :size="20" color="#409EFC">
             <edit />
         </el-icon>
+        <div>测试</div>
     </div>
     <router-view />
 </template>
@@ -65,4 +66,6 @@ export default {
         }
     }
 }
+// 引入基本样式
+@import '@/assets/scss/reset.scss'
 </style>
