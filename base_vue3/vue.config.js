@@ -1,13 +1,17 @@
 // 以下配置为了element+ 开箱即用，无需多余导入
+const AutoImport = require('unplugin-auto-import/webpack')
 const Components = require('unplugin-vue-components/webpack')
 const { ElementPlusResolver } = require('unplugin-vue-components/resolvers')
 
 module.exports = {
     configureWebpack: {
         plugins: [
-            Components({
+            AutoImport({
                 resolvers: [ElementPlusResolver()],
             }),
+            Components({
+                resolvers: [ElementPlusResolver()],
+            })
         ],
     }
 }
