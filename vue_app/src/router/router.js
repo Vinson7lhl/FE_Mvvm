@@ -95,6 +95,11 @@ const router = new Router({
 			component: () => import(/* webpackChunkName: "map-test2" */ '../views/MapTest2.vue')
 		},
 		{
+			path: '/ele',
+			name: 'elementUI_test',
+			component: () => import(/* webpackChunkName: "ele" */ '../views/Ele.vue')
+		},
+		{
 			path: '*',
 			name: 'not_found_page',
 			component: () => import(/* webpackChunkName: "404" */ '../views/NotFound.vue')

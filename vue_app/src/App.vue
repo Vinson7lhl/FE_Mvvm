@@ -11,6 +11,7 @@
 			<router-link to="/asyncComp">AsyncPage</router-link> //
 			<router-link to="/map">MapPage</router-link> //
 			<router-link to="/map2">MapPage2</router-link> //
+			<router-link to="/ele">饿了么UI</router-link> //
 		</div>
 		<div v-if="isShowPopUp" class="popUp">这里是弹窗</div>
 		<!--一级路由动画切换配置-->
