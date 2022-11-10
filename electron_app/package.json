@@ -9,6 +9,6 @@
   "author": "李宏磊",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^14.0.0"
+    "electron": "^18.3.7"
   }
 }
